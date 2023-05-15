@@ -26,7 +26,6 @@ $(document).ready(function() {
 		var img=document.getElementById("imgUpload").files;
 		reader.readAsDataURL(img[0]);
 		document.getElementById("imgUpload").addEventListener('change',function(e){
-			console.log("LOG");
 			base64img=reader.readAsDataURL(img[0]);
 			reader.onload=function(){
 				base64img=reader.result;
