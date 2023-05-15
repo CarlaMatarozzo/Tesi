@@ -22,21 +22,20 @@ $(document).ready(function() {
 		var segretario = document.getElementById("segretario").value;
 
 		var base64img;
-		var fileToLoadimg;
-		var fileReaderimg;
-
-		var selectedFileimg = document.getElementById("imgUpload").files;
-		fileToLoadimg = selectedFileimg[0];
-		fileReaderimg = new FileReader();
-		fileReaderimg.onload = function(fileLoadedEvent) {
-			base64img = fileLoadedEvent.target.result;
-
-		};
-		fileReaderimg.readAsDataURL(fileToLoadimg);
-
-		alert(base64img);
-
-		var base64ita;
+		var reader= new FileReader();
+		var img=document.getElementById("imgUpload").files;
+		reader.readAsDataURL(img[0]);
+		document.getElementById("imgUpload").addEventListener('change',function(e){
+			console.log("LOG");
+			base64img=reader.readAsDataURL(img[0]);
+			reader.onload=function(){
+				base64img=reader.result;
+				console.log("onload"+base64img);
+			}
+		})
+		console.log(base64img);
+		
+		/*var base64ita;
 		var selectedFileIta = document.getElementById("pdfIta").files;
 		if (selectedFileIta.length > 0) {
 			var fileToLoadIta = selectedFileIta[0];
@@ -58,8 +57,8 @@ $(document).ready(function() {
 			};
 			fileReaderIng.readAsDataURL(fileToLoadIng);
 		}
-
-		var bando = new Bando(codice, titolo, base64img, datascadenza, base64ita, base64Inglese, segretario);
+		*/
+		var bando = new Bando(codice, titolo, base64img, datascadenza, null, null, segretario);
 		$.ajax({
 			url: "creaNuovoBando",
 			method: "POST",
@@ -67,7 +66,7 @@ $(document).ready(function() {
 			contentType: "application/json",
 			success: function(risposta) {
 				if (risposta == "successo") {
-					location.reload();
+					//location.reload();
 					//window.location.href = "http://localhost:8080/";
 				}
 				if (risposta == "errore") {

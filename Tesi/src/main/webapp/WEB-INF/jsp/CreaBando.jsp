@@ -47,8 +47,9 @@
 					style="color: black;" required>
 			</div>
 			<div class="form-group">
-				<label>Inserire immagine bando</label> <input type="file"
-					accept=".jpg, .jpeg, .png" id="imgUpload" name="imgUpload">
+				<label>Inserire immagine bando</label> 
+				<input type="file"
+					accept=".jpeg" id="imgUpload" name="imgUpload">
 			</div>
 			<div class="form-group">
 				<label>Data di scadenza</label> <input class="input" type="date"
