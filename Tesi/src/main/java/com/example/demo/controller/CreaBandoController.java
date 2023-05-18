@@ -25,18 +25,16 @@ public class CreaBandoController {
 
 	@PostMapping("inserisciDocumenti")
 	public String addDocumenti(HttpSession session, @RequestBody ArrayList<DocumentiBando> d) {
-		for (int i=0; i<d.size(); i++) {
-		if(!DBManager.getInstance().documentiBandoDAO().inserisci(d.get(i))) {
-			System.out.println("INSERISCI ERRORE");
-		}
-		if(DBManager.getInstance().documentiBandoDAO().esiste(d.get(i))) {
-			System.out.println("ESISTE ERRORE");
-				Bando b=DBManager.getInstance().bandoDAO().ottieniBando(d.get(i).getCodicebando());
+		for (int i = 0; i < d.size(); i++) {
+			if (DBManager.getInstance().documentiBandoDAO().esiste(d.get(i))
+					|| !DBManager.getInstance().documentiBandoDAO().inserisci(d.get(i))) {
+
 				DBManager.getInstance().documentiBandoDAO().eliminaDocumentiBando(d.get(i).getCodicebando());
+				Bando b = DBManager.getInstance().bandoDAO().ottieniBando(d.get(i).getCodicebando());
 				DBManager.getInstance().bandoDAO().eliminaBando(b);
 				return "errore";
-			}
-		}
+
+			} 		}
 		return "successo";
 	}
 }

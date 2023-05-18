@@ -16,9 +16,9 @@ function DocumentiBando(codicebando, titolodocumento, formatodocumento, maxdim, 
 	this.mindim = mindim;
 }
 
-var indice = 0;
+
 $(document).ready(function() {
-	var uniqueId = 1;
+	let uniqueId = 1;
 
 	$("#addDoc").click(function() {
 
@@ -51,15 +51,10 @@ $(document).ready(function() {
 		formElementsHtml.cla
 		formContainer.insertAdjacentHTML("beforeend", formElementsHtml);
 	});
-	indice = uniqueId;
-})
-$(document).ready(function() {
-
 	var formBando = document.getElementById("creaBando");
 	document.getElementById("btnCreaBando").addEventListener("submit", function() {
 		formBando.submit();
 	});
-
 	$("#creaBando").on("submit", function(e) {
 		e.preventDefault();
 		var codice = document.getElementById("codiceBando").value;
@@ -150,7 +145,7 @@ $(document).ready(function() {
 		*/
 		var bando = new Bando(codice, titolo, null, datascadenza, null, null, segretario);
 		var doc = [];
-		for (var i = 0; i < indice; i++) {
+		for (var i = 0; i < uniqueId; i++) {
 			var tit = document.getElementById("doc" + i).value;
 			var formato = document.getElementById("formatoDoc" + i).value;
 			var minSize = document.getElementById("minSize" + i).value;
@@ -158,6 +153,7 @@ $(document).ready(function() {
 			var d = new DocumentiBando(codice, tit, formato, minSize, maxSize);
 			doc.push(d);
 		}
+		
 		$.ajax({
 			url: "creaNuovoBando",
 			method: "POST",

@@ -45,9 +45,7 @@ public class DocumentiBandoDAOJDBC implements DocumentiBandoDAO {
 			st.setInt(1, d.getCodicebando());
 			st.setString(2, d.getTitolodocumento());
 			ResultSet rs = st.executeQuery();
-			if (rs.next() == false) {
-				return false;
-			} else {
+			if (rs.next()) {
 				return true;
 			}
 
