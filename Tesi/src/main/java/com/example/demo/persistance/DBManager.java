@@ -4,6 +4,7 @@ import com.example.demo.persistance.dao.BandoDAO;
 import com.example.demo.persistance.dao.PreferitiDAO;
 import com.example.demo.persistance.dao.UtenteDAO;
 import com.example.demo.persistance.dao.jdbc.BandoDAOJDBC;
+import com.example.demo.persistance.dao.jdbc.DocumentiBandoDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.PreferitiDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.UtenteDAOJDBC;
 
@@ -46,5 +47,9 @@ public class DBManager {
 	
 	public PreferitiDAO preferitiDAO() {
 		return new PreferitiDAOJDBC(dataSource);
+	}
+	
+	public DocumentiBandoDAOJDBC documentiBandoDAO() {
+		return new DocumentiBandoDAOJDBC(dataSource);
 	}
 }

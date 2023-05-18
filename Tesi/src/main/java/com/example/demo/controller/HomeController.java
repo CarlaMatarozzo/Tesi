@@ -63,7 +63,7 @@ public class HomeController {
 	public String creaBando() {
 		return "CreaBando";
 	}
-
+	
 	@GetMapping("/Logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

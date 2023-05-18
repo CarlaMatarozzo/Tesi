@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.example.demo.model.Bando;
 import com.example.demo.persistance.DBSource;

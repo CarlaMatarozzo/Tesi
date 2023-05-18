@@ -72,7 +72,7 @@
 								<ul>
 									<li><a href="#">Risultati Bandi</a></li>
 									<li><a href="#">Comunicazioni</a></li>
-									<li><a href="creabando">Crea Bando</a></li>
+									<li><a href="aggiungiDocumenti">Crea Bando</a></li>
 									<li><a href="profilo">Profilo</a></li>
 									<li><a href="Logout">Logout</a></li>
 								</ul>
