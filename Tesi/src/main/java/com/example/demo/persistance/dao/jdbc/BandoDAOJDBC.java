@@ -1,9 +1,11 @@
 package com.example.demo.persistance.dao.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -149,6 +151,33 @@ public class BandoDAOJDBC implements BandoDAO{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public Date convertToDateUsingDate(LocalDate date) {
+        return java.sql.Date.valueOf(date);
+    }
+	@Override
+	public boolean scaduto(int codicebando) {
+		try {
+			LocalDate ld=LocalDate.now();
+	        Date dt1=convertToDateUsingDate(ld);
+			Connection conn = dbSource.getConnection();
+			String query = "select datascadenza from bando where codice=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setInt(1, codicebando);
+			ResultSet rs = st.executeQuery();
+			if(rs.next()) {
+				Date d=rs.getDate("datascadenza");
+				System.out.println(d.compareTo(dt1));
+				if(d.compareTo(dt1)<0) {
+					return true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	return false;
+
 	}
 }
 

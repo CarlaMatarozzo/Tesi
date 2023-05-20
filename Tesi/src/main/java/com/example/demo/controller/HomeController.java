@@ -31,6 +31,32 @@ public class HomeController {
 		return "index";
 	}
 
+	
+	/*@GetMapping({ "/" })
+	public String index(HttpSession session) {
+		List<Bando> bandi = DBManager.getInstance().bandoDAO().getBandi();
+		List<Bando> bandiValidi=new ArrayList();
+		for (int i=0; i<bandi.size();i++) {
+			System.out.println(bandi.get(i).getDatascadenza());
+			if(!DBManager.getInstance().bandoDAO().scaduto(bandi.get(i).getCodice())) {
+				bandiValidi.add(bandi.get(i));
+			}
+		}
+		session.setAttribute("bandi", bandiValidi);
+		if (session.getAttribute("codicefiscale") != null) {
+			int[] b = new int[bandi.size()];
+			for (int i = 0; i < bandi.size(); i++) {
+					if (DBManager.getInstance().preferitiDAO().existPreferito(
+							session.getAttribute("codicefiscale").toString(), bandi.get(i).getCodice())) {
+						b[i] = 1;
+					} else {
+						b[i] = 0;
+					}
+				}
+			session.setAttribute("bandipreferiti", b);
+		}
+		return "index";
+	}*/
 	@GetMapping("/navbar")
 	public String navbar() {
 		return "Navbar";

@@ -34,7 +34,8 @@ public class CreaBandoController {
 				DBManager.getInstance().bandoDAO().eliminaBando(b);
 				return "errore";
 
-			} 		}
+			}
+		}
 		return "successo";
 	}
 }

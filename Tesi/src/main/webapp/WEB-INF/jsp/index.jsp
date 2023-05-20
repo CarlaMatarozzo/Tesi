@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +55,7 @@
 								</form>
 							</c:if>
 							<c:if test="${bandipreferiti[status.index]==1}">
-							
+
 								<form id="formRimozione" method="post" action="RimuoviPreferiti">
 									<input type="hidden" id="codicebando" name="codicebando"
 										value="${bandi.codice}">
@@ -68,13 +72,41 @@
 								</form>
 							</c:if>
 						</c:if>
+					<input type="hidden" id="hiddenInput" value="hiddenInput">	
 						<div class="card-body p-4 mt-4">
 							<div class="etichetta mt-1">
-
-								<span> <small class="badge badge-success">Aperto</small>
-									<em> <span>chiude il</span> <strong>${bandi.datascadenza}</strong>
-								</em>
-								</span>
+								<script>
+									let minore=false;
+									var data = new Date(
+											'<c:out value="${bandi.datascadenza}" />');
+									var anno = data.getFullYear();
+									var mese = ('0' + (data.getMonth() + 1))
+											.slice(-2);
+									var giorno = ('0' + data.getDate())
+											.slice(-2);
+									var dataFormattata = anno + '-' + mese
+											+ '-' + giorno;
+									var dataCorrente = new Date();
+									var year = dataCorrente.getFullYear();
+									var month = dataCorrente.getMonth() + 1;
+									var day = dataCorrente.getDate();
+									var dataCorrenteFormattata = year + "-" + month + "-" + day;
+									if(dataCorrenteFormattata<dataFormattata){
+										minore=true;
+									}
+									document.getElementById("hiddenInput").value = minore;
+								</script>
+								<%
+								 String hiddenInput = request.getParameter("hiddenInput");
+								 Boolean min = Boolean.parseBoolean(hiddenInput);
+								%>
+								<c:out value="${min}" /></p>
+								<c:if test="${formattedCurrentDate > 'hiddenInput'}">
+									<span> <small class="badge badge-success">Aperto</small>
+										<em> <span>chiude il</span> <strong>${bandi.datascadenza}</strong>
+									</em>
+									</span>
+								</c:if>
 							</div>
 
 							<div class="wrapper-image">
@@ -125,7 +157,4 @@
 
 		</c:forEach>
 	</div>
-	<script>
-		
-	</script>
 </body>
