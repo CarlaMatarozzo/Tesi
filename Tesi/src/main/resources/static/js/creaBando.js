@@ -65,8 +65,8 @@ $(document).ready(function() {
 		var datascadenza = document.getElementById("data").value;
 		var segretario = document.getElementById("segretario").value;
 		var img = document.getElementById("imgUpload");
-		
-		var reader = new FileReader();
+
+		/*var reader = new FileReader();
 			reader.onload = function() {
 				base64img = reader.result;
 				console.log("UNO" + base64img);
@@ -87,10 +87,24 @@ $(document).ready(function() {
 				console.log("TRE" + base64ing);
 			}
 			readering.readAsDataURL(pdfing.files[0]);
-		
-		
-		var bando = new Bando(codice, titolo, null, datascadenza, null, null, segretario);
-		var doc = [];
+		*/
+		var pdfita = document.getElementById("pdfIta");
+		var readerita = new FileReader();
+
+		var pdfing = document.getElementById("pdfInglese");
+		var readering = new FileReader();
+		var reader = new FileReader();
+		reader.onload = function() {
+			base64img = reader.result;
+			console.log("UNO" + base64img);
+			readerita.onload = function() {
+				base64ita = readerita.result;
+				console.log("DUE" + base64ita);
+				readering.onload = function() {
+					base64ing = readering.result;
+					console.log("TRE" + base64ing);
+				var bando = new Bando(codice, titolo, base64img, datascadenza, base64ita, base64ing, segretario);
+						var doc = [];
 		for (var i = 0; i < uniqueId; i++) {
 			var tit = document.getElementById("doc" + i).value;
 			var formato = document.getElementById("formatoDoc" + i).value;
@@ -129,6 +143,15 @@ $(document).ready(function() {
 				}
 			},
 		});
+
+
+				}
+				readering.readAsDataURL(pdfing.files[0]);
+			}
+			readerita.readAsDataURL(pdfita.files[0]);
+		}
+		reader.readAsDataURL(img.files[0]);
+
 
 
 	});
