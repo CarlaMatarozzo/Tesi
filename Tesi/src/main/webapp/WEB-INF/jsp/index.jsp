@@ -76,7 +76,7 @@
 						<div class="card-body p-4 mt-4">
 							<div class="etichetta mt-1">
 								<script>
-									let minore=false;
+									let scaduto=true;
 									var data = new Date(
 											'<c:out value="${bandi.datascadenza}" />');
 									var anno = data.getFullYear();
@@ -91,19 +91,24 @@
 									var month = dataCorrente.getMonth() + 1;
 									var day = dataCorrente.getDate();
 									var dataCorrenteFormattata = year + "-" + month + "-" + day;
-									if(dataCorrenteFormattata<dataFormattata){
-										minore=true;
+									if(dataFormattata<dataCorrenteFormattata){
+										scaduto=false;
 									}
-									document.getElementById("hiddenInput").value = minore;
+									document.getElementById("hiddenInput").value = scaduto;
 								</script>
 								<%
 								 String hiddenInput = request.getParameter("hiddenInput");
 								 Boolean min = Boolean.parseBoolean(hiddenInput);
 								%>
-								<c:out value="${min}" /></p>
-								<c:if test="${formattedCurrentDate > 'hiddenInput'}">
+								<c:if test="${min}==false">
 									<span> <small class="badge badge-success">Aperto</small>
-										<em> <span>chiude il</span> <strong>${bandi.datascadenza}</strong>
+										<em> <span>Il bando chiude il</span> <strong>${bandi.datascadenza}</strong>
+									</em>
+									</span>
+								</c:if>
+								<c:if test="${min}==true">
+									<span> <small class="badge badge-success">Chiuso</small>
+										<em> <span>Bando scaduto il</span> <strong>${bandi.datascadenza}</strong>
 									</em>
 									</span>
 								</c:if>

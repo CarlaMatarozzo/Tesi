@@ -15,7 +15,9 @@ function DocumentiBando(codicebando, titolodocumento, formatodocumento, maxdim, 
 	this.maxdim = maxdim;
 	this.mindim = mindim;
 }
-
+var base64img;
+var base64ita;
+var base64ing;
 
 $(document).ready(function() {
 	let uniqueId = 1;
@@ -55,94 +57,38 @@ $(document).ready(function() {
 	document.getElementById("btnCreaBando").addEventListener("submit", function() {
 		formBando.submit();
 	});
+
 	$("#creaBando").on("submit", function(e) {
 		e.preventDefault();
 		var codice = document.getElementById("codiceBando").value;
 		var titolo = document.getElementById("titolo").value;
 		var datascadenza = document.getElementById("data").value;
 		var segretario = document.getElementById("segretario").value;
-
-		/*var reader= new FileReader();
-		var img=document.getElementById("imgUpload").files;
-		reader.readAsDataURL(img[0]);
-		document.getElementById("imgUpload").addEventListener('change',function(){
-			base64img=reader.readAsDataURL(img[0]);
-			reader.onload=function(){
-				base64img=reader.result;
-				console.log("onload"+base64img);
+		var img = document.getElementById("imgUpload");
+		
+		var reader = new FileReader();
+			reader.onload = function() {
+				base64img = reader.result;
+				console.log("UNO" + base64img);
 			}
-		})
-		console.log(base64img);*/
-		let base64img = ' ';
-
-		function readFileAsBase64(file) {
-			return new Promise((resolve, reject) => {
-				const reader = new FileReader();
-
-				reader.onload = () => {
-					base64img = reader.result;
-					resolve();
-				};
-
-				reader.onerror = () => {
-					reject(new Error('Error reading file.'));
-				};
-
-				reader.readAsDataURL(file);
-			});
-		}
-
-		async function handleFileUpload(event) {
-			const file = event.target.files[0];
-
-			try {
-				await readFileAsBase64(file);
-				console.log(base64img); // Do something with the base64 string
-			} catch (error) {
-				console.error(error);
+			reader.readAsDataURL(img.files[0]);
+		
+		var pdfita=document.getElementById("pdfIta");
+		var readerita = new FileReader();
+			readerita.onload = function() {
+				base64ita = readerita.result;
+				console.log("DUE" + base64ita);
 			}
-		}
-
-		// Attach the event listener to the file input element
-		const fileInput = document.getElementById('imgUpload');
-		fileInput.addEventListener('change', handleFileUpload);
-
-		alert(base64img);
-		/*var img=document.getElementById("imgUpload").files;
-		async function readFileAsDataURL(file) {
-			let result_base64 = await new Promise((resolve) => {
-				let fileReader = new FileReader();
-				fileReader.onload = (e) => resolve(fileReader.result);
-				fileReader.readAsDataURL(file);
-			});
-			//console.log(result_base64);
-			base64img=result_base64;
-		}
-		readFileAsDataURL(img[0]);
-		console.log(base64img);*/
-		/*var base64ita;
-		var selectedFileIta = document.getElementById("pdfIta").files;
-		if (selectedFileIta.length > 0) {
-			var fileToLoadIta = selectedFileIta[0];
-			var fileReaderIta = new FileReader();
-			fileReaderIta.onload = function(fileLoadedEvent) {
-				base64ita = fileLoadedEvent.target.result;
-
-			};
-			fileReaderIta.readAsDataURL(fileToLoadIta);
-		}
-
-		var base64Inglese;
-		var selectedFileIng = document.getElementById("pdfInglese").files;
-		if (selectedFileIng.length > 0) {
-			var fileToLoadIng = selectedFileIng[0];
-			var fileReaderIng = new FileReader();
-			fileReaderIng.onload = function(fileLoadedEvent) {
-				base64Inglese = fileLoadedEvent.target.result;
-			};
-			fileReaderIng.readAsDataURL(fileToLoadIng);
-		}
-		*/
+			readerita.readAsDataURL(pdfita.files[0]);
+		var pdfing=document.getElementById("pdfInglese");
+		var readering = new FileReader();
+			readering.onload = function() {
+				base64ing = readering.result;
+				console.log("TRE" + base64ing);
+			}
+			readering.readAsDataURL(pdfing.files[0]);
+		
+		
 		var bando = new Bando(codice, titolo, null, datascadenza, null, null, segretario);
 		var doc = [];
 		for (var i = 0; i < uniqueId; i++) {
@@ -153,7 +99,7 @@ $(document).ready(function() {
 			var d = new DocumentiBando(codice, tit, formato, minSize, maxSize);
 			doc.push(d);
 		}
-		
+
 		$.ajax({
 			url: "creaNuovoBando",
 			method: "POST",
