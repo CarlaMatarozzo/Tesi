@@ -30,22 +30,21 @@ $(document).ready(function() {
     <div class="form-group">
       <label class="l1">Titolo documento</label>
       <input class="input" type="text" name="doc${uniqueId}" id="doc${uniqueId}"
-        placeholder="Titolo documento" style="color: black;" required>
-    </div>
+        placeholder="Titolo documento" style="color: black;"    </div>
     <div class="form-group">
       <label class="l1">Formato documento</label>
       <input class="input" type="text" name="formatoDoc${uniqueId}" id="formatoDoc${uniqueId}"
-        placeholder="Formato documento" style="color: black;" required>
+        placeholder="Formato documento" style="color: black;">
     </div>
     <div class="form-group">
       <label class="l1">Minima dimensione</label>
       <input class="input" type="number" name="minSize${uniqueId}" id="minSize${uniqueId}"
-        placeholder="Minima dimensione" style="color: black;" required>
+        placeholder="Minima dimensione" style="color: black;">
     </div>
     <div class="form-group">
       <label class="l1">Massima dimensione</label>
       <input class="input" type="number" name="maxSize${uniqueId}" id="maxSize${uniqueId}"
-        placeholder="Massima dimensione" style="color: black;" required>
+        placeholder="Massima dimensione" style="color: black;">
     </div>
   `;
 		uniqueId++;
@@ -64,47 +63,9 @@ $(document).ready(function() {
 		var titolo = document.getElementById("titolo").value;
 		var datascadenza = document.getElementById("data").value;
 		var segretario = document.getElementById("segretario").value;
-		var img = document.getElementById("imgUpload");
 
-		/*var reader = new FileReader();
-			reader.onload = function() {
-				base64img = reader.result;
-				console.log("UNO" + base64img);
-			}
-			reader.readAsDataURL(img.files[0]);
-		
-		var pdfita=document.getElementById("pdfIta");
-		var readerita = new FileReader();
-			readerita.onload = function() {
-				base64ita = readerita.result;
-				console.log("DUE" + base64ita);
-			}
-			readerita.readAsDataURL(pdfita.files[0]);
-		var pdfing=document.getElementById("pdfInglese");
-		var readering = new FileReader();
-			readering.onload = function() {
-				base64ing = readering.result;
-				console.log("TRE" + base64ing);
-			}
-			readering.readAsDataURL(pdfing.files[0]);
-		*/
-		var pdfita = document.getElementById("pdfIta");
-		var readerita = new FileReader();
-
-		var pdfing = document.getElementById("pdfInglese");
-		var readering = new FileReader();
-		var reader = new FileReader();
-		reader.onload = function() {
-			base64img = reader.result;
-			console.log("UNO" + base64img);
-			readerita.onload = function() {
-				base64ita = readerita.result;
-				console.log("DUE" + base64ita);
-				readering.onload = function() {
-					base64ing = readering.result;
-					console.log("TRE" + base64ing);
-				var bando = new Bando(codice, titolo, base64img, datascadenza, base64ita, base64ing, segretario);
-						var doc = [];
+		var bando = new Bando(codice, titolo, null, datascadenza, null, null, segretario);
+		var doc = [];
 		for (var i = 0; i < uniqueId; i++) {
 			var tit = document.getElementById("doc" + i).value;
 			var formato = document.getElementById("formatoDoc" + i).value;
@@ -143,15 +104,56 @@ $(document).ready(function() {
 				}
 			},
 		});
+		var img = document.getElementById("imgUpload");
+		if (img != undefined) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				base64img = reader.result;
+				var parametri = [codice.toString(), base64img];
+				$.ajax({
+					url: "ottieniImg",
+					method: "POST",
+					data: JSON.stringify(parametri),
+					contentType: "application/json",
+				});
+			}
+			reader.readAsDataURL(img.files[0]);
+		}
 
-
-				}
-				readering.readAsDataURL(pdfing.files[0]);
+		var pdfita = document.getElementById("pdfIta");
+		if (pdfita != undefined) {
+			var readerita = new FileReader();
+			readerita.onload = function() {
+				alert("ITA");
+				base64ita = readerita.result;
+				var parametri1 = [codice.toString(), base64ita];
+				$.ajax({
+					url: "ottieniPdfItaliano",
+					method: "POST",
+					data: JSON.stringify(parametri1),
+					contentType: "application/json",
+				});
 			}
 			readerita.readAsDataURL(pdfita.files[0]);
 		}
-		reader.readAsDataURL(img.files[0]);
 
+		var pdfing = document.getElementById("pdfInglese");
+		if (pdfing != undefined) {
+			var readering = new FileReader();
+			readering.onload = function() {
+				alert("ING");
+				base64ing = readering.result;
+
+				var parametri2 = [codice.toString(), base64ing];
+				$.ajax({
+					url: "ottieniPdfInglese",
+					method: "POST",
+					data: JSON.stringify(parametri2),
+					contentType: "application/json",
+				});
+			}
+			readering.readAsDataURL(pdfing.files[0]);
+		}
 
 
 	});

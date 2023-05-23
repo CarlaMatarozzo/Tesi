@@ -127,8 +127,8 @@
 
 							<p class="card-text">
 								Codice: <strong>${bandi.codice}</strong><br> <br>
-								${bandi.pdfIta}
-
+								<a download="PDF Title" href=${bando.pdfIta}>Download PDF document</a>
+								
 							</p>
 
 							<div class="it-card-footer">

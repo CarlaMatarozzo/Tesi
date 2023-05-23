@@ -12,8 +12,10 @@ public interface BandoDAO {
 	public boolean eliminaBando(Bando bando);
 	public boolean esisteBando(int codicebando);
 	public ArrayList<Bando> getBandi();
-	public void setImage(Bando b,String path);
 	public Bando ottieniBando(int codicebando);
 	public boolean scaduto(int codicebando);
 	public Date convertToDateUsingDate(LocalDate date);
+	public void setImg(int codicebando, String img);
+	public void setPdfIta(int codicebando, String ita);
+	public void setPdfIng(int codicebando, String ing);
 }

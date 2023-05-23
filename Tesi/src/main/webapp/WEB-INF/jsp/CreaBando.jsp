@@ -52,7 +52,7 @@
 						</div>
 						<div class="form-group">
 							<label class="l2">Inserire immagine bando</label> <input
-								type="file" accept=".jpeg" id="imgUpload" name="imgUpload">
+								type="file" accept=".jpeg,.png,.jpg" id="imgUpload" name="imgUpload">
 						</div>
 						<div class="form-group">
 							<label class="l1">Data di scadenza</label> <input class="input"
@@ -98,6 +98,7 @@
 								placeholder="Titolo documento" style="color: black;" required>
 						</div>
 						<div class="form-group">
+						
 							<label class="l1">Formato documento</label> <input class="input"
 								type="text" name="formatoDoc0" class="form-control"
 								id="formatoDoc0" placeholder="Formato documento"
