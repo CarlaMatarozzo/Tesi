@@ -28,15 +28,16 @@
 <link rel="stylesheet" href="css/index.css" type="text/css">
 <title>TESI!</title>
 </head>
-<body>
+<body style="background: #fffdd0;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
-	<h1 style="text-align: center;">Bandi in corso</h1>
-	<div class="row pt-2 pb-4 catalogo_bandi_home">
+	<h1 style="text-align: center; 
+ text-shadow: 2px 2px 4px black; ">Bandi in corso</h1>
+	<div class="row catalogo_bandi_home">
 		<c:forEach items="${bandi}" var="bandi" varStatus="status">
 			<!-- Questa è la card -->
 			<div class="col-lg-4">
-				<div class="card-wrapper card-space">
-					<div class="card card-bg card-big">
+				<div class="card-wrapper card-space" style="margin-bottom: 10px !important;">
+					<div class="card card-bg card-big" style="box-shadow: 0px 0px 10px 2px #5f5f5f;">
 						<c:if test="${codicefiscale!=null and codicefiscale!='ADMIN'}">
 							<c:if test="${bandipreferiti[status.index]==0}">
 								<form id="formAggiunta" method="post" action="AggiungiPreferiti">
@@ -73,7 +74,7 @@
 							</c:if>
 						</c:if>
 					<input type="hidden" id="hiddenInput" value="hiddenInput">	
-						<div class="card-body p-4 mt-4">
+						<div class="card-body">
 							<div class="etichetta mt-1">
 								<script>
 									let scaduto=true;
@@ -115,8 +116,12 @@
 							</div>
 
 							<div class="wrapper-image">
-
+								<c:if test="${bandi.img != null}">
 								<img id="imgbando" src=${bandi.img}>
+								</c:if>
+								<c:if test="${bandi.img == null}">
+								<img id="imgbando" src="image\notImage.png">
+								</c:if>
 							</div>
 
 

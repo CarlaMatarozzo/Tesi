@@ -108,6 +108,7 @@ $(document).ready(function() {
 		if (img != undefined) {
 			var reader = new FileReader();
 			reader.onload = function() {
+				alert("IMG");
 				base64img = reader.result;
 				var parametri = [codice.toString(), base64img];
 				$.ajax({
