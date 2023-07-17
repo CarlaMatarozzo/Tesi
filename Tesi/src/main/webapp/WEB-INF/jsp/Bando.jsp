@@ -25,7 +25,7 @@
 <title>TESI!</title>
 </head>
 <body>
-<jsp:include page="Navbar.jsp"></jsp:include>
+	<jsp:include page="Navbar.jsp"></jsp:include>
 	<main class="container">
 		<!-- Left Column / Headphones Image -->
 		<div class="col-6">

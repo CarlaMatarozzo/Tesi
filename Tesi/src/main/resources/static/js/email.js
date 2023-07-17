@@ -1,9 +1,9 @@
 function sendEmail(nome,email,oggetto,messaggio) {
 	Email.send({
-	//SecureToken:"e32f3415-e014-4e08-92eb-7c8c4fe6e797",
+//	SecureToken:"e32f3415-e014-4e08-92eb-7c8c4fe6e797",
 	Host: "smtp.gmail.com",
 	Username : "carlaferronirc@gmail.com",
-	Password : "Progettoweb2022.",
+	Password : "gjujxsavkunarojv",
 	From : email,
 	To : 'carlaferronirc@gmail.com',
 	Subject : oggetto,

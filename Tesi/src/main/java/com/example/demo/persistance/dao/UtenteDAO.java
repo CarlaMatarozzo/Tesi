@@ -24,4 +24,5 @@ public interface UtenteDAO {
 	 * getEmail(String username);
 	 */
 	public boolean updateWithoutPsw(Utente u);
+	public String getCodiceFiscale(String email);
 }

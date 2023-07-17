@@ -1,10 +1,7 @@
 package com.example.demo.model;
 
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.Authenticator;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -15,18 +12,15 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
-import java.util.Random;
+
 
 public class EmailSender {
 	private static EmailSender instance = null; 
 	private static String Server="smtp.gmail.com";
 	private static String Porta="587";
 	private static String myEmail="carlaferronirc@gmail.com";
-	private static String myPass="Progettoweb2022.";
+	private static String myPass="gjujxsavkunarojv";
 	private String anteprima="";
 	private String titolo="";
 	 

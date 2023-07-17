@@ -165,7 +165,6 @@ public class UtenteDAOJDBC implements UtenteDAO {
 			statement.setString(1, BCrypt.hashpw(password, BCrypt.gensalt(12)));			
 			statement.setString(2, codicefiscale);			
 			statement.executeUpdate();
-			
 		} catch (SQLException e) {
 			throw new RuntimeException(e.getMessage());
 		}
@@ -207,6 +206,26 @@ public class UtenteDAOJDBC implements UtenteDAO {
 		} catch (SQLException e) {
 			return false;
 		} 			
+	}
+
+	@Override
+	public String getCodiceFiscale(String email) {
+		String cf=null;
+		
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select codicefiscale from utente where email=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, email);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				cf=rs.getString("codicefiscale");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	return cf;
 	}
 
 }

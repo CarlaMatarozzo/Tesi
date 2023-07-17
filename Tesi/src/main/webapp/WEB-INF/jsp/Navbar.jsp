@@ -293,7 +293,7 @@
 									<form id="recuperoPassword" action="#">
 										<h5>Inserisci la tua email per recuperare la password</h5>
 										<br> <input style="font-size: 15px;" type="email"
-											id="emailRecupero" name="emailrecupero" required><br>
+											id="emailRecupero" name="emailRecupero" required><br>
 										<br>
 										<button type="submit" id="btnRecuperoPassword" class="btn"
 											style="float: right; background: #e9e4e2;">Recupera</button>
@@ -307,27 +307,26 @@
 			</div>
 		</div>
 
-		<div class="modal fade" id="invioNuovaPassword">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Modal body -->
-					<div class="modal-body">
-						<div class="myform2 form ">
-							<div class="logo mb-3">
-								<div class="col-md-12 text-center">
-									<button id="chiudi" type="button" class="close"
-										data-dismiss="modal">×</button>
-									<br>
-									<p>Email inviata
-									<p>
-										<br>
-								</div>
-							</div>
-						</div>
-					</div>
+	 <div class="modal fade" id="invioNuovaPassword">
+	    <div class="modal-dialog">
+	      <div class="modal-content">	            
+	        <!-- Modal body -->
+	        <div class="modal-body">	
+				<div class="myform form ">
+					<div class="logo mb-3">
+						 <div class="col-md-12 text-center">
+							<button id="chiudi" type="button" class="close" data-dismiss="modal">×</button>
+							 <br>							
+				               <p>Se la tua email è presente sul sistema ti è stata inviata una nuova password, controlla tra la posta in arrivo ed accedi con la nuova password!<p> 					              		                 
+							 <br>
+						 </div>
+					</div>	                   	               
 				</div>
+			  </div>
 			</div>
-		</div>
+	     </div>
+	 </div>  
+	 
 		<div class="modal fade" id="apriTermini">
 			<div class="modal-dialog">
 				<div class="modal-content">

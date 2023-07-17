@@ -39,4 +39,5 @@ public class BandoController {
 		}
 		return "redirect:/";
 	}
+	
 }

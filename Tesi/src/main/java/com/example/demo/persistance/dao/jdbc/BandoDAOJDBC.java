@@ -45,7 +45,6 @@ public class BandoDAOJDBC implements BandoDAO {
 	@Override
 	public boolean eliminaBando(Bando bando) {
 		Connection connection = null;
-
 		try {
 			connection = this.dbSource.getConnection();
 			String delete = "delete FROM bando WHERE codice=? ";

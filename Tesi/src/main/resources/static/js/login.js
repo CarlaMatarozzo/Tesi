@@ -108,4 +108,32 @@ $(document).ready(function() {
 			},
 		});
 	});
+		$("#recuperoPassword").on("submit", function(e){
+		
+		$("#btnRecuperoPassword").prop("disabled", true);
+		$("#btnRecuperoPassword").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`);  
+
+		e.preventDefault();			
+		var email3 = document.getElementById("emailRecupero").value;
+		var utente3 = new Utente(null, null, null, null, email3.toLowerCase(), true);
+		$.ajax({
+				  url: "RecuperoPassword",  
+		          method: "POST",	         
+		          data: JSON.stringify(utente3),	       
+		          contentType: "application/json",	         
+		          success: function(risposta) {
+				  if (risposta == "successo") {
+						$("#btnRecuperoPassword").prop("disabled", false);
+						$("#btnStartUploads i").removeAttr('class');						
+						$("#btnStartUploads i").addClass('class="btn btn-sm btn-outline-info"');
+						$("#btnRecuperoPassword").html(`recupera`);
+						$('#invioNuovaPassword').modal('show');	
+					}														
+		          },	            	  
+		    });	
+	});	
+	
+	$("#chiudi").on("click", function(e){
+		$('#recuperaPassword').modal('hide');	
+	});	
 });

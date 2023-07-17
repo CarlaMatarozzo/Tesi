@@ -22,6 +22,7 @@ public class LoginController {
 				session.setAttribute("cognome", utenteLoggato.getCognome());
 				session.setAttribute("email", utenteLoggato.getEmail());
 				session.setAttribute("docente", utenteLoggato.isDocente());
+				System.out.println( utenteLoggato.getCodiceFiscale() + utenteLoggato.getPassword());
 				return "successo";
 			}
 		}
@@ -50,12 +51,14 @@ public class LoginController {
 		if(DBManager.getInstance().utenteDAO().existsUserEmail(utente.getEmail())){
 			try {			
 				String nuovaPassword= EmailSender.getInstance().ResetPassword(utente.getEmail());
-				DBManager.getInstance().utenteDAO().setPassword(utente.getEmail(), nuovaPassword);
+				String cf=DBManager.getInstance().utenteDAO().getCodiceFiscale(utente.getEmail());
+				DBManager.getInstance().utenteDAO().setPassword(cf, nuovaPassword);
+				return "successo";
 			} catch (Exception e) {			
 				e.printStackTrace();
 			}
 		}
-		return "successo";	
+		return "errore";	
 	}
 	
 	
