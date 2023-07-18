@@ -99,10 +99,48 @@
 
 							<p class="card-text">
 								Codice: <strong>${bandi.codice}</strong><br> <br>
-								<a download="PDF Title" href=${bando.pdfIta}>Download PDF document</a>
-								
 							</p>
+								<a id="downloadLink" href="#" download="BandoIta.pdf">Scarica il PDF</a>
+							<c:set var="myVariable" value='${bandi.pdfIta}' />
+							<p></p>
+							<c:if test="${bandi.pdfInglese!=null}">
+								<a id="downloadLinkIng" href="#" download="BandoIng.pdf">Download PDF </a>
+							<c:set var="myVariable2" value='${bandi.pdfInglese}' />
+							</c:if>
+    <script>
 
+        // La tua stringa Base64 contenente i dati del PDF
+        var base64PDFData = '${myVariable}'; // Inserisci qui i dati Base64
+        // Decodifica la stringa Base64 in un Blob
+        var binaryData = atob(base64PDFData.split(',')[1]);
+        var arrayBuffer = new ArrayBuffer(binaryData.length);
+        var uint8Array = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < binaryData.length; i++) {
+            uint8Array[i] = binaryData.charCodeAt(i);
+        }
+        var blob = new Blob([uint8Array], { type: 'application/pdf' });
+
+        // Crea il link di download dinamico
+        var downloadLink = document.getElementById('downloadLink');
+        downloadLink.href = URL.createObjectURL(blob);
+    </script>
+    <script>
+
+        // La tua stringa Base64 contenente i dati del PDF
+        var base64PDFDataIng = '${myVariable2}'; // Inserisci qui i dati Base64
+        // Decodifica la stringa Base64 in un Blob
+        var binaryData2 = atob(base64PDFDataIng.split(',')[1]);
+        var arrayBuffer2 = new ArrayBuffer(binaryData2.length);
+        var uint8Array2 = new Uint8Array(arrayBuffer2);
+        for (var i = 0; i < binaryData2.length; i++) {
+            uint8Array2[i] = binaryData2.charCodeAt(i);
+        }
+        var blob2 = new Blob([uint8Array2], { type: 'application/pdf' });
+
+        // Crea il link di download dinamico
+        var downloadLinkIng = document.getElementById('downloadLinkIng');
+        downloadLinkIng.href = URL.createObjectURL(blob);
+    </script>
 							<div class="it-card-footer">
 								<!-- FAI DOMANDA -->
 								<span class="card-signature"> <!-- Bandi SIAGE --> <c:if
@@ -121,9 +159,6 @@
 												type="submit">Rimuovi Bando</button>
 										</form>
 									</c:if>
-								</span> <a class="read-more" href="/DettagliBando"
-									rel="nofollow noopener noreferrer" target="_blank"> <span
-									class="text">Vedi dettaglio ${bandi.codice}</span>
 								</a>
 							</div>
 						</div>

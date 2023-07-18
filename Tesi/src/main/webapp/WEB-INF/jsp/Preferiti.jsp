@@ -70,8 +70,6 @@
 
 								<p class="card-text">
 									Codice: <strong>${bandi.codice}</strong><br> <br>
-									${bandi.spiegazione }
-
 								</p>
 
 								<div class="it-card-footer">
