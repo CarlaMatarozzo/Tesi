@@ -15,6 +15,22 @@ function DocumentiBando(codicebando, titolodocumento, formatodocumento, maxdim, 
 	this.maxdim = maxdim;
 	this.mindim = mindim;
 }
+function checkFileSize(inputId, maxSizeInKb) {
+	var fileInput = document.getElementById(inputId);
+	var maxSizeInBytes = maxSizeInKb * 1024;
+
+	if (fileInput.files.length > 0) {
+		var fileSize = fileInput.files[0].size;
+		if (fileSize > maxSizeInBytes) {
+			alert("Dimensione massima consentita: " + maxSizeInKb + " MB");
+		}
+	}
+}
+
+
+
+
+
 var base64img;
 var base64ita;
 var base64ing;
@@ -88,9 +104,9 @@ $(document).ready(function() {
 						data: JSON.stringify(doc),
 						contentType: "application/json",
 						success: function(risposta) {
-							if (risposta == "successo") {
+							/*if (risposta == "successo") {
 								window.location.href = "http://localhost:8080/";
-							}
+							}*/
 							if (risposta == "errore") {
 								var err = document.getElementById("erroreBando");
 								err.innerHTML = "Errore documenti inseriti";
@@ -104,58 +120,94 @@ $(document).ready(function() {
 				}
 			},
 		});
-				var img = document.getElementById("imgUpload");
-				if (img != undefined) {
-					var reader = new FileReader();
-					reader.onload = function() {
-						base64img = reader.result;
-						console.log("base64img"+base64img);
-						var parametri = [codice.toString(), base64img];
-						$.ajax({
-							url: "ottieniImg",
-							method: "POST",
-							data: JSON.stringify(parametri),
-							contentType: "application/json",
-						});
-					}
-						reader.readAsDataURL(img.files[0]);
-				}
-		
-				var pdfita = document.getElementById("pdfIta");
-				if (pdfita != undefined) {
-					console.log("OK CI SONO");
-					var readerita = new FileReader();
-					readerita.onload = function() {
-						base64ita = readerita.result;
-						console.log("base64imgta"+base64ita);
-						var parametri1 = [codice.toString(), base64ita];
-						$.ajax({
-							url: "ottieniPdfItaliano",
-							method: "POST",
-							data: JSON.stringify(parametri1),
-							contentType: "application/json",
-						});
-					}
-						readerita.readAsDataURL(pdfita.files[0]);
-					
-				}
-				var pdfing = document.getElementById("pdfInglese");
-				if (pdfing != undefined) {
-					var readering = new FileReader();
-					readering.onloadend = function() {
-						base64ing = readering.result;
-						console.log("base64ing"+base64ing);
-						var parametri2 = [codice.toString(), base64ing];
-						$.ajax({
-							url: "ottieniPdfInglese",
-							method: "POST",
-							data: JSON.stringify(parametri2),
-							contentType: "application/json",
-						});
-					}
-					readering.readAsDataURL(pdfing.files[0]);
-				}
-		
+		var img = document.getElementById("imgUpload");
+		if (img != undefined) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				base64img = reader.result;
+				console.log("base64img" + base64img);
+				var parametri = [codice.toString(), base64img];
+				$.ajax({
+					url: "ottieniImg",
+					method: "POST",
+					data: JSON.stringify(parametri),
+					contentType: "application/json",
+				});
+			}
+			reader.readAsDataURL(img.files[0]);
+		}
+		else {
+			console.error("non è andato a buon fine img");
+		}
+
+		/*				var pdfita = document.getElementById("pdfIta");
+						if (pdfita != undefined ) {
+							var readerita = new FileReader();
+							readerita.onload = function() {
+								base64ita = readerita.result;
+								console.log("base64imgta"+base64ita);
+								var parametri1 = [codice.toString(), base64ita];
+								$.ajax({
+									url: "ottieniPdfItaliano",
+									method: "POST",
+									data: JSON.stringify(parametri1),
+									contentType: "application/json",
+								});
+							}
+								readerita.readAsDataURL(pdfita.files[0]);
+							
+						}
+								 else {
+			console.error("non è andato a buon fine ita");
+				}*/
+		var pdfita = document.getElementById("pdfIta");
+		if (pdfita != undefined) {
+			if (checkFileSize("pdfIta", 1500)) { // Verifica la dimensione del file prima di continuare
+				var readerita = new FileReader();
+				readerita.onload = function() {
+					base64ita = readerita.result;
+					console.log("base64imgta" + base64ita);
+					var parametri1 = [codice.toString(), base64ita];
+					$.ajax({
+						url: "ottieniPdfItaliano",
+						method: "POST",
+						data: JSON.stringify(parametri1),
+						contentType: "application/json",
+					});
+				};
+				readerita.readAsDataURL(pdfita.files[0]);
+			} else {
+				console.error("La dimensione del file italiano supera la dimensione massima consentita.");
+			}
+		} else {
+			console.error("File italiano non selezionato.");
+		}
+
+
+
+
+
+
+		var pdfing = document.getElementById("pdfInglese");
+		if (pdfing != undefined) {
+			var readering = new FileReader();
+			readering.onloadend = function() {
+				base64ing = readering.result;
+				console.log("base64ing" + base64ing);
+				var parametri2 = [codice.toString(), base64ing];
+				$.ajax({
+					url: "ottieniPdfInglese",
+					method: "POST",
+					data: JSON.stringify(parametri2),
+					contentType: "application/json",
+				});
+			}
+			readering.readAsDataURL(pdfing.files[0]);
+		}
+		else {
+			console.error("non è andato a buon fine ing");
+		}
+
 		/*
 		var base64imgPromise = new Promise(function(resolve, reject) {
 			var img = document.getElementById("imgUpload");

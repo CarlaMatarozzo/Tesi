@@ -27,7 +27,6 @@ public class ProfiloController {
 				return "successo";
 			}
 		}
-		System.out.println("errore");
 		return "errore";
 
 	}

@@ -22,7 +22,6 @@ public class LoginController {
 				session.setAttribute("cognome", utenteLoggato.getCognome());
 				session.setAttribute("email", utenteLoggato.getEmail());
 				session.setAttribute("docente", utenteLoggato.isDocente());
-				System.out.println( utenteLoggato.getCodiceFiscale() + utenteLoggato.getPassword());
 				return "successo";
 			}
 		}

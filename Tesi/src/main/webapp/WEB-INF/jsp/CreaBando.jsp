@@ -74,12 +74,14 @@
 						</div>
 						<div class="form-group">
 							<label class="l2">Inserire pdf italiano</label> <input
-								type="file" accept=".pdf" id="pdfIta" name="pdfIta" required>
+								type="file" accept=".pdf" id="pdfIta" name="pdfIta" maxlength="150" onchange="checkFileSize('pdfInglese', 1500)" required>
+								<h7 id="sizeIta">*MaxSize: 1500Kb</h7>
 							<br>
 						</div>
 						<div class="form-group">
 							<label class="l2">Inserire pdf del bando in inglese</label> <input
-								type="file" accept=".pdf" id="pdfInglese" name="pdfInglese">
+								type="file" accept=".pdf" id="pdfInglese" name="pdfInglese" onchange="checkFileSize('pdfInglese', 1500)">
+							<h7 id="sizeIng">*MaxSize: 1500Kb</h7>
 							<br>
 						</div>
 						<div class="form-group">
