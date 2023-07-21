@@ -38,7 +38,7 @@
 
 		<form method="post" action="#" id="creaBando">
 			<div class="row">
-				<div class="col" >
+				<div class="col">
 					<div class="form">
 						<div class="form-group">
 							<label class="l1">Codice Bando</label> <input class="input"
@@ -52,35 +52,26 @@
 						</div>
 						<div class="form-group">
 							<label class="l2">Inserire immagine bando</label> <input
-								type="file" accept=".jpeg,.png,.jpg" id="imgUpload" name="imgUpload">
+								type="file" accept=".jpeg,.png,.jpg" id="imgUpload"
+								name="imgUpload">
 						</div>
 						<div class="form-group">
 							<label class="l1">Data di scadenza</label> <input class="input"
 								type="date" name="datascadenza" class="form-control" id="data"
 								placeholder="Data di scadenza" style="color: black;" required>
-							<script>
-								// Ottieni la data di domani
-								var tomorrow = new Date();
-								tomorrow.setDate(tomorrow.getDate() + 1);
-
-								// Formatta la data nel formato 'YYYY-MM-DD'
-								var formattedDate = tomorrow.toISOString()
-										.split('T')[0];
-
-								// Imposta il valore dell'attributo 'min' dell'input
-								document.getElementById('data').setAttribute(
-										'min', formattedDate);
-							</script>
 						</div>
 						<div class="form-group">
 							<label class="l2">Inserire pdf italiano</label> <input
-								type="file" accept=".pdf" id="pdfIta" name="pdfIta" maxlength="150" onchange="checkFileSize('pdfInglese', 1500)" required>
-								<h7 id="sizeIta">*MaxSize: 1500Kb</h7>
+								type="file" accept=".pdf" id="pdfIta" name="pdfIta"
+								maxlength="150" onchange="checkFileSize('pdfIta', 1500)"
+								required>
+							<h7 id="sizeIta">*MaxSize: 1500Kb</h7>
 							<br>
 						</div>
 						<div class="form-group">
 							<label class="l2">Inserire pdf del bando in inglese</label> <input
-								type="file" accept=".pdf" id="pdfInglese" name="pdfInglese" onchange="checkFileSize('pdfInglese', 1500)">
+								type="file" accept=".pdf" id="pdfInglese" name="pdfInglese"
+								onchange="checkFileSize('pdfInglese', 1500)">
 							<h7 id="sizeIng">*MaxSize: 1500Kb</h7>
 							<br>
 						</div>
@@ -100,7 +91,7 @@
 								placeholder="Titolo documento" style="color: black;" required>
 						</div>
 						<div class="form-group">
-						
+
 							<label class="l1">Formato documento</label> <input class="input"
 								type="text" name="formatoDoc0" class="form-control"
 								id="formatoDoc0" placeholder="Formato documento"
@@ -126,9 +117,9 @@
 						style="width: 30%; border-color: transparent; background-color: #55d6aa">Aggiungi
 						bando</button>
 				</div>
-		</div>
+			</div>
 		</form>
-	
+
 	</div>
 </body>
 

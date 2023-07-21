@@ -15,6 +15,7 @@ function DocumentiBando(codicebando, titolodocumento, formatodocumento, maxdim, 
 	this.maxdim = maxdim;
 	this.mindim = mindim;
 }
+
 function checkFileSize(inputId, maxSizeInKb) {
 	var fileInput = document.getElementById(inputId);
 	var maxSizeInBytes = maxSizeInKb * 1024;
@@ -22,7 +23,17 @@ function checkFileSize(inputId, maxSizeInKb) {
 	if (fileInput.files.length > 0) {
 		var fileSize = fileInput.files[0].size;
 		if (fileSize > maxSizeInBytes) {
-			alert("Dimensione massima consentita: " + maxSizeInKb + " MB");
+			fileInput.value = "";
+			if(inputId==="pdfIta"){
+				var it=document.getElementById("sizeIta");
+				it.textContent="Dimensione superata, max size 1500Kb";
+				it.style.color="RED";
+			}
+			else{
+				var ingl=document.getElementById("sizeIng");
+				ingl.textContent="Dimensione superata, max size 1500Kb";
+				ingl.style.color="RED";
+			}
 		}
 	}
 }
@@ -104,9 +115,9 @@ $(document).ready(function() {
 						data: JSON.stringify(doc),
 						contentType: "application/json",
 						success: function(risposta) {
-							/*if (risposta == "successo") {
+							if (risposta == "successo") {
 								window.location.href = "http://localhost:8080/";
-							}*/
+							}
 							if (risposta == "errore") {
 								var err = document.getElementById("erroreBando");
 								err.innerHTML = "Errore documenti inseriti";
@@ -120,12 +131,13 @@ $(document).ready(function() {
 				}
 			},
 		});
+
+
 		var img = document.getElementById("imgUpload");
-		if (img != undefined) {
+		if (img.files[0]) {
 			var reader = new FileReader();
-			reader.onload = function() {
+			reader.onloadend = function() {
 				base64img = reader.result;
-				console.log("base64img" + base64img);
 				var parametri = [codice.toString(), base64img];
 				$.ajax({
 					url: "ottieniImg",
@@ -135,9 +147,6 @@ $(document).ready(function() {
 				});
 			}
 			reader.readAsDataURL(img.files[0]);
-		}
-		else {
-			console.error("non è andato a buon fine img");
 		}
 
 		/*				var pdfita = document.getElementById("pdfIta");
@@ -160,13 +169,13 @@ $(document).ready(function() {
 								 else {
 			console.error("non è andato a buon fine ita");
 				}*/
+				
 		var pdfita = document.getElementById("pdfIta");
-		if (pdfita != undefined) {
+		if (pdfita.files[0]) {
 			if (checkFileSize("pdfIta", 1500)) { // Verifica la dimensione del file prima di continuare
 				var readerita = new FileReader();
 				readerita.onload = function() {
 					base64ita = readerita.result;
-					console.log("base64imgta" + base64ita);
 					var parametri1 = [codice.toString(), base64ita];
 					$.ajax({
 						url: "ottieniPdfItaliano",
@@ -176,130 +185,27 @@ $(document).ready(function() {
 					});
 				};
 				readerita.readAsDataURL(pdfita.files[0]);
-			} else {
-				console.error("La dimensione del file italiano supera la dimensione massima consentita.");
 			}
-		} else {
-			console.error("File italiano non selezionato.");
 		}
-
-
-
-
-
 
 		var pdfing = document.getElementById("pdfInglese");
-		if (pdfing != undefined) {
-			var readering = new FileReader();
-			readering.onloadend = function() {
-				base64ing = readering.result;
-				console.log("base64ing" + base64ing);
-				var parametri2 = [codice.toString(), base64ing];
-				$.ajax({
-					url: "ottieniPdfInglese",
-					method: "POST",
-					data: JSON.stringify(parametri2),
-					contentType: "application/json",
-				});
-			}
-			readering.readAsDataURL(pdfing.files[0]);
-		}
-		else {
-			console.error("non è andato a buon fine ing");
-		}
-
-		/*
-		var base64imgPromise = new Promise(function(resolve, reject) {
-			var img = document.getElementById("imgUpload");
-			if (img) {
-				var reader = new FileReader();
-				reader.onload = function() {
-					var base64img = reader.result;
-					console.log("base64img: " + base64img);
-					resolve(base64img);
-				};
-				reader.onerror = function(error) {
-					reject(error);
-				};
-				reader.readAsDataURL(img.files[0]);
-			} else {
-				resolve(null); // Nessun file da leggere, risolvi con valore null
-			}
-		});
-
-		var base64itaPromise = new Promise(function(resolve, reject) {
-			var pdfita = document.getElementById("pdfIta");
-			if (pdfita) {
-				var readerita = new FileReader();
-				readerita.onload = function() {
-					var base64ita = readerita.result;
-					console.log("base64ita: " + base64ita);
-					resolve(base64ita);
-				};
-				readerita.onerror = function(error) {
-					reject(error);
-				};
-				readerita.readAsDataURL(pdfita.files[0]);
-			} else {
-				resolve(null); // Nessun file da leggere, risolvi con valore null
-			}
-		});
-
-		var base64ingPromise = new Promise(function(resolve, reject) {
-			var pdfing = document.getElementById("pdfInglese");
-			if (pdfing) {
+		if (pdfing.files[0]) {
+			if (checkFileSize("pdfIng", 1500)) {
 				var readering = new FileReader();
-				readering.onload = function() {
-					var base64ing = readering.result;
-					console.log("base64ing: " + base64ing);
-					resolve(base64ing);
-				};
-				readering.onerror = function(error) {
-					reject(error);
-				};
+				readering.onloadend = function() {
+					base64ing = readering.result;
+					var parametri2 = [codice.toString(), base64ing];
+					$.ajax({
+						url: "ottieniPdfInglese",
+						method: "POST",
+						data: JSON.stringify(parametri2),
+						contentType: "application/json",
+					});
+				}
 				readering.readAsDataURL(pdfing.files[0]);
-			} else {
-				resolve(null); // Nessun file da leggere, risolvi con valore null
 			}
-		});
+		}
 
-		// ...
-
-		Promise.all([base64imgPromise, base64itaPromise, base64ingPromise])
-			.then(function(results) {
-				var base64img = results[0];
-				var base64ita = results[1];
-				var base64ing = results[2];
-
-				console.log("Tutte le basi64 sono state memorizzate correttamente!");
-				console.log("base64img: " + base64img);
-				console.log("base64ita: " + base64ita);
-				console.log("base64ing: " + base64ing);
-				var parametri = [codice.toString(), base64img];
-				$.ajax({
-					url: "ottieniImg",
-					method: "POST",
-					data: JSON.stringify(parametri),
-					contentType: "application/json",
-				});
-				var parametri1 = [codice.toString(), base64ita];
-				$.ajax({
-					url: "ottieniPdfItaliano",
-					method: "POST",
-					data: JSON.stringify(parametri1),
-					contentType: "application/json",
-				});
-				var parametri2 = [codice.toString(), base64ing];
-				$.ajax({
-					url: "ottieniPdfInglese",
-					method: "POST",
-					data: JSON.stringify(parametri2),
-					contentType: "application/json",
-				});
-			})
-			.catch(function(error) {
-				console.error("Si è verificato un errore durante la generazione delle basi64:", error);
-			});*/
 	});
 });
 

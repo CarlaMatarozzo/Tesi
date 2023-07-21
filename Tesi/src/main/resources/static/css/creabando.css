@@ -18,9 +18,22 @@
 	text-align: left;
 }
 
+.input1 {
+	width: 350px !important;
+	margin: auto;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
 .form {
 	display: table;
 	margin-right: auto;
 	margin-left: auto;
 }
 
+textarea{
+	width:450px !important;
+	height:300px !important;
+}

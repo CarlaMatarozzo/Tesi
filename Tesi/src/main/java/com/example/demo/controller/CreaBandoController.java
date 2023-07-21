@@ -30,7 +30,6 @@ public class CreaBandoController {
 				&& d.get(i).getMindim() != 0 && d.get(i).getMaxdim()!=0) {
 				if (DBManager.getInstance().documentiBandoDAO().esiste(d.get(i))
 						|| !DBManager.getInstance().documentiBandoDAO().inserisci(d.get(i))) {
-
 					DBManager.getInstance().documentiBandoDAO().eliminaDocumentiBando(d.get(i).getCodicebando());
 					Bando b = DBManager.getInstance().bandoDAO().ottieniBando(d.get(i).getCodicebando());
 					DBManager.getInstance().bandoDAO().eliminaBando(b);
@@ -45,11 +44,13 @@ public class CreaBandoController {
 	@PostMapping("ottieniImg")
 	public void ottieniImg(HttpSession session, @RequestBody ArrayList<String> parametri) {
 		DBManager.getInstance().bandoDAO().setImg(Integer.parseInt(parametri.get(0)), parametri.get(1));
+		
 	}
 
 	@PostMapping("ottieniPdfItaliano")
 	public void ottieniPdfIta(HttpSession session, @RequestBody ArrayList<String> parametri1) {
 		DBManager.getInstance().bandoDAO().setPdfIta(Integer.parseInt(parametri1.get(0)), parametri1.get(1));
+		
 	}
 
 	@PostMapping("ottieniPdfInglese")

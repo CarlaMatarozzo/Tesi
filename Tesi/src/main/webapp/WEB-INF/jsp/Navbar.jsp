@@ -58,7 +58,7 @@
 								<!-- primo list-item, prima voce del menu -->
 								<ul>
 									<li><a href="#">Come funziona</a></li>
-									<li><a href="#">Assistenza</a></li>
+									<li><a href="assistenza">Assistenza</a></li>
 									<li><a href="#">I miei bandi</a></li>
 									<li><a href="preferiti">Preferiti</a></li>
 									<li><a href="profilo">Il mio profilo</a></li>
@@ -74,6 +74,7 @@
 									<li><a href="#">Comunicazioni</a></li>
 									<li><a href="creabando">Crea Bando</a></li>
 									<li><a href="profilo">Profilo</a></li>
+									<li><a href="aggiungiDocente">Aggiungi docente</a></li>
 									<li><a href="Logout">Logout</a></li>
 								</ul>
 					</c:if>
@@ -84,7 +85,7 @@
 				<c:if test="${codicefiscale == null }">
 					<ul>
 						<li><a href="#">Come funziona</a></li>
-						<li><a href="#">Assistenza</a></li>
+						<li><a href="assistenza">Assistenza</a></li>
 						<div id="hormenu">
 							<!-- div che contiene il menu -->
 							<ul>
@@ -97,8 +98,7 @@
 											data-target="#loginModal">Accedi</a></li>
 										<li><a type="button" data-toggle="modal"
 											data-target="#registrazioneModal">Registrati</a></li>
-									</ul>
-									</li>
+									</ul></li>
 							</ul>
 						</div>
 					</ul>
@@ -107,7 +107,7 @@
 					<ul>
 						<li><a href="#">I miei bandi</a></li>
 						<li><a href="#">Come funziona</a></li>
-						<li><a href="#">Assistenza</a></li>
+						<li><a href="assistenza">Assistenza</a></li>
 						<div id="hormenu">
 							<ul>
 								<li><a href="#"> <span class="glyphicon glyphicon-user"></span></a>
@@ -117,18 +117,18 @@
 										<li><a href="preferiti">Preferiti</a></li>
 										<li><a href="profilo">Il mio profilo</a></li>
 										<li><a href="Logout">Logout</a></li>
-									</ul>
-									</li>
-									</ul>
-									</div>
-									</ul>
-									
+									</ul></li>
+							</ul>
+						</div>
+					</ul>
+
 				</c:if>
 
 				<c:if test="${codicefiscale=='ADMIN'}">
 					<li><a href="creabando">Crea Bando</a></li>
 					<li><a href="#">Risultati bandi</a></li>
 					<li><a href="#">Comunicazioni</a></li>
+					<li><a href="aggiungiDocente">Aggiungi docente</a></li>
 					<div id="hormenu">
 
 						<ul>
@@ -307,26 +307,30 @@
 			</div>
 		</div>
 
-	 <div class="modal fade" id="invioNuovaPassword">
-	    <div class="modal-dialog">
-	      <div class="modal-content">	            
-	        <!-- Modal body -->
-	        <div class="modal-body">	
-				<div class="myform form ">
-					<div class="logo mb-3">
-						 <div class="col-md-12 text-center">
-							<button id="chiudi" type="button" class="close" data-dismiss="modal">×</button>
-							 <br>							
-				               <p>Se la tua email è presente sul sistema ti è stata inviata una nuova password, controlla tra la posta in arrivo ed accedi con la nuova password!<p> 					              		                 
-							 <br>
-						 </div>
-					</div>	                   	               
+		<div class="modal fade" id="invioNuovaPassword">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div class="myform form ">
+							<div class="logo mb-3">
+								<div class="col-md-12 text-center">
+									<button id="chiudi" type="button" class="close"
+										data-dismiss="modal">×</button>
+									<br>
+									<p>Se la tua email è presente sul sistema ti è stata
+										inviata una nuova password, controlla tra la posta in arrivo
+										ed accedi con la nuova password!
+									<p>
+										<br>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			  </div>
 			</div>
-	     </div>
-	 </div>  
-	 
+		</div>
+
 		<div class="modal fade" id="apriTermini">
 			<div class="modal-dialog">
 				<div class="modal-content">

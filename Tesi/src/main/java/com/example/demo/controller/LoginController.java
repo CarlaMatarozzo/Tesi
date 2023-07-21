@@ -1,4 +1,7 @@
 package com.example.demo.controller;
+
+import java.util.ArrayList;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +33,8 @@ public class LoginController {
 
 	@PostMapping("registrationService")
 	public String faiRegistration(HttpSession session, @RequestBody Utente u) {
-		if (DBManager.getInstance().utenteDAO().existsUser(u.getCodiceFiscale()) || DBManager.getInstance().utenteDAO().existsUserEmail(u.getEmail()) ) {
+		if (DBManager.getInstance().utenteDAO().existsUser(u.getCodiceFiscale())
+				|| DBManager.getInstance().utenteDAO().existsUserEmail(u.getEmail())) {
 			return "errore";
 		} else {
 			DBManager.getInstance().utenteDAO().save(u);
@@ -44,21 +48,48 @@ public class LoginController {
 		}
 	}
 
+	@PostMapping("registrazioneDocente")
+	public String registrazioneDoc(HttpSession session, @RequestBody Utente u) {
+		if (DBManager.getInstance().utenteDAO().existsUser(u.getCodiceFiscale())
+				|| DBManager.getInstance().utenteDAO().existsUserEmail(u.getEmail())) {
+			return "errore";
+		} else {
+			DBManager.getInstance().utenteDAO().save(u);
+			session.setAttribute("codicefiscale", u.getCodiceFiscale());
+			session.setAttribute("password", u.getPassword());
+			session.setAttribute("nome", u.getNome());
+			session.setAttribute("cognome", u.getCognome());
+			session.setAttribute("email", u.getEmail());
+			session.setAttribute("docente", true);
+			return "successo";
+		}
+	}
+
 	@PostMapping("RecuperoPassword")
-	public String recuperoPasswor(HttpSession session, @RequestBody Utente utente){
-		
-		if(DBManager.getInstance().utenteDAO().existsUserEmail(utente.getEmail())){
-			try {			
-				String nuovaPassword= EmailSender.getInstance().ResetPassword(utente.getEmail());
-				String cf=DBManager.getInstance().utenteDAO().getCodiceFiscale(utente.getEmail());
+	public String recuperoPasswor(HttpSession session, @RequestBody Utente utente) {
+
+		if (DBManager.getInstance().utenteDAO().existsUserEmail(utente.getEmail())) {
+			try {
+				String nuovaPassword = EmailSender.getInstance().ResetPassword(utente.getEmail());
+				String cf = DBManager.getInstance().utenteDAO().getCodiceFiscale(utente.getEmail());
 				DBManager.getInstance().utenteDAO().setPassword(cf, nuovaPassword);
 				return "successo";
-			} catch (Exception e) {			
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return "errore";	
+		return "errore";
 	}
-	
-	
+
+	@PostMapping("emailRegistrazioneDocente")
+	public String emailRegistrazioneDoc(HttpSession session, @RequestBody ArrayList<String> parametri) {
+		try {
+			EmailSender.getInstance().invioEmailRegistrazioneDoc(parametri.get(0), parametri.get(1), parametri.get(2));
+			return "successo";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "errore";
+	}
+
 }

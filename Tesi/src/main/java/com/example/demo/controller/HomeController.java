@@ -84,6 +84,14 @@ public class HomeController {
 	public String creaBando() {
 		return "CreaBando";
 	}
+	@GetMapping("/assistenza")
+	public String paginaAssistenza() {
+		return "Assistenza";
+	}
+	@GetMapping("/aggiungiDocente")
+	public String addDocente() {
+		return "AggiungiDocente";
+	}
 	
 	@GetMapping("/Logout")
 	public String logout(HttpSession session) {
