@@ -1,10 +1,13 @@
 package com.example.demo.persistance;
 
 import com.example.demo.persistance.dao.BandoDAO;
+import com.example.demo.persistance.dao.DocumentiBandoDAO;
+import com.example.demo.persistance.dao.DocumentiCaricatiBandoDAO;
 import com.example.demo.persistance.dao.PreferitiDAO;
 import com.example.demo.persistance.dao.UtenteDAO;
 import com.example.demo.persistance.dao.jdbc.BandoDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.DocumentiBandoDAOJDBC;
+import com.example.demo.persistance.dao.jdbc.DocumentiCaricatiBandoDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.PreferitiDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.UtenteDAOJDBC;
 
@@ -49,7 +52,11 @@ public class DBManager {
 		return new PreferitiDAOJDBC(dataSource);
 	}
 	
-	public DocumentiBandoDAOJDBC documentiBandoDAO() {
+	public DocumentiBandoDAO documentiBandoDAO() {
 		return new DocumentiBandoDAOJDBC(dataSource);
+	}
+	
+	public DocumentiCaricatiBandoDAO documentiCaricatiBandoDAO() {
+		return new DocumentiCaricatiBandoDAOJDBC(dataSource);
 	}
 }

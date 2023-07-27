@@ -60,4 +60,5 @@ public class DocumentiBando {
 		this.mindim = mindim;
 	}
 
+
 }

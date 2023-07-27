@@ -6,8 +6,13 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Bando;
+import com.example.demo.model.DocumentiBando;
+import com.example.demo.model.Utente;
 import com.example.demo.persistance.DBManager;
 
 import jakarta.servlet.http.HttpSession;
@@ -16,42 +21,51 @@ import jakarta.servlet.http.HttpSession;
 public class HomeController {
 	public void eliminaScaduti() {
 		List<Bando> bandi = DBManager.getInstance().bandoDAO().getBandi();
-		for(int i=0; i<bandi.size();i++) {
+		for (int i = 0; i < bandi.size(); i++) {
 			Date sqlDate = bandi.get(i).getDatascadenza();
-	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-	        String dateString = formatter.format(sqlDate);
-	        LocalDate ds = LocalDate.parse(dateString);
-	        LocalDate dc = LocalDate.now();
-	        if(ds.isBefore(dc)) {
-	        	DBManager.getInstance().bandoDAO().eliminaBando(bandi.get(i));
-	        }
-		
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String dateString = formatter.format(sqlDate);
+			LocalDate ds = LocalDate.parse(dateString);
+			LocalDate dc = LocalDate.now();
+			if (ds.isBefore(dc)) {
+				DBManager.getInstance().bandoDAO().eliminaBando(bandi.get(i));
+			}
+
 		}
 	}
-	
+
 	@GetMapping({ "/" })
 	public String index(HttpSession session) {
 		eliminaScaduti();
 		List<Bando> bandi = DBManager.getInstance().bandoDAO().getBandi();
 		for (int i = 0, j = bandi.size() - 1; i < j; i++) {
-			 bandi.add(i, bandi.remove(j));
-        }
+			bandi.add(i, bandi.remove(j));
+		}
 		session.setAttribute("bandi", bandi);
 		if (session.getAttribute("codicefiscale") != null) {
 			int[] b = new int[bandi.size()];
 			for (int i = 0; i < bandi.size(); i++) {
-				if (DBManager.getInstance().preferitiDAO().existPreferito(session.getAttribute("codicefiscale").toString(), bandi.get(i).getCodice())) {
+				if (DBManager.getInstance().preferitiDAO()
+						.existPreferito(session.getAttribute("codicefiscale").toString(), bandi.get(i).getCodice())) {
 					b[i] = 1;
-				} else{
+				} else {
 					b[i] = 0;
-				}				
+				}
 			}
 			session.setAttribute("bandipreferiti", b);
 		}
 		return "index";
 	}
-
 	
+	@GetMapping("/compilaBando")
+	public String compilaBando(HttpSession session, @RequestParam int codiceBando) {
+		List<DocumentiBando> doc= DBManager.getInstance().documentiBandoDAO().getDocumenti(codiceBando);
+		session.setAttribute("doc", doc);
+		Bando b=DBManager.getInstance().documentiBandoDAO().getBando(codiceBando);
+		session.setAttribute("bando", b);
+		return "CompilaBando";
+	}
+
 	@GetMapping("/navbar")
 	public String navbar() {
 		return "Navbar";
@@ -61,15 +75,17 @@ public class HomeController {
 	public String vaiAlProfilo() {
 		return "Profilo";
 	}
+
 	@GetMapping("/preferiti")
 	public String vaiAiPreferiti() {
 		return "Preferiti";
 	}
+
 	@GetMapping("/bandi")
 	public String vaiAiBandi() {
 		return "Bandi";
 	}
-	
+
 	@GetMapping("/login")
 	public String vaiAlLogin() {
 		return "Login";
@@ -84,19 +100,26 @@ public class HomeController {
 	public String creaBando() {
 		return "CreaBando";
 	}
+
 	@GetMapping("/assistenza")
 	public String paginaAssistenza() {
 		return "Assistenza";
 	}
+
 	@GetMapping("/aggiungiDocente")
 	public String addDocente() {
 		return "AggiungiDocente";
 	}
-	
+
 	@GetMapping("/Logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+
+	@GetMapping("/comeFunziona")
+	public String comeFunziona(HttpSession session) {
+		return "ComeFunziona";
 	}
 
 	@GetMapping("/VisualizzaBandi")

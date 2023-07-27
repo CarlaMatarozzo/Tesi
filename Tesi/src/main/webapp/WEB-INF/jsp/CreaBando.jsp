@@ -12,16 +12,12 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <!-- bootstrap -->
 
-
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <link rel="stylesheet" href="css/creabando.css" type="text/css">
 
 <title>TESI!</title>
@@ -35,7 +31,6 @@
 				<h3 style="text-align: center;" id="erroreBando"></h3>
 			</div>
 		</div>
-
 		<form method="post" action="#" id="creaBando">
 			<div class="row">
 				<div class="col">
@@ -63,15 +58,15 @@
 						<div class="form-group">
 							<label class="l2">Inserire pdf italiano</label> <input
 								type="file" accept=".pdf" id="pdfIta" name="pdfIta"
-								maxlength="150" onchange="checkFileSize('pdfIta', 1500)"
-								required>
+								maxlength="150"
+								 required>
 							<h7 id="sizeIta">*MaxSize: 1500Kb</h7>
 							<br>
 						</div>
 						<div class="form-group">
 							<label class="l2">Inserire pdf del bando in inglese</label> <input
 								type="file" accept=".pdf" id="pdfInglese" name="pdfInglese"
-								onchange="checkFileSize('pdfInglese', 1500)">
+								>
 							<h7 id="sizeIng">*MaxSize: 1500Kb</h7>
 							<br>
 						</div>
@@ -91,7 +86,6 @@
 								placeholder="Titolo documento" style="color: black;" required>
 						</div>
 						<div class="form-group">
-
 							<label class="l1">Formato documento</label> <input class="input"
 								type="text" name="formatoDoc0" class="form-control"
 								id="formatoDoc0" placeholder="Formato documento"
@@ -109,8 +103,6 @@
 						</div>
 					</div>
 					<button id="addDoc">Aggiungi documento</button>
-
-
 				</div>
 				<div class="col-md-12 text-center mb-3">
 					<button type="submit" id="btnCreaBando"
@@ -119,9 +111,8 @@
 				</div>
 			</div>
 		</form>
-
 	</div>
 </body>
-
 <script src="./js/creaBando.js"></script>
+<script src="./js/uploadFile.js"></script>
 </html>

@@ -43,18 +43,21 @@ public class CreaBandoController {
 
 	@PostMapping("ottieniImg")
 	public void ottieniImg(HttpSession session, @RequestBody ArrayList<String> parametri) {
+		System.out.println("IMMAGINE  "+parametri.get(1));
 		DBManager.getInstance().bandoDAO().setImg(Integer.parseInt(parametri.get(0)), parametri.get(1));
 		
 	}
 
 	@PostMapping("ottieniPdfItaliano")
-	public void ottieniPdfIta(HttpSession session, @RequestBody ArrayList<String> parametri1) {
-		DBManager.getInstance().bandoDAO().setPdfIta(Integer.parseInt(parametri1.get(0)), parametri1.get(1));
+	public void ottieniPdfIta(HttpSession session, @RequestBody ArrayList<String> parametri) {
+		System.out.println("ITALIANO  "+parametri.get(1));
+		DBManager.getInstance().bandoDAO().setPdfIta(Integer.parseInt(parametri.get(0)), parametri.get(1));
 		
 	}
 
 	@PostMapping("ottieniPdfInglese")
-	public void ottieniPdfIngelse(HttpSession session, @RequestBody ArrayList<String> parametri2) {
-		DBManager.getInstance().bandoDAO().setPdfIng(Integer.parseInt(parametri2.get(0)), parametri2.get(1));
+	public void ottieniPdfIngelse(HttpSession session, @RequestBody ArrayList<String> parametri) {
+		System.out.println("INGLESE  "+parametri.get(1));
+		DBManager.getInstance().bandoDAO().setPdfIng(Integer.parseInt(parametri.get(0)), parametri.get(1));
 	}
 }

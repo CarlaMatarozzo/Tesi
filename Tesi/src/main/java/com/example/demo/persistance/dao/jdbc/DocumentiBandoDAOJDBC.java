@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.example.demo.model.Bando;
 import com.example.demo.model.DocumentiBando;
 import com.example.demo.persistance.DBSource;
 import com.example.demo.persistance.dao.DocumentiBandoDAO;
@@ -69,4 +72,54 @@ public class DocumentiBandoDAOJDBC implements DocumentiBandoDAO {
 		return true;
 	}
 
+	@Override
+	public List<DocumentiBando> getDocumenti(int codicebando) {
+			List<DocumentiBando> doc=new ArrayList<DocumentiBando>();
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select * from documentibando where codicebando=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setInt(1, codicebando);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				DocumentiBando db=new DocumentiBando();
+				db.setCodicebando(codicebando);
+				db.setTitolodocumento(rs.getString("titolodocumento"));
+				db.setFormatodocumento(rs.getString("formatodocumento"));
+				db.setMaxdim(rs.getInt("maxdim"));
+				db.setMindim(rs.getInt("mindim"));
+				doc.add(db);			
+				}	
+
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return doc;
+	}
+
+	@Override
+	public Bando getBando(int codiceBando) {
+		Bando b = new Bando();
+		try {
+			Connection conn = dbSource.getConnection();
+			String query="select * from bando inner join documentiBando on (bando.codice =?);";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setInt(1, codiceBando);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				b.setCodice(rs.getInt("codice"));
+				b.setTitolo(rs.getString("titolo"));
+				b.setImg(rs.getString("img"));
+				b.setDatascadenza(rs.getDate("datascadenza"));
+				b.setPdfIta(rs.getString("pdfIta"));
+				b.setPdfInglese(rs.getString("pdfInglese"));
+				b.setSegretario(rs.getString("segretario"));			
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	return b;
+	
+	}
 }
+		
