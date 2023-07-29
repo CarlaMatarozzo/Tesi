@@ -121,6 +121,80 @@ $(document).ready(function() {
 							}
 						},
 					});
+					var img = document.getElementById("imgUpload");
+					if (img.files[0]) {
+						// Ora puoi gestire la sequenza di chiamate utilizzando le Promesse:
+						window.convert(img.files[0], codice)
+							.then((conversionResult) => {
+								return window.callEndpoint(conversionResult, "ottieniImg", "POST");
+							})
+							.then((responseData) => {
+								// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
+								console.log("Risposta dal servizio Spring: IMMAGINE", responseData);
+							})
+							.catch((error) => {
+								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
+								console.error("Errore:", error);
+							});
+					}
+
+					/*				var pdfita = document.getElementById("pdfIta");
+                                        if (pdfita != undefined ) {
+                                            var readerita = new FileReader();
+                                            readerita.onload = function() {
+                                                base64ita = readerita.result;
+                                                console.log("base64imgta"+base64ita);
+                                                var parametri1 = [codice.toString(), base64ita];
+                                                $.ajax({
+                                                    url: "ottieniPdfItaliano",
+                                                    method: "POST",
+                                                    data: JSON.stringify(parametri1),
+                                                    contentType: "application/json",
+                                                });
+                                            }
+                                                readerita.readAsDataURL(pdfita.files[0]);
+
+                                        }
+                                                 else {
+                            console.error("non è andato a buon fine ita");
+                                }*/
+
+					var pdfita = document.getElementById("pdfIta");
+					if (pdfita.files[0]) {
+						//if (window.checkFileSize("pdfIta", 1, 1500)) {
+						window.convert(pdfita.files[0], codice)
+							.then((conversionResult) => {
+								return window.callEndpoint(conversionResult, "ottieniPdfItaliano", "POST");
+							})
+							.then((responseData) => {
+								// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
+								console.log("Risposta dal servizio Spring: ITALIANO", responseData);
+							})
+							.catch((error) => {
+								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
+								console.error("Errore:", error);
+							});
+						//}
+					}
+
+					var pdfing = document.getElementById("pdfInglese");
+					if (pdfing.files[0]) {
+						//if (window.checkFileSize("pdfIng", 1, 1500)) {
+						window.convert(pdfing.files[0], codice)
+							.then((conversionResult) => {
+								return window.callEndpoint(conversionResult, "ottieniPdfInglese", "POST");
+							})
+							.then((responseData) => {
+								// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
+								console.log("Risposta dal servizio Spring: INGLESE", responseData);
+							})
+							.catch((error) => {
+								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
+								console.error("Errore:", error);
+							});
+
+						//}
+					}
 				}
 				if (risposta == "errore") {
 					var err = document.getElementById("erroreBando");
@@ -129,79 +203,6 @@ $(document).ready(function() {
 			},
 		});
 
-		var img = document.getElementById("imgUpload");
-		if (img.files[0]) {
-			// Ora puoi gestire la sequenza di chiamate utilizzando le Promesse:
-			window.convert(img.files[0], codice)
-				.then((conversionResult) => {
-					return window.callEndpoint(conversionResult, "ottieniImg", "POST");
-				})
-				.then((responseData) => {
-					// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
-					console.log("Risposta dal servizio Spring: IMMAGINE", responseData);
-				})
-				.catch((error) => {
-					// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
-					console.error("Errore:", error);
-				});
-		}
 
-		/*				var pdfita = document.getElementById("pdfIta");
-							if (pdfita != undefined ) {
-								var readerita = new FileReader();
-								readerita.onload = function() {
-									base64ita = readerita.result;
-									console.log("base64imgta"+base64ita);
-									var parametri1 = [codice.toString(), base64ita];
-									$.ajax({
-										url: "ottieniPdfItaliano",
-										method: "POST",
-										data: JSON.stringify(parametri1),
-										contentType: "application/json",
-									});
-								}
-									readerita.readAsDataURL(pdfita.files[0]);
-								
-							}
-									 else {
-				console.error("non è andato a buon fine ita");
-					}*/
-
-		var pdfita = document.getElementById("pdfIta");
-		if (pdfita.files[0]) {
-			//if (window.checkFileSize("pdfIta", 1, 1500)) {
-				window.convert(pdfita.files[0], codice)
-					.then((conversionResult) => {
-						return window.callEndpoint(conversionResult, "ottieniPdfItaliano", "POST");
-					})
-					.then((responseData) => {
-						// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
-						console.log("Risposta dal servizio Spring: ITALIANO", responseData);
-					})
-					.catch((error) => {
-						// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
-						console.error("Errore:", error);
-					});
-			//}
-		}
-
-		var pdfing = document.getElementById("pdfInglese");
-		if (pdfing.files[0]) {
-			//if (window.checkFileSize("pdfIng", 1, 1500)) {
-				window.convert(pdfing.files[0], codice)
-					.then((conversionResult) => {
-						return window.callEndpoint(conversionResult, "ottieniPdfInglese", "POST");
-					})
-					.then((responseData) => {
-						// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
-						console.log("Risposta dal servizio Spring: INGLESE", responseData);
-					})
-					.catch((error) => {
-						// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
-						console.error("Errore:", error);
-					});
-
-			//}
-		}
 	});
 });

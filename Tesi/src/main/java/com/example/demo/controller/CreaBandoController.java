@@ -34,7 +34,6 @@ public class CreaBandoController {
 					Bando b = DBManager.getInstance().bandoDAO().ottieniBando(d.get(i).getCodicebando());
 					DBManager.getInstance().bandoDAO().eliminaBando(b);
 					return "errore";
-
 				}
 			}
 		}
@@ -51,8 +50,7 @@ public class CreaBandoController {
 	@PostMapping("ottieniPdfItaliano")
 	public void ottieniPdfIta(HttpSession session, @RequestBody ArrayList<String> parametri) {
 		System.out.println("ITALIANO  "+parametri.get(1));
-		DBManager.getInstance().bandoDAO().setPdfIta(Integer.parseInt(parametri.get(0)), parametri.get(1));
-		
+		DBManager.getInstance().bandoDAO().setPdfIta(Integer.parseInt(parametri.get(0)), parametri.get(1));	
 	}
 
 	@PostMapping("ottieniPdfInglese")
@@ -60,4 +58,5 @@ public class CreaBandoController {
 		System.out.println("INGLESE  "+parametri.get(1));
 		DBManager.getInstance().bandoDAO().setPdfIng(Integer.parseInt(parametri.get(0)), parametri.get(1));
 	}
+	
 }
