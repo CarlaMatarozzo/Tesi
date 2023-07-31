@@ -95,4 +95,5 @@
 </body>
 
 <script src="./js/faidomanda.js"></script>
+<script src="./js/uploadFile.js"></script>
 </html>

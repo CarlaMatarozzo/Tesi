@@ -31,8 +31,7 @@ public class CompilaDomandaController {
 
 	@PostMapping("ottieniDocumento")
 	public void ottieniPdfIta(HttpSession session, @RequestBody ArrayList<String> parametri) {
-		DBManager.getInstance().documentiCaricatiBandoDAO().setDocumento(Integer.parseInt(parametri.get(0)),
-				parametri.get(1), parametri.get(2));
-
+		DBManager.getInstance().documentiCaricatiBandoDAO().setDocumento(parametri.get(0),Integer.parseInt(parametri.get(1)),
+				parametri.get(2), parametri.get(3));
 	}
 }

@@ -112,9 +112,9 @@ $(document).ready(function() {
 						data: JSON.stringify(doc),
 						contentType: "application/json",
 						success: function(risposta) {
-							//if (risposta == "successo") {
-							//	window.location.href = "http://localhost:8080/";
-							//}
+							if (risposta == "successo") {
+								window.location.href = "http://localhost:8080/";
+							}
 							if (risposta == "errore") {
 								var err = document.getElementById("erroreBando");
 								err.innerHTML = "Errore documenti inseriti";
@@ -137,27 +137,6 @@ $(document).ready(function() {
 								console.error("Errore:", error);
 							});
 					}
-
-					/*				var pdfita = document.getElementById("pdfIta");
-                                        if (pdfita != undefined ) {
-                                            var readerita = new FileReader();
-                                            readerita.onload = function() {
-                                                base64ita = readerita.result;
-                                                console.log("base64imgta"+base64ita);
-                                                var parametri1 = [codice.toString(), base64ita];
-                                                $.ajax({
-                                                    url: "ottieniPdfItaliano",
-                                                    method: "POST",
-                                                    data: JSON.stringify(parametri1),
-                                                    contentType: "application/json",
-                                                });
-                                            }
-                                                readerita.readAsDataURL(pdfita.files[0]);
-
-                                        }
-                                                 else {
-                            console.error("non è andato a buon fine ita");
-                                }*/
 
 					var pdfita = document.getElementById("pdfIta");
 					if (pdfita.files[0]) {

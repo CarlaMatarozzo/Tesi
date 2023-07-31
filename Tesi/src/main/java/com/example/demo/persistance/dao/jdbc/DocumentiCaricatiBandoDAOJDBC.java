@@ -58,17 +58,17 @@ public class DocumentiCaricatiBandoDAOJDBC implements DocumentiCaricatiBandoDAO 
 	}
 
 	@Override
-	public void setDocumento(int codicebando, String titolodocumento, String codicefiscale) {
+	public void setDocumento(String documento,int codicebando, String titolodocumento, String codicefiscale) {
 		Connection connection = null;
 
 		try {
 			connection = this.dbSource.getConnection();
-			String update = "update documenticaricatibando SET \"documento\" = ? WHERE codicebando=?, titolodocumento=? and codicefiscale=?";
+			String update = "update documenticaricatibando SET \"documento\" = ? WHERE codicebando=? and titolodocumento=? and codicefiscale=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-
-			statement.setInt(1, codicebando);
-			statement.setString(2, titolodocumento);
-			statement.setString(3, codicefiscale);
+			statement.setString(1, documento);
+			statement.setInt(2, codicebando);
+			statement.setString(3, titolodocumento);
+			statement.setString(4, codicefiscale);
 			statement.executeUpdate();
 
 		} catch (SQLException e) {

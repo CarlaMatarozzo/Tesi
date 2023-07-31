@@ -20,7 +20,6 @@ $(document).ready(function() {
 		for (var i = 0; i < numDoc; i++) {
 			var titoloDoc = document.getElementById("titolodoc_" + i).value;
 			var caricaDoc = document.getElementById("doc_" + i).value;
-
 			var d = new DocumentiCaricatiBando(codice, titoloDoc, codFiscale, null);
 			doc1.push(d);
 		}
@@ -31,9 +30,23 @@ $(document).ready(function() {
 			contentType: "application/json",
 			success: function(risposta) {
 				if (risposta == "successo") {
-					alert("OK");
+					for (var i = 0; i < numDoc; i++) {
+						var pdf = document.getElementById("doc_" + i);
+						var tit=document.getElementById("titolodoc_"+i).value;
+						if (pdf.files[0]) {
+							window.convert1(pdf.files[0], codice, tit, codFiscale)
+								.then((conversionResult) => {
+									return window.callEndpoint(conversionResult, "ottieniDocumento", "POST");
+								})
+								.catch((error) => {
+									// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
+									console.error("Errore:", error);
+								});
+						}
+					}
+					window.location.href = "http://localhost:8080/";
 				}
-				else {
+				if (risposta == "errore") {
 					alert("NO");
 				}
 
