@@ -1,22 +1,39 @@
 function checkFileSize(inputId, minSizeInKb, maxSizeInKb) {
 	var fileInput = document.getElementById(inputId);
-	var maxSizeInBytes = maxSizeInKb * 1024;
-	if (fileInput.files.length > 0) {
-		var fileSize = fileInput.files[0].size;
-		if (fileSize > maxSizeInBytes && fileSize < minSizeInKb) {
-			fileInput.value = "";
-			if (inputId === "pdfIta") {
-				var it = document.getElementById("sizeIta");
-				it.textContent = "Dimensione superata, max size 1500Kb";
-				it.style.color = "RED";
-			} else {
-				var ingl = document.getElementById("sizeIng");
-				ingl.textContent = "Dimensione superata, max size 1500Kb";
-				ingl.style.color = "RED";
-			}
-		}
-	}
+    var sizeElement;
+    var fileSizeKB = 0; 
+
+    if (fileInput.files.length > 0) {
+        fileSizeKB = fileInput.files[0].size / 1024;
+    }
+
+    if (inputId === "pdfIta") {
+        sizeElement = document.getElementById("sizeIta");
+    } else {
+        sizeElement = document.getElementById("sizeIng");
+    }
+
+    if (fileSizeKB < minSizeInKb) {
+        sizeElement.textContent = "Dimensione minima non raggiunta, min size " + minSizeInKb + "Kb";
+        sizeElement.style.color = "red";
+    } else if (fileSizeKB > maxSizeInKb) {
+        sizeElement.textContent = "Dimensione superata, max size " + maxSizeInKb + "Kb";
+        sizeElement.style.color = "red";
+        fileInput.value="";
+    } else {
+        sizeElement.textContent = "*MaxSize: 1500Kb";
+        sizeElement.style.color = "initial";
+    }
 }
+
+document.getElementById("pdfIta").addEventListener("change", function() {
+    checkFileSize("pdfIta", 1, 1500);
+});
+
+document.getElementById("pdfInglese").addEventListener("change", function() {
+    checkFileSize("pdfInglese", 1, 1500);
+});
+
 
 function convert(file, codice) {
 	return new Promise((resolve, reject) => {
@@ -38,22 +55,22 @@ function convert(file, codice) {
 
 
 function callEndpoint(data, url, method) {
-	 return new Promise((resolve, reject) => {
-		 $.ajax({
-			 url: url,
-			 method: method,
-			 data: JSON.stringify(data),
-			 contentType: "application/json",
-			 success: function(responseData) {
-				 // La chiamata ha avuto successo, risolvi la Promise con i dati della risposta
-				 resolve(responseData);
-			 },
-			 error: function(error) {
-				 // Si è verificato un errore durante la chiamata, rifiuta la Promise con l'errore
-				 reject(error);
-			 }
-		 });
-	 });
+	return new Promise((resolve, reject) => {
+		$.ajax({
+			url: url,
+			method: method,
+			data: JSON.stringify(data),
+			contentType: "application/json",
+			success: function(responseData) {
+				// La chiamata ha avuto successo, risolvi la Promise con i dati della risposta
+				resolve(responseData);
+			},
+			error: function(error) {
+				// Si è verificato un errore durante la chiamata, rifiuta la Promise con l'errore
+				reject(error);
+			}
+		});
+	});
 }
 
 window.checkFileSize = checkFileSize;
