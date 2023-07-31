@@ -59,6 +59,9 @@ public class HomeController {
 	
 	@GetMapping("/compilaBando")
 	public String compilaBando(HttpSession session, @RequestParam int codiceBando) {
+		var num=DBManager.getInstance().documentiBandoDAO().numDocumentiBando(codiceBando);
+		session.setAttribute("numDoc", num);
+		System.out.println(num);
 		List<DocumentiBando> doc= DBManager.getInstance().documentiBandoDAO().getDocumenti(codiceBando);
 		session.setAttribute("doc", doc);
 		Bando b=DBManager.getInstance().documentiBandoDAO().getBando(codiceBando);

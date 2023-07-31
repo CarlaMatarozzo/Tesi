@@ -11,4 +11,5 @@ public interface DocumentiBandoDAO {
 	public boolean eliminaDocumentiBando(int codicebando);
 	public List<DocumentiBando> getDocumenti(int codicebando);
 	public Bando getBando(int codiceBando);
+	public int numDocumentiBando(int codiceBando);
 }

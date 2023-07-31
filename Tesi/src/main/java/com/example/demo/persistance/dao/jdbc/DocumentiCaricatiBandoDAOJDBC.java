@@ -20,13 +20,14 @@ public class DocumentiCaricatiBandoDAOJDBC implements DocumentiCaricatiBandoDAO 
 	public boolean esisteDocumento(int codicebando, String titolodocumento, String codicefiscale) {
 		try {
 			Connection conn = dbSource.getConnection();
-			String query = "select * from documenticaricatibando where codicebando=?, titolodocumento=? and codicefiscale=?";
+			String query = "select * from documenticaricatibando where codicebando=? and titolodocumento=? and codicefiscale=?";
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setInt(1, codicebando);
 			st.setString(2, titolodocumento);
 			st.setString(3, codicefiscale);
 			ResultSet rs = st.executeQuery();
 			if (rs.next() == false) {
+
 				return false;
 			} else {
 				return true;
@@ -51,7 +52,6 @@ public class DocumentiCaricatiBandoDAOJDBC implements DocumentiCaricatiBandoDAO 
 			st.setString(3, doc.getCodicefiscale());
 			st.setString(4, doc.getDocumento());
 			st.executeUpdate();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

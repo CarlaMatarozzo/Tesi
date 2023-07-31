@@ -161,7 +161,6 @@ $(document).ready(function() {
 
 					var pdfita = document.getElementById("pdfIta");
 					if (pdfita.files[0]) {
-						//if (window.checkFileSize("pdfIta", 1, 1500)) {
 						window.convert(pdfita.files[0], codice)
 							.then((conversionResult) => {
 								return window.callEndpoint(conversionResult, "ottieniPdfItaliano", "POST");
@@ -174,7 +173,6 @@ $(document).ready(function() {
 								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
 								console.error("Errore:", error);
 							});
-						//}
 					}
 
 					var pdfing = document.getElementById("pdfInglese");

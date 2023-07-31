@@ -14,40 +14,30 @@ $(document).ready(function() {
 	$("#compilaDomanda").on("submit", function(e) {
 		e.preventDefault();
 		var codice = document.getElementById("codiceBando").value;
-		var titolo = document.getElementById("titolo").value;
-		var codicefiscale = document.getElementById("codicefiscale").value;
-		var doc = new DocumentiCaricatiBando(
-			codice,
-			titolo,
-			codicefiscale,
-			null
-		);
+		var codFiscale = document.getElementById("codiceFiscalee").value;
+		var numDoc = document.getElementById("numeroDocDaCaricare").value;
+		var doc1 = [];
+		for (var i = 0; i < numDoc; i++) {
+			var titoloDoc = document.getElementById("titolodoc_" + i).value;
+			var caricaDoc = document.getElementById("doc_" + i).value;
 
+			var d = new DocumentiCaricatiBando(codice, titoloDoc, codFiscale, null);
+			doc1.push(d);
+		}
 		$.ajax({
 			url: "inserisciDocumento",
 			method: "POST",
-			data: JSON.stringify(bando),
+			data: JSON.stringify(doc1),
 			contentType: "application/json",
 			success: function(risposta) {
 				if (risposta == "successo") {
+					alert("OK");
 				}
+				else {
+					alert("NO");
+				}
+
 			},
 		});
-		var documento = document.getElementById("documento").value;
-		if (documento.files[0]) {
-			// Ora puoi gestire la sequenza di chiamate utilizzando le Promesse:
-			window.convert(documento.files[0], codice)
-				.then((conversionResult) => {
-					return window.callEndpoint(conversionResult, "ottieniDocumento", "POST");
-				})
-				.then((responseData) => {
-					// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
-					console.log("Risposta dal servizio Spring: Documento", responseData);
-				})
-				.catch((error) => {
-					// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
-					console.error("Errore:", error);
-				});
-		}
 	});
 });

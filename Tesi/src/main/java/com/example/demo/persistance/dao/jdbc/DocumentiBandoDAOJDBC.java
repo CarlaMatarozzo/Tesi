@@ -74,7 +74,7 @@ public class DocumentiBandoDAOJDBC implements DocumentiBandoDAO {
 
 	@Override
 	public List<DocumentiBando> getDocumenti(int codicebando) {
-			List<DocumentiBando> doc=new ArrayList<DocumentiBando>();
+		List<DocumentiBando> doc = new ArrayList<DocumentiBando>();
 		try {
 			Connection conn = dbSource.getConnection();
 			String query = "select * from documentibando where codicebando=?";
@@ -82,18 +82,18 @@ public class DocumentiBandoDAOJDBC implements DocumentiBandoDAO {
 			st.setInt(1, codicebando);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				DocumentiBando db=new DocumentiBando();
+				DocumentiBando db = new DocumentiBando();
 				db.setCodicebando(codicebando);
 				db.setTitolodocumento(rs.getString("titolodocumento"));
 				db.setFormatodocumento(rs.getString("formatodocumento"));
 				db.setMaxdim(rs.getInt("maxdim"));
 				db.setMindim(rs.getInt("mindim"));
-				doc.add(db);			
-				}	
-
-			}catch (SQLException e) {
-				e.printStackTrace();
+				doc.add(db);
 			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return doc;
 	}
 
@@ -102,7 +102,7 @@ public class DocumentiBandoDAOJDBC implements DocumentiBandoDAO {
 		Bando b = new Bando();
 		try {
 			Connection conn = dbSource.getConnection();
-			String query="select * from bando inner join documentiBando on (bando.codice =?);";
+			String query = "select * from bando inner join documentiBando on (bando.codice =?);";
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setInt(1, codiceBando);
 			ResultSet rs = st.executeQuery();
@@ -113,13 +113,29 @@ public class DocumentiBandoDAOJDBC implements DocumentiBandoDAO {
 				b.setDatascadenza(rs.getDate("datascadenza"));
 				b.setPdfIta(rs.getString("pdfIta"));
 				b.setPdfInglese(rs.getString("pdfInglese"));
-				b.setSegretario(rs.getString("segretario"));			
-				}
+				b.setSegretario(rs.getString("segretario"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	return b;
-	
+		return b;
+
+	}
+
+	@Override
+	public int numDocumentiBando(int codiceBando) {
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select COUNT(*) AS num from documentibando where codicebando=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setInt(1, codiceBando);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				return rs.getInt("num");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }
-		

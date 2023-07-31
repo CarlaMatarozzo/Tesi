@@ -53,6 +53,24 @@ function convert(file, codice) {
 	});
 }
 
+function convert(file, codice,titoloDoc,codFiscale) {
+	return new Promise((resolve, reject) => {
+		console.log("INIZIO CONVERSIONE");
+		var reader = new FileReader();
+		reader.onload = function() {
+			var base64 = reader.result;
+			console.log(base64);
+			var parametri = [codice.toString(), titoloDoc, codFiscale, base64];
+			resolve(parametri); // Risolve la Promise con i parametri desiderati
+		};
+		reader.onerror = function() {
+			reject(new Error('Errore durante la lettura del file.'));
+		};
+		reader.readAsDataURL(file);
+		console.log("FINE CONVERSIONE");
+	});
+}
+
 
 function callEndpoint(data, url, method) {
 	return new Promise((resolve, reject) => {
