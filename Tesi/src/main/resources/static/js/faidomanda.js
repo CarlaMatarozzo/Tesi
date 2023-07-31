@@ -34,9 +34,9 @@ $(document).ready(function() {
 						var pdf = document.getElementById("doc_" + i);
 						var tit=document.getElementById("titolodoc_"+i).value;
 						if (pdf.files[0]) {
-							window.convert1(pdf.files[0], codice, tit, codFiscale)
+							window.convert2(pdf.files[0], codice, tit, codFiscale)
 								.then((conversionResult) => {
-									return window.callEndpoint(conversionResult, "ottieniDocumento", "POST");
+									return window.callEndpoint2(conversionResult, "ottieniDocumento", "POST");
 								})
 								.catch((error) => {
 									// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni

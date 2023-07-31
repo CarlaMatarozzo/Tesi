@@ -73,12 +73,15 @@
 						<input type="hidden" name="numeroDocDaCaricare" id="numeroDocDaCaricare"value='${numDoc}'>
 						<c:forEach items="${doc}" var="doc" varStatus="status">
 							<div class="form-group">
-							<input type="hidden" name="titolodoc" id="titolodoc_${status.index}" value='${doc.titolodocumento}'>
+							<input type="hidden" id="titolodoc_${status.index}" value='${doc.titolodocumento}'>
+							<input type="hidden" id="mindoc_${status.index}" value='${doc.mindim}'>
+							<input type="hidden" id="maxdoc_${status.index}" value='${doc.maxdim}'>
+							
 							<h4>titolodoc_${status.index}</h4>
 								<label class="l2">Inserire ${doc.titolodocumento}</label> <input
 									type="file" accept="" id="doc_${status.index}" name="doc" maxlength="150"
 									required>
-								<h7 id="sizeIta">*MaxSize: ${doc.maxdim}</h7>
+								<h7 id="size_${status.index}">*MaxSize: ${doc.maxdim}</h7>
 								<br>
 							</div>
 						</c:forEach>
@@ -95,5 +98,5 @@
 </body>
 
 <script src="./js/faidomanda.js"></script>
-<script src="./js/uploadFile.js"></script>
+<script src="./js/uploadFile2.js"></script>
 </html>
