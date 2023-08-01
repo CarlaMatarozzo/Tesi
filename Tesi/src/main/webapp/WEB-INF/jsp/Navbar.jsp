@@ -59,7 +59,7 @@
 								<ul>
 									<li><a href="#">Come funziona</a></li>
 									<li><a href="assistenza">Assistenza</a></li>
-									<li><a href="#">I miei bandi</a></li>
+									<li><a href="mieiBandi">I miei bandi</a></li>
 									<li><a href="preferiti">Preferiti</a></li>
 									<li><a href="profilo">Il mio profilo</a></li>
 									<li><a href="Logout">Logout</a></li>
@@ -105,7 +105,7 @@
 				</c:if>
 				<c:if test="${codicefiscale != null and codicefiscale!='ADMIN'}">
 					<ul>
-						<li><a href="#">I miei bandi</a></li>
+						<li><a href="mieiBandi">I miei bandi</a></li>
 						<li><a href="#">Come funziona</a></li>
 						<li><a href="assistenza">Assistenza</a></li>
 						<div id="hormenu">
@@ -139,6 +139,7 @@
 									<li><a href="Logout">Logout</a></li>
 								</ul></li>
 						</ul>
+					</div>
 				</c:if>
 		</div>
 

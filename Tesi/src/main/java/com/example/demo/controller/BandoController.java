@@ -41,5 +41,12 @@ public class BandoController {
 		return "redirect:/";
 	}
 	
+	@PostMapping("/RimuoviIscrizione")
+	public String rimuoviDomanda(HttpSession session, @RequestParam int codicebando) {
+		if(DBManager.getInstance().documentiCaricatiBandoDAO().rimuoviBando(codicebando, session.getAttribute("codicefiscale").toString())) {
+			return "redirect:/";
+		}
+		return "redirect:/";
+	}
 	
 }

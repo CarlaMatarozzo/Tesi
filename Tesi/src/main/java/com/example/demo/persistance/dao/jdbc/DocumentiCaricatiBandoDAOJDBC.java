@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.example.demo.model.DocumentiBando;
 import com.example.demo.model.DocumentiCaricatiBando;
 import com.example.demo.persistance.DBSource;
 import com.example.demo.persistance.dao.DocumentiCaricatiBandoDAO;
@@ -75,6 +78,44 @@ public class DocumentiCaricatiBandoDAOJDBC implements DocumentiCaricatiBandoDAO 
 			throw new RuntimeException(e.getMessage());
 		}
 
+	}
+
+	@Override
+	public List<Integer> getBandiCompilati(String codicefiscale) {
+		List<Integer> d = new ArrayList<Integer>();
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select codicebando from documenticaricatibando where codicefiscale=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, codicefiscale);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				int x=rs.getInt("codicebando");
+				if(!d.contains(x)) {
+					d.add(x);
+				}
+			}
+			return d;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return d;
+	}
+
+	@Override
+	public boolean rimuoviBando(int codiceBando, String codiceFiscale) {
+		try {
+			Connection conn = dbSource.getConnection();
+			String delete = "delete FROM documenticaricatibando WHERE codicebando=? and codicefiscale=? ";
+			PreparedStatement statement = conn.prepareStatement(delete);
+			statement.setInt(1, codiceBando);
+			statement.setString(2, codiceFiscale);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -78,9 +78,16 @@
 						<input type="hidden" id="hiddenInput" value="hiddenInput">
 						<div class="card-body">
 							<div class="etichetta mt-1">
-								<span> <small class="badge badge-success">Aperto</small>
-									<em> <span>Il bando chiude il</span> <strong>${bandi.datascadenza}</strong>
-								</em>
+								<span> <c:if
+										test="${!fn:contains(bandiScaduti, bandi.codice)}">
+										<small class="badge badge-success">Aperto</small>
+										<em> <span>Il bando chiude il</span> <strong>${bandi.datascadenza}</strong>
+										</em>
+									</c:if> <c:if test="${fn:contains(bandiScaduti, bandi.codice)}">
+										<small class="badge badge-success">Chiuso</small>
+										<em> <span>Il bando &#232 scaduto il</span> <strong>${bandi.datascadenza}</strong>
+										</em>
+									</c:if>
 								</span>
 							</div>
 
@@ -157,10 +164,15 @@
 								<!-- FAI DOMANDA -->
 								<span class="card-signature"> <!-- Bandi SIAGE --> <c:if
 										test="${codicefiscale != null and codicefiscale!='ADMIN'}">
-										<a href="/compilaBando?codiceBando=${bandi.codice}">
-											<button class="btn btn-xs btn-primary btn-nuova-bozza"
-												type="button"> Fai domanda</button>
-										</a>
+										<c:if
+											test="${!fn:contains(codiceBandiCompilati, bandi.codice)}">
+											<c:if test="${!fn:contains(bandiScaduti, bandi.codice)}">
+												<a href="/compilaBando?codiceBando=${bandi.codice}">
+													<button class="btn btn-xs btn-primary btn-nuova-bozza"
+														type="button">Fai domanda</button>
+												</a>
+											</c:if>
+										</c:if>
 									</c:if>
 								</span> <span class="card-signature"> <c:if
 										test="${codicefiscale=='ADMIN'}">
