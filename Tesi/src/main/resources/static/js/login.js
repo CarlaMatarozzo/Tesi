@@ -22,13 +22,14 @@ function checklogin() {
 	});
 }*/
 
-function Utente(codiceFiscale, password, nome, cognome, email, docente) {
+function Utente(codiceFiscale, password, nome, cognome, email, docente, notifica) {
 	this.codiceFiscale = codiceFiscale;
 	this.password = password;
 	this.nome = nome;
 	this.cognome = cognome;
 	this.email = email;
 	this.docente = docente;
+	this.notifica = notifica
 }
 
 
@@ -62,9 +63,9 @@ $(document).ready(function() {
 		var password1 = document.getElementById("passwordLogin").value;
 		var utente1;
 		if (codicefiscale1 == "admin") {
-			var utente1 = new Utente(codicefiscale1.toUpperCase(), password1, null, null, null, true);
+			var utente1 = new Utente(codicefiscale1.toUpperCase(), password1, null, null, null, true, 0);
 		} else {
-			var utente1 = new Utente(codicefiscale1.toUpperCase(), password1, null, null, null, false);
+			var utente1 = new Utente(codicefiscale1.toUpperCase(), password1, null, null, null, false, 0);
 		}
 		$.ajax({
 			url: "loginService",
@@ -91,7 +92,7 @@ $(document).ready(function() {
 		var codicefiscale2 = document.getElementById("codiceFiscale").value;
 		var email2 = document.getElementById("email").value;
 		var password2 = document.getElementById("password").value;
-		var utente2 = new Utente(codicefiscale2.toUpperCase(), password2, nome2, cognome2, email2.toLowerCase(), false);
+		var utente2 = new Utente(codicefiscale2.toUpperCase(), password2, nome2, cognome2, email2.toLowerCase(), false, 0);
 		$.ajax({
 			url: "registrationService",
 			method: "POST",
@@ -114,7 +115,7 @@ $(document).ready(function() {
 		var cognome4 = document.getElementById("cognome1").value;
 		var codicefiscale4 = document.getElementById("codiceFiscale1").value;
 		var email4 = document.getElementById("email1").value;
-		var utente4 = new Utente(codicefiscale4.toUpperCase(), "Docente1.", nome4, cognome4, email4.toLowerCase(), true);
+		var utente4 = new Utente(codicefiscale4.toUpperCase(), "Docente1.", nome4, cognome4, email4.toLowerCase(), true, 0);
 		var parametri4 = [cognome4, email4, codicefiscale4];
 		$.ajax({
 			url: "registrazioneDocente",
@@ -137,6 +138,38 @@ $(document).ready(function() {
 			},
 		});
 	});
+
+	$("#formRichiestaRegistrazioneDocente").on("submit", function(e) {
+		e.preventDefault();
+		var nomedoc = document.getElementById("nomeDoc").value;
+		var cognomedoc = document.getElementById("cognomeDoc").value;
+		var codicefiscaledoc = document.getElementById("codiceFiscaleDoc").value;
+		var emaildoc = document.getElementById("emailDoc").value;
+		var parametridoc = [nomedoc, cognomedoc, codicefiscaledoc, emaildoc];
+		$.ajax({
+			url: "richiestaRegistrazioneDocente",
+			method: "POST",
+			data: JSON.stringify(parametridoc),
+			contentType: "application/json",
+			success: function(risposta) {
+				if (risposta == "successo") {
+					$.ajax({
+						url: "eliminaRichiestaDocente",
+						method: "POST",
+						data: JSON.stringify(parametridoc),
+						contentType: "application/json",
+						success: function(risposta) {
+							if (risposta == "successo") {
+								location.reload();
+							}
+						},
+					});
+				}
+			},
+		});
+	});
+
+
 	$("#recuperoPassword").on("submit", function(e) {
 
 		$("#btnRecuperoPassword").prop("disabled", true);

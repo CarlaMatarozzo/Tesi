@@ -19,7 +19,7 @@ $(document).ready(function(){
 		var codicefiscale = document.getElementById("codiceFiscale1").value;
 		var email = document.getElementById("email1").value;
 		var password = document.getElementById("nuovaPassword").value;
-		var utente = new Utente(codicefiscale,password,nome,cognome,email,false);
+		var utente = new Utente(codicefiscale,password,nome,cognome,email,false,0);
 		$.ajax({
 				  url: "modificaProfilo",  
 		          method: "POST",	         

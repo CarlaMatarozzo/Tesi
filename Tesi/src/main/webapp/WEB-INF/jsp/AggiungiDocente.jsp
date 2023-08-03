@@ -33,25 +33,25 @@
 		<div class="form-group">
 			<label for="exampleInputEmail1">Nome</label> <input type="text"
 				name="nome" class="form-control" id="nome1"
-				aria-describedby="emailHelp" placeholder="Inserisci Nome" required>
+				aria-describedby="emailHelp" placeholder="${richiesta.nome}" value="${richiesta.nome}" required>
 		</div>
 		<div class="form-group">
 			<label for="exampleInputEmail1">Cognome</label> <input type="text"
 				name="cognome" class="form-control" id="cognome1"
-				aria-describedby="emailHelp" placeholder="Inserisci Cognome"
+				aria-describedby="emailHelp" placeholder="${richiesta.cognome}" value="${richiesta.cognome}"
 				required>
 		</div>
 		<div class="form-group">
 			<label for="exampleInputEmail1">Codice Fiscale</label> <input
 				type="text" name="username" class="form-control" id="codiceFiscale1"
-				aria-describedby="emailHelp" placeholder="Inserisci Codice Fiscale"
+				aria-describedby="emailHelp" placeholder="${richiesta.codicefiscale}" value="${richiesta.codicefiscale}"
 				pattern="^[A-Za-z]{6}\d{2}[A-Za-z]\d{2}[A-Za-z]\d{3}[A-Za-z]$"
 				required>
 		</div>
 		<div class="form-group">
 			<label for="exampleInputEmail1">Email</label> <input type="email"
 				name="email" class="form-control" id="email1"
-				aria-describedby="emailHelp" placeholder="Inserisci email" required>
+				aria-describedby="emailHelp" placeholder="${richiesta.email}" value="${richiesta.email}" required>
 		</div>
 
 		<div class="col-md-12 text-center mb-3">

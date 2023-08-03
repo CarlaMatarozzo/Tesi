@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Bando;
 import com.example.demo.model.DocumentiBando;
+import com.example.demo.model.Notifica;
+import com.example.demo.model.RichiestaDocente;
 import com.example.demo.persistance.DBManager;
 
 import jakarta.servlet.http.HttpSession;
@@ -40,12 +42,13 @@ public class HomeController {
 		session.setAttribute("bandi", bandi);
 		session.setAttribute("bandiScaduti",getBandiScaduti());
 		if (session.getAttribute("codicefiscale") != null) {
-
 			int[] b = getBandiPreferiti(session.getAttribute("codicefiscale").toString(), bandi);
 			session.setAttribute("bandipreferiti", b);
 			List<Integer> codiceBandiCompilati=getCodiceBandiCompilati(session.getAttribute("codicefiscale").toString());
 			session.setAttribute("codiceBandiCompilati",codiceBandiCompilati );
 			session.setAttribute("bandiCompilati", getBandiCompilati(codiceBandiCompilati));
+			List<Notifica> notifiche= getTutteLeNotifiche(session.getAttribute("codicefiscale").toString());
+			session.setAttribute("arraynotifiche", notifiche);
 		}
 		return "index";
 	}
@@ -61,8 +64,18 @@ public class HomeController {
 		return "CompilaBando";
 	}
 
+	@GetMapping("/aggiungiDocente")
+	public String addDocente(HttpSession session, @RequestParam String codFiscale) {
+		RichiestaDocente richiesta=DBManager.getInstance().richiestaDocenteDAO().getRichiestaDocente(codFiscale);
+		session.setAttribute("richiesta", richiesta);
+		return "AggiungiDocente";
+	}
+	
 	@GetMapping("/navbar")
-	public String navbar() {
+	public String navbar(HttpSession session) {
+		List<Integer> idNotificheDaLeggere=getIdNotificheDaLeggere(session.getAttribute("codicefiscale").toString());
+		session.setAttribute("numNotifiche", idNotificheDaLeggere.size());
+		session.setAttribute("idNotificheDaLeggere", idNotificheDaLeggere);
 		return "Navbar";
 	}
 
@@ -101,10 +114,6 @@ public class HomeController {
 		return "Assistenza";
 	}
 
-	@GetMapping("/aggiungiDocente")
-	public String addDocente() {
-		return "AggiungiDocente";
-	}
 
 	@GetMapping("/Logout")
 	public String logout(HttpSession session) {
@@ -136,6 +145,16 @@ public class HomeController {
 		return bandi;
 	}
 	
+	
+	@GetMapping("/comunicazioni")
+	public String getComunicazioni(HttpSession session) {
+		List<Notifica> notifiche=getTutteLeNotifiche(session.getAttribute("codicefiscale").toString());
+		for (int i=0; i<notifiche.size(); i++) {
+			DBManager.getInstance().notificaDAO().messaggioLetto(notifiche.get(i).getIdnotifica());
+		}
+		return "Comunicazioni";
+	}
+	
 	public int[] getBandiPreferiti(String codiceFiscale, List<Bando> bandi) {
 		int[] b = new int[bandi.size()];
 		for (int i = 0; i < bandi.size(); i++) {
@@ -164,4 +183,11 @@ public class HomeController {
 		return bandiCompilati;
 	}
 	
+	public List<Integer> getIdNotificheDaLeggere(String codiceFiscale) {
+		return DBManager.getInstance().utenteDAO().getIdNotificheDaLeggere(codiceFiscale);
+	}
+
+	public List<Notifica> getTutteLeNotifiche(String codiceFiscale){
+		return DBManager.getInstance().utenteDAO().ottieniNotifiche(codiceFiscale);
+	}
 }

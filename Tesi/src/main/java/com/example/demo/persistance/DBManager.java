@@ -3,12 +3,16 @@ package com.example.demo.persistance;
 import com.example.demo.persistance.dao.BandoDAO;
 import com.example.demo.persistance.dao.DocumentiBandoDAO;
 import com.example.demo.persistance.dao.DocumentiCaricatiBandoDAO;
+import com.example.demo.persistance.dao.NotificaDAO;
 import com.example.demo.persistance.dao.PreferitiDAO;
+import com.example.demo.persistance.dao.RichiestaDocenteDAO;
 import com.example.demo.persistance.dao.UtenteDAO;
 import com.example.demo.persistance.dao.jdbc.BandoDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.DocumentiBandoDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.DocumentiCaricatiBandoDAOJDBC;
+import com.example.demo.persistance.dao.jdbc.NotificaDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.PreferitiDAOJDBC;
+import com.example.demo.persistance.dao.jdbc.RichiestaDocenteDAOJDBC;
 import com.example.demo.persistance.dao.jdbc.UtenteDAOJDBC;
 
 public class DBManager {
@@ -40,6 +44,9 @@ public class DBManager {
 		return dataSource;
 	}
 	
+	public RichiestaDocenteDAO richiestaDocenteDAO() {
+		return new RichiestaDocenteDAOJDBC(dataSource);
+	}
 	public UtenteDAO utenteDAO() {
 		return new UtenteDAOJDBC(dataSource);
 	}
@@ -58,5 +65,9 @@ public class DBManager {
 	
 	public DocumentiCaricatiBandoDAO documentiCaricatiBandoDAO() {
 		return new DocumentiCaricatiBandoDAOJDBC(dataSource);
+	}
+	
+	public NotificaDAO notificaDAO() {
+		return new NotificaDAOJDBC(dataSource);
 	}
 }

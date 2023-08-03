@@ -7,13 +7,13 @@ public class Utente {
 	public String cognome;
 	public String email;
 	public boolean docente;
-
+	public int notifica;
 	public Utente() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Utente(String codiceFiscale, String password, String nome, String cognome, String email, boolean docente) {
+	public Utente(String codiceFiscale, String password, String nome, String cognome, String email, boolean docente, int notifica) {
 		super();
 		this.codiceFiscale = codiceFiscale;
 		this.password = password;
@@ -21,6 +21,7 @@ public class Utente {
 		this.cognome = cognome;
 		this.email = email;
 		this.docente = docente;
+		this.notifica=notifica;
 	}
 
 	public String getEmail() {
@@ -71,4 +72,12 @@ public class Utente {
 		this.codiceFiscale = codiceFiscale;
 	}
 
+	public int getNotifica() {
+		return notifica;
+	}
+	
+	public void setNotifica(int notifica) {
+		this.notifica=notifica;
+	}
+	
 }

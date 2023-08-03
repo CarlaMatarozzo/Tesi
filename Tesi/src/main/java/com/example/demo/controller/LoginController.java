@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.EmailSender;
+import com.example.demo.model.RichiestaDocente;
 import com.example.demo.model.Utente;
 import com.example.demo.persistance.DBManager;
 
@@ -25,6 +26,7 @@ public class LoginController {
 				session.setAttribute("cognome", utenteLoggato.getCognome());
 				session.setAttribute("email", utenteLoggato.getEmail());
 				session.setAttribute("docente", utenteLoggato.isDocente());
+				session.setAttribute("notifica", utenteLoggato.getNotifica());
 				return "successo";
 			}
 		}
@@ -44,6 +46,7 @@ public class LoginController {
 			session.setAttribute("cognome", u.getCognome());
 			session.setAttribute("email", u.getEmail());
 			session.setAttribute("docente", false);
+			session.setAttribute("notifica", 0);
 			return "successo";
 		}
 	}
@@ -61,8 +64,29 @@ public class LoginController {
 			session.setAttribute("cognome", u.getCognome());
 			session.setAttribute("email", u.getEmail());
 			session.setAttribute("docente", true);
+			session.setAttribute("notifica", 0);
 			return "successo";
 		}
+	}
+
+	@PostMapping("richiestaRegistrazioneDocente")
+	public String richiestaRegistrazioneDocente(HttpSession session, @RequestBody ArrayList<String> parametriDoc) {
+		String messaggio = "Richiesta registrazione: " + parametriDoc.get(0) + " " + parametriDoc.get(1) + " "
+				+ parametriDoc.get(2) + " " + parametriDoc.get(3) + " ";
+		if (DBManager.getInstance().notificaDAO().nuovaNotifica("ADMIN", messaggio, false)) {
+			DBManager.getInstance().richiestaDocenteDAO().aggiungiRichiesta(parametriDoc.get(0), parametriDoc.get(1),
+					parametriDoc.get(2), parametriDoc.get(3));
+			return "successo";
+		}
+		return "errore";
+	}
+
+	@PostMapping("eliminaRichiestaDocente")
+	public String eliminaRichiestaDocente(HttpSession session,@RequestBody ArrayList<String> parametriDoc) {
+		RichiestaDocente richiesta=new RichiestaDocente(parametriDoc.get(0),parametriDoc.get(1),parametriDoc.get(2),parametriDoc.get(3));
+		DBManager.getInstance().richiestaDocenteDAO().rimuoviRichiesta(richiesta);
+		return "successo";
+		
 	}
 
 	@PostMapping("RecuperoPassword")

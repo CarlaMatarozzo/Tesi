@@ -39,6 +39,7 @@ public class ProfiloController {
 		session.setAttribute("cognome", u.getCognome());
 		session.setAttribute("email", u.getEmail());
 		session.setAttribute("docente", false);
+		session.setAttribute("notifica", u.getNotifica());
 	}
 	
 }
