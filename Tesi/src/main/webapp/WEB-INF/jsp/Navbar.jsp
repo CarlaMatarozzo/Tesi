@@ -89,7 +89,6 @@
 									<li><a href="comunicazioni">Comunicazioni</a></li>
 									<li><a href="creabando">Crea Bando</a></li>
 									<li><a href="profilo">Profilo</a></li>
-									<li><a href="aggiungiDocente">Aggiungi docente</a></li>
 									<li><a href="Logout">Logout</a></li>
 								</ul></li>
 						</ul>
@@ -134,8 +133,8 @@
 										<a href="#"><span class="glyphicon glyphicon-user"></span></a>
 									</c:if> <c:if test="${numNotifiche!=0}">
 										<a href="#"><span class="notification-badge"
-										style="color: red !important;">${numNotifiche}</span><span
-										class="glyphicon glyphicon-user"></span></a>
+											style="color: red !important;">${numNotifiche}</span><span
+											class="glyphicon glyphicon-user"></span></a>
 									</c:if> <!-- primo list-item, prima voce del menu -->
 									<ul>
 										<li><a href="comunicazioni">Comunicazioni</a></li>
@@ -153,7 +152,6 @@
 					<li><a href="creabando">Crea Bando</a></li>
 					<li><a href="#">Risultati bandi</a></li>
 					<li><a href="comunicazioni">Comunicazioni</a></li>
-					<li><a href="aggiungiDocente">Aggiungi docente</a></li>
 					<div id="hormenu">
 
 						<ul>
@@ -320,9 +318,12 @@
 								<div class="col-md-12 text-center">
 									<button type="button" class="close" data-dismiss="modal">×</button>
 									<h1 class="titolo-loginForm">Registrazione docente</h1>
-									<h3>Compilando il seguente form verrà inviata una
-										richiesta all'amministratore per la creazione del suo profilo</h3>
-									<h5 id="erroreDocente"></h5>
+									<h5 id="erroreRegistrazioneDoc" style="color: red;"></h5>
+									<p>Compilando il seguente form verrà inviata una
+										richiesta all'amministratore per la creazione del suo profilo.
+										Se l'admin accetta la sua iscrizione le arriverà un'email con
+										la password.</p>
+									<h4 id="erroreDocente"></h4>
 								</div>
 							</div>
 							<form method="post" action="#"
@@ -362,8 +363,6 @@
 											d'uso</button>
 									</p>
 								</div>
-								<p class="txt-center">Se l'admin accetta la sua iscrizione
-									le arriverà un'email con la password.</p>
 								<div class="col-md-12 text-center mb-3">
 									<button type="submit" id="btnIscriviti"
 										class=" btn btn-block mybtn x-tfm "

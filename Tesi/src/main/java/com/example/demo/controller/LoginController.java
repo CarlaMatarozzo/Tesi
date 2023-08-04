@@ -71,6 +71,10 @@ public class LoginController {
 
 	@PostMapping("richiestaRegistrazioneDocente")
 	public String richiestaRegistrazioneDocente(HttpSession session, @RequestBody ArrayList<String> parametriDoc) {
+		if (DBManager.getInstance().utenteDAO().existsUser(parametriDoc.get(2))
+				|| DBManager.getInstance().utenteDAO().existsUserEmail(parametriDoc.get(3))) {
+			return "errore";
+		}
 		String messaggio = "Richiesta registrazione: " + parametriDoc.get(0) + " " + parametriDoc.get(1) + " "
 				+ parametriDoc.get(2) + " " + parametriDoc.get(3) + " ";
 		if (DBManager.getInstance().notificaDAO().nuovaNotifica("ADMIN", messaggio, false)) {

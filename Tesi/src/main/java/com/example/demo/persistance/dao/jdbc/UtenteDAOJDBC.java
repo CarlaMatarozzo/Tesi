@@ -67,6 +67,7 @@ public class UtenteDAOJDBC implements UtenteDAO {
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("email"));
+				utente.setDocente(rs.getBoolean("docente"));
 				utente.setNotifica(rs.getInt("notifica"));
 			}
 

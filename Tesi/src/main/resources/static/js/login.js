@@ -165,6 +165,10 @@ $(document).ready(function() {
 						},
 					});
 				}
+				if(risposta=="errore"){
+					var errorRegistrazione = document.getElementById("erroreRegistrazioneDoc");
+					errorRegistrazione.innerHTML = "Docente gi&#224 registrato";
+				}
 			},
 		});
 	});
