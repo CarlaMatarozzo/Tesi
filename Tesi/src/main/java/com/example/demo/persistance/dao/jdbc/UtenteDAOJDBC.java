@@ -277,15 +277,20 @@ public class UtenteDAOJDBC implements UtenteDAO {
 	@Override
 	public List<Integer> getIdNotificheDaLeggere(String codiceFiscale) {
 		List<Integer> idNotifiche = new ArrayList<>();
+		Set<Integer> id=new HashSet<>();
 		try {
 			Connection conn = dbSource.getConnection();
-			String query = "select * from notifica inner join utente on (notifica.codicefiscale =?) where lettura=?;";
+			String query = "select idnotifica from notifica inner join utente on (notifica.codicefiscale =?) where lettura=?;";
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setBoolean(2, false);
 			st.setString(1, codiceFiscale);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				idNotifiche.add(rs.getInt("idnotifica"));
+				int i=rs.getInt("idNotifica");
+				if(!id.contains(i)) {
+					id.add(i);
+					idNotifiche.add(i);
+				}
 			}
 
 		} catch (SQLException e) {

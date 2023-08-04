@@ -19,10 +19,10 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
-	
+
 	public List<Integer> getBandiScaduti() {
 		List<Bando> bandi = DBManager.getInstance().bandoDAO().getBandi();
-		List<Integer> bandiScaduti=new ArrayList<Integer>();
+		List<Integer> bandiScaduti = new ArrayList<Integer>();
 		for (int i = 0; i < bandi.size(); i++) {
 			Date sqlDate = bandi.get(i).getDatascadenza();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -38,16 +38,22 @@ public class HomeController {
 
 	@GetMapping({ "/" })
 	public String index(HttpSession session) {
-		List<Bando> bandi=getBandi();
+		List<Bando> bandi = getBandi();
 		session.setAttribute("bandi", bandi);
-		session.setAttribute("bandiScaduti",getBandiScaduti());
+		session.setAttribute("bandiScaduti", getBandiScaduti());
 		if (session.getAttribute("codicefiscale") != null) {
+
+			List<Integer> idNotificheDaLeggere = getIdNotificheDaLeggere(
+					session.getAttribute("codicefiscale").toString());
+			session.setAttribute("numNotifiche", idNotificheDaLeggere.size());
+			session.setAttribute("idNotificheDaLeggere", idNotificheDaLeggere);
 			int[] b = getBandiPreferiti(session.getAttribute("codicefiscale").toString(), bandi);
 			session.setAttribute("bandipreferiti", b);
-			List<Integer> codiceBandiCompilati=getCodiceBandiCompilati(session.getAttribute("codicefiscale").toString());
-			session.setAttribute("codiceBandiCompilati",codiceBandiCompilati );
+			List<Integer> codiceBandiCompilati = getCodiceBandiCompilati(
+					session.getAttribute("codicefiscale").toString());
+			session.setAttribute("codiceBandiCompilati", codiceBandiCompilati);
 			session.setAttribute("bandiCompilati", getBandiCompilati(codiceBandiCompilati));
-			List<Notifica> notifiche= getTutteLeNotifiche(session.getAttribute("codicefiscale").toString());
+			List<Notifica> notifiche = getTutteLeNotifiche(session.getAttribute("codicefiscale").toString());
 			session.setAttribute("arraynotifiche", notifiche);
 		}
 		return "index";
@@ -66,16 +72,13 @@ public class HomeController {
 
 	@GetMapping("/aggiungiDocente")
 	public String addDocente(HttpSession session, @RequestParam String codFiscale) {
-		RichiestaDocente richiesta=DBManager.getInstance().richiestaDocenteDAO().getRichiestaDocente(codFiscale);
+		RichiestaDocente richiesta = DBManager.getInstance().richiestaDocenteDAO().getRichiestaDocente(codFiscale);
 		session.setAttribute("richiesta", richiesta);
 		return "AggiungiDocente";
 	}
-	
+
 	@GetMapping("/navbar")
 	public String navbar(HttpSession session) {
-		List<Integer> idNotificheDaLeggere=getIdNotificheDaLeggere(session.getAttribute("codicefiscale").toString());
-		session.setAttribute("numNotifiche", idNotificheDaLeggere.size());
-		session.setAttribute("idNotificheDaLeggere", idNotificheDaLeggere);
 		return "Navbar";
 	}
 
@@ -114,7 +117,6 @@ public class HomeController {
 		return "Assistenza";
 	}
 
-
 	@GetMapping("/Logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -137,29 +139,28 @@ public class HomeController {
 	public String getMieiBandi(HttpSession session) {
 		return "MieiBandi";
 	}
-	public List<Bando> getBandi(){
+
+	public List<Bando> getBandi() {
 		List<Bando> bandi = DBManager.getInstance().bandoDAO().getBandi();
 		for (int i = 0, j = bandi.size() - 1; i < j; i++) {
 			bandi.add(i, bandi.remove(j));
 		}
 		return bandi;
 	}
-	
-	
+
 	@GetMapping("/comunicazioni")
 	public String getComunicazioni(HttpSession session) {
-		List<Notifica> notifiche=getTutteLeNotifiche(session.getAttribute("codicefiscale").toString());
-		for (int i=0; i<notifiche.size(); i++) {
+		List<Notifica> notifiche = getTutteLeNotifiche(session.getAttribute("codicefiscale").toString());
+		for (int i = 0; i < notifiche.size(); i++) {
 			DBManager.getInstance().notificaDAO().messaggioLetto(notifiche.get(i).getIdnotifica());
 		}
 		return "Comunicazioni";
 	}
-	
+
 	public int[] getBandiPreferiti(String codiceFiscale, List<Bando> bandi) {
 		int[] b = new int[bandi.size()];
 		for (int i = 0; i < bandi.size(); i++) {
-			if (DBManager.getInstance().preferitiDAO()
-					.existPreferito(codiceFiscale, bandi.get(i).getCodice())) {
+			if (DBManager.getInstance().preferitiDAO().existPreferito(codiceFiscale, bandi.get(i).getCodice())) {
 				b[i] = 1;
 			} else {
 				b[i] = 0;
@@ -167,27 +168,27 @@ public class HomeController {
 		}
 		return b;
 	}
-	
-	public List<Integer> getCodiceBandiCompilati(String codiceFiscale){
+
+	public List<Integer> getCodiceBandiCompilati(String codiceFiscale) {
 		List<Integer> codiceBandiCompilati = DBManager.getInstance().documentiCaricatiBandoDAO()
 				.getBandiCompilati(codiceFiscale);
 		return codiceBandiCompilati;
 	}
-	
-	public List<Bando> getBandiCompilati(List<Integer> codiceBandiCompilati){
-		List<Bando> bandiCompilati=new ArrayList<Bando>();
+
+	public List<Bando> getBandiCompilati(List<Integer> codiceBandiCompilati) {
+		List<Bando> bandiCompilati = new ArrayList<Bando>();
 		for (int i = 0; i < codiceBandiCompilati.size(); i++) {
 			Bando ban = DBManager.getInstance().bandoDAO().ottieniBando(codiceBandiCompilati.get(i));
 			bandiCompilati.add(ban);
 		}
 		return bandiCompilati;
 	}
-	
+
 	public List<Integer> getIdNotificheDaLeggere(String codiceFiscale) {
 		return DBManager.getInstance().utenteDAO().getIdNotificheDaLeggere(codiceFiscale);
 	}
 
-	public List<Notifica> getTutteLeNotifiche(String codiceFiscale){
+	public List<Notifica> getTutteLeNotifiche(String codiceFiscale) {
 		return DBManager.getInstance().utenteDAO().ottieniNotifiche(codiceFiscale);
 	}
 }

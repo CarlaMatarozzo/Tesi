@@ -37,14 +37,17 @@
 
 		<form id="emailAssistenza" action="#">
 			<div class="form">
+				<c:if test="${codicefiscale==null}">
 				<div class="form-group">
-
-
 					<label for="11">Mittente:</label> <input class="input1"
 						type="email" class="form-control" style="color: black;"
 						id="mittente" placeholder="Inserisci il tuo indirizzo email"
 						required>
 				</div>
+				</c:if>
+				<c:if test="${codicefiscale!=null}">
+				<input type="hidden" id="mittente" value="${email}">
+				</c:if>
 				<div class="form-group">
 					<label for="11">Oggetto:</label> <input class="input1" type="text"
 						class="form-control" style="color: black;" id="oggetto"

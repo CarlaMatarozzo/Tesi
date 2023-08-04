@@ -1,6 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600')
 	;
-
+.notification-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .notification-badge {
+            color: red !important;
+            position: absolute;
+            top: 0px;
+            right: 70px;
+            padding: 10px;
+        }
+        
 body {
 	margin: 0;
 	font-family: 'Work Sans', sans-serif;

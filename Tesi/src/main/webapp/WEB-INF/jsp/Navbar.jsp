@@ -60,12 +60,12 @@
 							<li><c:if test="${numNotifiche==0}">
 									<a href="#"><span class="glyphicon glyphicon-user"></span></a>
 								</c:if> <c:if test="${numNotifiche!=0}">
-									<a href="#"><span class="glyphicon glyphicon-user"></span>
-										<span class="notification-badge"
-										style="color: red !important;">*</span></a>
+									<a href="#"> <span class="notification-badge"
+										style="color: red !important;">${numNotifiche}</span><span
+										class="glyphicon glyphicon-user"></span></a>
 								</c:if> <!-- primo list-item, prima voce del menu -->
 								<ul>
-									<li><a href="#">Come funziona</a></li>
+									<li><a href="comeFunziona">Come funziona</a></li>
 									<li><a href="comunicazioni">Comunicazioni"</a></li>
 									<li><a href="assistenza">Assistenza</a></li>
 									<li><a href="mieiBandi">I miei bandi</a></li>
@@ -80,9 +80,9 @@
 							<li><c:if test="${numNotifiche==0}">
 									<a href="#"><span class="glyphicon glyphicon-user"></span></a>
 								</c:if> <c:if test="${numNotifiche!=0}">
-									<a href="#"><span class="glyphicon glyphicon-user"></span>
-										<span class="notification-badge"
-										style="color: red !important;">*</span></a>
+									<a href="#"><span class="notification-badge"
+										style="color: red !important;">${numNotifiche}</span><span
+										class="glyphicon glyphicon-user"></span></a>
 								</c:if> <!-- primo list-item, prima voce del menu -->
 								<ul>
 									<li><a href="#">Risultati Bandi</a></li>
@@ -100,7 +100,7 @@
 			<nav id="navbar-right">
 				<c:if test="${codicefiscale == null }">
 					<ul>
-						<li><a href="#">Come funziona</a></li>
+						<li><a href="comeFunziona">Come funziona</a></li>
 						<li><a href="assistenza">Assistenza</a></li>
 						<div id="hormenu">
 							<!-- div che contiene il menu -->
@@ -126,16 +126,16 @@
 				<c:if test="${codicefiscale != null and codicefiscale!='ADMIN'}">
 					<ul>
 						<li><a href="mieiBandi">I miei bandi</a></li>
-						<li><a href="#">Come funziona</a></li>
+						<li><a href="comeFunziona">Come funziona</a></li>
 						<li><a href="assistenza">Assistenza</a></li>
 						<div id="hormenu">
 							<ul>
 								<li><c:if test="${numNotifiche==0}">
 										<a href="#"><span class="glyphicon glyphicon-user"></span></a>
 									</c:if> <c:if test="${numNotifiche!=0}">
-										<a href="#"><span class="glyphicon glyphicon-user"></span>
-											<span class="notification-badge"
-											style="color: red !important;">*</span></a>
+										<a href="#"><span class="notification-badge"
+										style="color: red !important;">${numNotifiche}</span><span
+										class="glyphicon glyphicon-user"></span></a>
 									</c:if> <!-- primo list-item, prima voce del menu -->
 									<ul>
 										<li><a href="comunicazioni">Comunicazioni</a></li>
@@ -160,9 +160,9 @@
 							<li><c:if test="${numNotifiche==0}">
 									<a href="#"><span class="glyphicon glyphicon-user"></span></a>
 								</c:if> <c:if test="${numNotifiche!=0}">
-									<a href="#"><span class="glyphicon glyphicon-user"></span>
-										<span class="notification-badge"
-										style="color: red !important;">*</span></a>
+									<a href="#"> <span class="notification-badge"
+										style="color: red !important;">${numNotifiche}</span><span
+										class="glyphicon glyphicon-user"></span></a>
 								</c:if> <!-- primo list-item, prima voce del menu -->
 								<ul>
 									<li><a href="profilo">Profilo</a></li>
