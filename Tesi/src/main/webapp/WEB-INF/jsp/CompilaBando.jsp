@@ -41,12 +41,14 @@
 						<div class="form-group">
 							<label class="l1">Codice Bando</label> <input class="input"
 								type="text" name="codice" class="form-control" id="codiceBando"
-								style="color: black;" placeholder="${bando.codice}" value="${bando.codice}" required>
+								style="color: black;" placeholder="${bando.codice}"
+								value="${bando.codice}" required>
 						</div>
 						<div class="form-group">
 							<label class="l1">Titolo</label> <input class="input" type="text"
 								name="titolo" class="form-control" id="titolo"
-								placeholder="${bando.titolo}" value="${bando.titolo}"style="color: black;" required>
+								placeholder="${bando.titolo}" value="${bando.titolo}"
+								style="color: black;" required>
 						</div>
 						<div class="form-group">
 							<label class="l1">Nome</label> <input class="input" type="text"
@@ -60,9 +62,9 @@
 						</div>
 						<div class="form-group">
 							<label class="l1">Codice Fiscale</label> <input class="input"
-								type="text" name="codiceFiscalee" class="form-control" id="codiceFiscalee"
-								value="${codicefiscale}" placeholder="${codicefiscale}"
-								style="color: black;" required>
+								type="text" name="codiceFiscalee" class="form-control"
+								id="codiceFiscalee" value="${codicefiscale}"
+								placeholder="${codicefiscale}" style="color: black;" required>
 						</div>
 
 						<div class="form-group">
@@ -70,17 +72,33 @@
 								class="form-control" id="email" value="${email}"
 								placeholder="${email}" style="color: black;" required>
 						</div>
-						<input type="hidden" name="numeroDocDaCaricare" id="numeroDocDaCaricare"value='${numDoc}'>
+						<input type="hidden" name="numeroDocDaCaricare"
+							id="numeroDocDaCaricare" value='${numDoc}'>
 						<c:forEach items="${doc}" var="doc" varStatus="status">
 							<div class="form-group">
-							<input type="hidden" id="titolodoc_${status.index}" value='${doc.titolodocumento}'>
-							<input type="hidden" id="mindoc_${status.index}" value='${doc.mindim}'>
-							<input type="hidden" id="maxdoc_${status.index}" value='${doc.maxdim}'>
-							
-							<h4>titolodoc_${status.index}</h4>
-								<label class="l2">Inserire ${doc.titolodocumento}</label> <input
-									type="file" accept="" id="doc_${status.index}" name="doc" maxlength="150"
-									required>
+								<input type="hidden" id="titolodoc_${status.index}"
+									value='${doc.titolodocumento}'> <input type="hidden"
+									id="mindoc_${status.index}" value='${doc.mindim}'> <input
+									type="hidden" id="maxdoc_${status.index}" value='${doc.maxdim}'>
+
+								<h4>titolodoc_${status.index}</h4>
+								<label class="l2">Inserire ${doc.titolodocumento}</label>
+								<h7>Formato documento: ${doc.formatodocumento}</h7>
+								<br>
+								<c:choose>
+									<c:when test="${doc.formatodocumento == 'img'}">
+										<input type="file" accept=".jpeg,.png,.jpg"
+											id="doc_${status.index}" name="doc" maxlength="150" required>
+									</c:when>
+									<c:when test="${doc.formatodocumento == 'testo'}">
+										<input type="file" accept=".txt" id="doc_${status.index}"
+											name="doc" maxlength="150" required>
+									</c:when>
+									<c:when test="${doc.formatodocumento == 'pdf'}">
+										<input type="file" accept=".pdf" id="doc_${status.index}"
+											name="doc" maxlength="150" required>
+									</c:when>
+								</c:choose>
 								<h7 id="size_${status.index}">*MaxSize: ${doc.maxdim}</h7>
 								<br>
 							</div>

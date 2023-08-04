@@ -93,9 +93,10 @@ $(document).ready(function() {
 		for (var i = 0; i < uniqueId; i++) {
 			var tit = document.getElementById("doc" + i).value;
 			var formato = document.getElementById("formatoDoc" + i).value;
+			var sceltaElement=document.getElementById('scelta').value;
 			var minSize = document.getElementById("minSize" + i).value;
 			var maxSize = document.getElementById("maxSize" + i).value;
-			var d = new DocumentiBando(codice, tit, formato, minSize, maxSize);
+			var d = new DocumentiBando(codice, tit, sceltaElement, minSize, maxSize);
 			doc.push(d);
 		}
 
@@ -128,10 +129,6 @@ $(document).ready(function() {
 							.then((conversionResult) => {
 								return window.callEndpoint(conversionResult, "ottieniImg", "POST");
 							})
-							.then((responseData) => {
-								// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
-								console.log("Risposta dal servizio Spring: IMMAGINE", responseData);
-							})
 							.catch((error) => {
 								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
 								console.error("Errore:", error);
@@ -143,10 +140,6 @@ $(document).ready(function() {
 						window.convert(pdfita.files[0], codice)
 							.then((conversionResult) => {
 								return window.callEndpoint(conversionResult, "ottieniPdfItaliano", "POST");
-							})
-							.then((responseData) => {
-								// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
-								console.log("Risposta dal servizio Spring: ITALIANO", responseData);
 							})
 							.catch((error) => {
 								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
@@ -160,10 +153,6 @@ $(document).ready(function() {
 						window.convert(pdfing.files[0], codice)
 							.then((conversionResult) => {
 								return window.callEndpoint(conversionResult, "ottieniPdfInglese", "POST");
-							})
-							.then((responseData) => {
-								// La chiamata all'endpoint è completata con successo, puoi gestire la risposta qui
-								console.log("Risposta dal servizio Spring: INGLESE", responseData);
 							})
 							.catch((error) => {
 								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni

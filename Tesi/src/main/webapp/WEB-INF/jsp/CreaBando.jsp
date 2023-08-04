@@ -58,15 +58,13 @@
 						<div class="form-group">
 							<label class="l2">Inserire pdf italiano</label> <input
 								type="file" accept=".pdf" id="pdfIta" name="pdfIta"
-								maxlength="150"
-								 required>
+								maxlength="150" required>
 							<h7 id="sizeIta">*MaxSize: 1500Kb</h7>
 							<br>
 						</div>
 						<div class="form-group">
 							<label class="l2">Inserire pdf del bando in inglese</label> <input
-								type="file" accept=".pdf" id="pdfInglese" name="pdfInglese"
-								>
+								type="file" accept=".pdf" id="pdfInglese" name="pdfInglese">
 							<h7 id="sizeIng">*MaxSize: 1500Kb</h7>
 							<br>
 						</div>
@@ -90,6 +88,27 @@
 								type="text" name="formatoDoc0" class="form-control"
 								id="formatoDoc0" placeholder="Formato documento"
 								style="color: black;" required>
+						</div>
+						<div class="form-group">
+						<label class="l1" for="scelta">Formato documento</label> 
+							<select id="scelta">
+								<option value="pdf">Pdf</option>
+								<option value="img">Immagine</option>
+								<option value="txt">Testo</option>
+							</select>
+
+							<p>
+								Hai selezionato: <span id="risultato"></span>
+							</p>
+
+							<script>
+        const sceltaElement = document.getElementById('scelta');
+        const risultatoElement = document.getElementById('risultato');
+        
+        sceltaElement.addEventListener('change', () => {
+            risultatoElement.textContent = sceltaElement.value;
+        });
+    </script>
 						</div>
 						<div class="form-group">
 							<label class="l1">Minima dimensione</label> <input class="input"

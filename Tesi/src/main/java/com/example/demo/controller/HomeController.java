@@ -20,8 +20,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-	public List<Integer> getBandiScaduti() {
-		List<Bando> bandi = DBManager.getInstance().bandoDAO().getBandi();
+	public List<Integer> getBandiScaduti(List<Bando> bandi) {
 		List<Integer> bandiScaduti = new ArrayList<Integer>();
 		for (int i = 0; i < bandi.size(); i++) {
 			Date sqlDate = bandi.get(i).getDatascadenza();
@@ -40,7 +39,7 @@ public class HomeController {
 	public String index(HttpSession session) {
 		List<Bando> bandi = getBandi();
 		session.setAttribute("bandi", bandi);
-		session.setAttribute("bandiScaduti", getBandiScaduti());
+		session.setAttribute("bandiScaduti", getBandiScaduti(bandi));
 		if (session.getAttribute("codicefiscale") != null) {
 
 			List<Integer> idNotificheDaLeggere = getIdNotificheDaLeggere(
