@@ -96,19 +96,6 @@
 								<option value="img">Immagine</option>
 								<option value="txt">Testo</option>
 							</select>
-
-							<p>
-								Hai selezionato: <span id="risultato"></span>
-							</p>
-
-							<script>
-        const sceltaElement = document.getElementById('scelta');
-        const risultatoElement = document.getElementById('risultato');
-        
-        sceltaElement.addEventListener('change', () => {
-            risultatoElement.textContent = sceltaElement.value;
-        });
-    </script>
 						</div>
 						<div class="form-group">
 							<label class="l1">Minima dimensione</label> <input class="input"

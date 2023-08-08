@@ -92,7 +92,6 @@ $(document).ready(function() {
 		var doc = [];
 		for (var i = 0; i < uniqueId; i++) {
 			var tit = document.getElementById("doc" + i).value;
-			var formato = document.getElementById("formatoDoc" + i).value;
 			var sceltaElement=document.getElementById('scelta').value;
 			var minSize = document.getElementById("minSize" + i).value;
 			var maxSize = document.getElementById("maxSize" + i).value;

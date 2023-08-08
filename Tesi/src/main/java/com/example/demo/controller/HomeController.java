@@ -41,7 +41,7 @@ public class HomeController {
 		session.setAttribute("bandi", bandi);
 		session.setAttribute("bandiScaduti", getBandiScaduti(bandi));
 		if (session.getAttribute("codicefiscale") != null) {
-
+			session.setAttribute("docente", DBManager.getInstance().utenteDAO().isDocente(session.getAttribute("codicefiscale").toString()));
 			List<Integer> idNotificheDaLeggere = getIdNotificheDaLeggere(
 					session.getAttribute("codicefiscale").toString());
 			session.setAttribute("numNotifiche", idNotificheDaLeggere.size());

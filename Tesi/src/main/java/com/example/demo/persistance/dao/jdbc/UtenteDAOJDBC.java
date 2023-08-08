@@ -82,6 +82,37 @@ public class UtenteDAOJDBC implements UtenteDAO {
 	}
 
 	@Override
+	public boolean isDocente(String codicefiscale) {
+		Utente utente = new Utente();
+
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select * from utente where codicefiscale=? and docente=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, codicefiscale);
+			st.setBoolean(2, true);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				utente.setCodiceFiscale(rs.getString("codicefiscale"));
+				utente.setPassword(rs.getString("password"));
+				utente.setNome(rs.getString("nome"));
+				utente.setCognome(rs.getString("cognome"));
+				utente.setEmail(rs.getString("email"));
+				utente.setDocente(rs.getBoolean("docente"));
+				utente.setNotifica(rs.getInt("notifica"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (utente.getCodiceFiscale() != null)
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
 	public Utente findByPrimaryKey(String codicefiscale) {
 		Utente utente = new Utente();
 

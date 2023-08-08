@@ -32,4 +32,6 @@ public interface UtenteDAO {
 	public boolean updateWithoutPsw(Utente u);
 
 	public String getCodiceFiscale(String email);
+	
+	public boolean isDocente(String codicefiscale);
 }

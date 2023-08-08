@@ -39,138 +39,197 @@
 				width=auto height="130"></a>
 			<nav id="nav-response">
 				<div id="hormenu">
-					<c:if test="${codicefiscale == null }">
-						<!-- div che contiene il menu -->
-						<ul>
-							<li><a href="#"> <span class="glyphicon glyphicon-user"></span></a>
-								<ul>
-									<li><a type="button" data-toggle="modal"
-										data-target="#loginModal">Accedi</a></li>
-									<li><a type="button" data-toggle="modal"
-										data-target="#registrazioneModal">Registrati</a></li>
-									<li><a type="button" data-toggle="modal"
-										data-target="#registrazioneDocenteModal">Registrazione
-											Docente</a></li>
-								</ul>
-						</ul>
-					</c:if>
-					<c:if test="${codicefiscale != null and codicefiscale!='ADMIN'}">
-
-						<ul>
-							<li><c:if test="${numNotifiche==0}">
-									<a href="#"><span class="glyphicon glyphicon-user"></span></a>
-								</c:if> <c:if test="${numNotifiche!=0}">
-									<a href="#"> <span class="notification-badge"
-										style="color: red !important;">${numNotifiche}</span><span
-										class="glyphicon glyphicon-user"></span></a>
-								</c:if> <!-- primo list-item, prima voce del menu -->
-								<ul>
-									<li><a href="comeFunziona">Come funziona</a></li>
-									<li><a href="comunicazioni">Comunicazioni"</a></li>
-									<li><a href="assistenza">Assistenza</a></li>
-									<li><a href="mieiBandi">I miei bandi</a></li>
-									<li><a href="preferiti">Preferiti</a></li>
-									<li><a href="profilo">Il mio profilo</a></li>
-									<li><a href="Logout">Logout</a></li>
-								</ul></li>
-						</ul>
-					</c:if>
-					<c:if test="${codicefiscale=='ADMIN'}">
-						<ul>
-							<li><c:if test="${numNotifiche==0}">
-									<a href="#"><span class="glyphicon glyphicon-user"></span></a>
-								</c:if> <c:if test="${numNotifiche!=0}">
-									<a href="#"><span class="notification-badge"
-										style="color: red !important;">${numNotifiche}</span><span
-										class="glyphicon glyphicon-user"></span></a>
-								</c:if> <!-- primo list-item, prima voce del menu -->
-								<ul>
-									<li><a href="#">Risultati Bandi</a></li>
-									<li><a href="comunicazioni">Comunicazioni</a></li>
-									<li><a href="creabando">Crea Bando</a></li>
-									<li><a href="profilo">Profilo</a></li>
-									<li><a href="Logout">Logout</a></li>
-								</ul></li>
-						</ul>
-					</c:if>
-				</div>
-			</nav>
-
-			<nav id="navbar-right">
-				<c:if test="${codicefiscale == null }">
 					<ul>
-						<li><a href="comeFunziona">Come funziona</a></li>
-						<li><a href="assistenza">Assistenza</a></li>
-						<div id="hormenu">
-							<!-- div che contiene il menu -->
-							<ul>
-								<!-- lista principale: definisce il menu nella sua interezza -->
-								<li><a href="#"> <span class="glyphicon glyphicon-user"></span></a>
-									<!-- primo list-item, prima voce del menu -->
+						<c:choose>
+							<c:when test="${codicefiscale == null}">
+								<li><a href="#"><span class="glyphicon glyphicon-user"></span></a>
 									<ul>
-										<!-- Lista annidata: voci del sotto-menu -->
 										<li><a type="button" data-toggle="modal"
 											data-target="#loginModal">Accedi</a></li>
 										<li><a type="button" data-toggle="modal"
 											data-target="#registrazioneModal">Registrati</a></li>
-
 										<li><a type="button" data-toggle="modal"
 											data-target="#registrazioneDocenteModal">Registrazione
 												Docente</a></li>
 									</ul></li>
-							</ul>
-						</div>
-					</ul>
-				</c:if>
-				<c:if test="${codicefiscale != null and codicefiscale!='ADMIN'}">
-					<ul>
-						<li><a href="mieiBandi">I miei bandi</a></li>
-						<li><a href="comeFunziona">Come funziona</a></li>
-						<li><a href="assistenza">Assistenza</a></li>
-						<div id="hormenu">
-							<ul>
-								<li><c:if test="${numNotifiche==0}">
-										<a href="#"><span class="glyphicon glyphicon-user"></span></a>
-									</c:if> <c:if test="${numNotifiche!=0}">
-										<a href="#"><span class="notification-badge"
-											style="color: red !important;">${numNotifiche}</span><span
-											class="glyphicon glyphicon-user"></span></a>
-									</c:if> <!-- primo list-item, prima voce del menu -->
+							</c:when>
+							<c:when
+								test="${codicefiscale != null and codicefiscale!='ADMIN' and docente==false}">
+								<li><c:choose>
+										<c:when test="${numNotifiche==0}">
+											<a href="#"><span class="glyphicon glyphicon-user"></span></a>
+										</c:when>
+										<c:otherwise>
+											<a href="#"><span class="notification-badge"
+												style="color: red !important;">${numNotifiche}</span><span
+												class="glyphicon glyphicon-user"></span></a>
+										</c:otherwise>
+									</c:choose>
 									<ul>
-										<li><a href="comunicazioni">Comunicazioni</a></li>
+										<li><a href="comeFunziona">Come funziona</a></li>
+										<li><a href="comunicazioni">Comunicazioni"</a></li>
+										<li><a href="assistenza">Assistenza</a></li>
+										<li><a href="mieiBandi">I miei bandi</a></li>
 										<li><a href="preferiti">Preferiti</a></li>
-										<li><a href="profilo">Il mio profilo</a></li>
+										<li><a href="profilo">Profilo</a></li>
 										<li><a href="Logout">Logout</a></li>
 									</ul></li>
-							</ul>
-						</div>
-					</ul>
+							</c:when>
+							<c:when
+								test="${codicefiscale != null and codicefiscale!='ADMIN' and docente==true}">
+								
+									<li><c:choose>
+										<c:when test="${numNotifiche==0}">
+											<a href="#"><span class="glyphicon glyphicon-user"></span></a>
+										</c:when>
+										<c:otherwise>
+											<a href="#"><span class="notification-badge"
+												style="color: red !important;">${numNotifiche}</span><span
+												class="glyphicon glyphicon-user"></span></a>
+										</c:otherwise>
+									</c:choose>
+									<ul>
+									<li><a href="comunicazioni">Comunicazioni</a></li>
 
-				</c:if>
-
-				<c:if test="${codicefiscale=='ADMIN'}">
-					<li><a href="creabando">Crea Bando</a></li>
-					<li><a href="#">Risultati bandi</a></li>
-					<li><a href="comunicazioni">Comunicazioni</a></li>
-					<div id="hormenu">
-
-						<ul>
-							<li><c:if test="${numNotifiche==0}">
-									<a href="#"><span class="glyphicon glyphicon-user"></span></a>
-								</c:if> <c:if test="${numNotifiche!=0}">
-									<a href="#"> <span class="notification-badge"
-										style="color: red !important;">${numNotifiche}</span><span
-										class="glyphicon glyphicon-user"></span></a>
-								</c:if> <!-- primo list-item, prima voce del menu -->
-								<ul>
+									<li><a href="assistenza">Assistenza</a></li>
+									<li><a href="preferiti">Bandi da correggere</a></li>
 									<li><a href="profilo">Profilo</a></li>
 									<li><a href="Logout">Logout</a></li>
-								</ul></li>
-						</ul>
-					</div>
-				</c:if>
-		</div>
+								</ul>
+								</li>
+							</c:when>
+							<c:when test="${codicefiscale=='ADMIN'}">
+								<li><c:choose>
+										<c:when test="${numNotifiche==0}">
+											<a href="#"><span class="glyphicon glyphicon-user"></span></a>
+										</c:when>
+										<c:otherwise>
+											<a href="#"><span class="notification-badge"
+												style="color: red !important;">${numNotifiche}</span><span
+												class="glyphicon glyphicon-user"></span></a>
+										</c:otherwise>
+									</c:choose>
+									<ul>
+										<li><a href="creabando">Crea Bando</a></li>
+										<li><a href="#">Risultati bandi</a></li>
+										<li><a href="comunicazioni">Comunicazioni</a></li>
+										<li><a href="profilo">Profilo</a></li>
+										<li><a href="Logout">Logout</a></li>
+									</ul></li>
+							</c:when>
+						</c:choose>
+					</ul>
+				</div>
+			</nav>
 
+			<nav id="navbar-right">
+				<ul>
+					<c:choose>
+						<c:when test="${codicefiscale == null}">
+							<li><a href="comeFunziona">Come funziona</a></li>
+							<li><a href="assistenza">Assistenza</a></li>
+							<li>
+								<div id="hormenu">
+									<ul>
+										<li><a href="#"><span
+												class="glyphicon glyphicon-user"></span></a>
+											<ul>
+												<li><a type="button" data-toggle="modal"
+													data-target="#loginModal">Accedi</a></li>
+												<li><a type="button" data-toggle="modal"
+													data-target="#registrazioneModal">Registrati</a></li>
+												<li><a type="button" data-toggle="modal"
+													data-target="#registrazioneDocenteModal">Registrazione
+														Docente</a></li>
+											</ul></li>
+									</ul>
+								</div>
+							</li>
+						</c:when>
+						<c:when
+							test="${codicefiscale != null and codicefiscale!='ADMIN' and docente==false}">
+							<li><a href="mieiBandi">I miei bandi</a></li>
+							<li><a href="comeFunziona">Come funziona</a></li>
+							<li><a href="assistenza">Assistenza</a></li>
+							<li>
+								<div id="hormenu">
+									<ul>
+										<li><c:choose>
+												<c:when test="${numNotifiche==0}">
+													<a href="#"><span class="glyphicon glyphicon-user"></span></a>
+												</c:when>
+												<c:otherwise>
+													<a href="#"><span class="notification-badge"
+														style="color: red !important;">${numNotifiche}</span><span
+														class="glyphicon glyphicon-user"></span></a>
+												</c:otherwise>
+											</c:choose>
+											<ul>
+												<li><a href="comunicazioni">Comunicazioni</a></li>
+												<li><a href="preferiti">Preferiti</a></li>
+												<li><a href="profilo">Profilo</a></li>
+												<li><a href="Logout">Logout</a></li>
+											</ul></li>
+									</ul>
+								</div>
+							</li>
+						</c:when>
+						<c:when
+							test="${codicefiscale != null and codicefiscale!='ADMIN' and docente==true}">
+
+							<li><a href="preferiti">Bandi da correggere</a></li>
+							<li><a href="assistenza">Assistenza</a></li>
+							<li>
+								<div id="hormenu">
+									<ul>
+										<li><c:choose>
+												<c:when test="${numNotifiche==0}">
+													<a href="#"><span class="glyphicon glyphicon-user"></span></a>
+												</c:when>
+												<c:otherwise>
+													<a href="#"><span class="notification-badge"
+														style="color: red !important;">${numNotifiche}</span><span
+														class="glyphicon glyphicon-user"></span></a>
+												</c:otherwise>
+											</c:choose>
+											<ul>
+												<li><a href="comunicazioni">Comunicazioni</a></li>
+												<li><a href="profilo">Profilo</a></li>
+												<li><a href="Logout">Logout</a></li>
+											</ul></li>
+									</ul>
+								</div>
+							</li>
+						</c:when>
+						<c:when test="${codicefiscale=='ADMIN'}">
+							<li><a href="creabando">Crea Bando</a></li>
+							<li><a href="#">Risultati bandi</a></li>
+							<li><a href="comunicazioni">Comunicazioni</a></li>
+							<li>
+								<div id="hormenu">
+									<ul>
+										<li><c:choose>
+												<c:when test="${numNotifiche==0}">
+													<a href="#"><span class="glyphicon glyphicon-user"></span></a>
+												</c:when>
+												<c:otherwise>
+													<a href="#"><span class="notification-badge"
+														style="color: red !important;">${numNotifiche}</span><span
+														class="glyphicon glyphicon-user"></span></a>
+												</c:otherwise>
+											</c:choose>
+											<ul>
+												<li><a href="profilo">Profilo</a></li>
+												<li><a href="Logout">Logout</a></li>
+											</ul></li>
+									</ul>
+								</div>
+							</li>
+						</c:when>
+					</c:choose>
+				</ul>
+			</nav>
+		</div>
 		<!-- LOGIN -->
 		<div class="modal fade" id="loginModal">
 			<div class="modal-dialog">
@@ -319,10 +378,10 @@
 									<button type="button" class="close" data-dismiss="modal">×</button>
 									<h1 class="titolo-loginForm">Registrazione docente</h1>
 									<h5 id="erroreRegistrazioneDoc" style="color: red;"></h5>
-									<p>Compilando il seguente form verrà inviata una
-										richiesta all'amministratore per la creazione del suo profilo.
-										Se l'admin accetta la sua iscrizione le arriverà un'email con
-										la password.</p>
+									<p>Compilando il seguente form verrà inviata una richiesta
+										all'amministratore per la creazione del suo profilo. Se
+										l'admin accetta la sua iscrizione le arriverà un'email con la
+										password.</p>
 									<h4 id="erroreDocente"></h4>
 								</div>
 							</div>
