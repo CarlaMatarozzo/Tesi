@@ -47,7 +47,7 @@ img {
 	width: 180px !important;
 }
 </style>
-<body>
+<body  style="background:  #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<div class="container-fluid"></div>
 	<h2>I Miei Bandi</h2>

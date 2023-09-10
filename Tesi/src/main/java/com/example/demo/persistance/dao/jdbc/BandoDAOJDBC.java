@@ -210,4 +210,30 @@ public class BandoDAOJDBC implements BandoDAO {
 		}
 
 	}
+
+	@Override
+	public ArrayList<Bando> getBandiDocente(String docente) {
+		ArrayList<Bando> bandi = new ArrayList<Bando>();
+		try {
+			Connection con = dbSource.getConnection();
+			String query = "select * from bando where segretario=?";
+			PreparedStatement st = con.prepareStatement(query);
+			st.setString(1,docente);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				Bando b = new Bando();
+				b.setCodice(rs.getInt("codice"));
+				b.setTitolo(rs.getString("titolo"));
+				b.setImg(rs.getString("img"));
+				b.setDatascadenza(rs.getDate("datascadenza"));
+				b.setPdfIta(rs.getString("pdfIta"));
+				b.setPdfInglese(rs.getString("pdfInglese"));
+				b.setSegretario(rs.getString("segretario"));
+				bandi.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bandi;
+	}
 }

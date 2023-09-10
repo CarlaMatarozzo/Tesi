@@ -78,7 +78,7 @@ $(document).ready(function() {
 		var codice = document.getElementById("codiceBando").value;
 		var titolo = document.getElementById("titolo").value;
 		var datascadenza = document.getElementById("data").value;
-		var segretario = document.getElementById("segretario").value;
+		var docente = document.getElementById('sceltaDocente').value;
 
 		var bando = new Bando(
 			codice,
@@ -87,7 +87,7 @@ $(document).ready(function() {
 			datascadenza,
 			null,
 			null,
-			segretario
+			docente
 		);
 		var doc = [];
 		for (var i = 0; i < uniqueId; i++) {
@@ -123,13 +123,11 @@ $(document).ready(function() {
 					});
 					var img = document.getElementById("imgUpload");
 					if (img.files[0]) {
-						// Ora puoi gestire la sequenza di chiamate utilizzando le Promesse:
 						window.convert(img.files[0], codice)
 							.then((conversionResult) => {
 								return window.callEndpoint(conversionResult, "ottieniImg", "POST");
 							})
 							.catch((error) => {
-								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
 								console.error("Errore:", error);
 							});
 					}
@@ -140,25 +138,15 @@ $(document).ready(function() {
 							.then((conversionResult) => {
 								return window.callEndpoint(conversionResult, "ottieniPdfItaliano", "POST");
 							})
-							.catch((error) => {
-								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
-								console.error("Errore:", error);
-							});
 					}
 
 					var pdfing = document.getElementById("pdfInglese");
 					if (pdfing.files[0]) {
-						//if (window.checkFileSize("pdfIng", 1, 1500)) {
 						window.convert(pdfing.files[0], codice)
 							.then((conversionResult) => {
 								return window.callEndpoint(conversionResult, "ottieniPdfInglese", "POST");
 							})
-							.catch((error) => {
-								// Gestisci gli errori qui, se si verifica un errore in qualsiasi delle due operazioni
-								console.error("Errore:", error);
-							});
 
-						//}
 					}
 				}
 				if (risposta == "errore") {

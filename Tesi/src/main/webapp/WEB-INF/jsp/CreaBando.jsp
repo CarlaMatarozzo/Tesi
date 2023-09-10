@@ -22,8 +22,18 @@
 
 <title>TESI!</title>
 </head>
-<body>
+<body  style="background:  #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
+	    <style>
+        /* Personalizza la dimensione del select */
+        select{
+            padding: 3px; /* Spazio interno */
+            font-size: 12px; /* Dimensione del testo */
+            width: 150px; /* Larghezza */
+            height: 30px; /* Altezza */
+        }
+    </style>
+	
 	<div class="container-fluid">
 		<div>
 			<div>
@@ -69,10 +79,13 @@
 							<br>
 						</div>
 						<div class="form-group">
-							<label class="l1">Segretario</label> <input class="input"
-								type="text" name="segretario" class="form-control"
-								id="segretario" placeholder="Segretario" style="color: black;"
-								required>
+
+						<label class="l1" for="scelta">Docente</label> 
+								<select id="sceltaDocente">
+								<c:forEach items="${docenti}" var="docenti" varStatus="status">
+									<option value="${docenti}">${docenti}</option>
+								</c:forEach>
+								</select>
 						</div>
 					</div>
 				</div>
@@ -82,12 +95,6 @@
 							<label class="l1">Titolo documento</label> <input class="input"
 								type="text" name="doc0" class="form-control" id="doc0"
 								placeholder="Titolo documento" style="color: black;" required>
-						</div>
-						<div class="form-group">
-							<label class="l1">Formato documento</label> <input class="input"
-								type="text" name="formatoDoc0" class="form-control"
-								id="formatoDoc0" placeholder="Formato documento"
-								style="color: black;" required>
 						</div>
 						<div class="form-group">
 						<label class="l1" for="scelta">Formato documento</label> 

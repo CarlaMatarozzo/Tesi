@@ -118,4 +118,51 @@ public class DocumentiCaricatiBandoDAOJDBC implements DocumentiCaricatiBandoDAO 
 		return true;
 	}
 
+	@Override
+	public int getNumeroRichieste(int codiceBando,String titolo) {
+	    int count = 0;
+	    try {
+	        Connection conn = dbSource.getConnection();
+	        String query = "SELECT COUNT(*) AS numRichieste FROM documenticaricatibando WHERE codicebando=? and titolodocumento=?";
+	        PreparedStatement st = conn.prepareStatement(query);
+	        st.setInt(1, codiceBando);
+	        st.setString(2,titolo);
+	        ResultSet rs = st.executeQuery();
+	        if (rs.next()) {
+	            count = rs.getInt("numRichieste");
+	        }
+	        rs.close();
+	        st.close();
+	        conn.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return count;
+	}
+
+	@Override
+	public List<DocumentiCaricatiBando> getDocumentiBando(int codice) {
+		List<DocumentiCaricatiBando> doc = new ArrayList<DocumentiCaricatiBando>();
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select * from documenticaricatibando where codicebando=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setInt(1, codice);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+			
+			DocumentiCaricatiBando db = new DocumentiCaricatiBando();
+			db.setCodicebando(codice);
+			db.setTitolodocumento(rs.getString("titolodocumento"));
+			db.setCodicefiscale(rs.getString("codicefiscale"));
+			db.setDocumento(rs.getString("documento"));
+			doc.add(db);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return doc;
+	}
+
+
 }

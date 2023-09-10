@@ -1,26 +1,7 @@
-window.addEventListener("load", function() { //"load"-->al caricamento della pagina inizializziamo il form per effettuare login e sign up
-	//checklogin();
+window.addEventListener("load", function() {
 });
 
 var modalLogin = true;
-/*
-function checklogin() {
-
-
-	$("#registrati").click(function() {
-		$("#first").fadeOut("fast", function() {
-			$("#second").fadeIn("fast");
-			modalLogin = false;
-		});
-	});
-
-	$("#accedi").click(function() {
-		$("#second").fadeOut("fast", function() {
-			$("#first").fadeIn("fast");
-			modalLogin = true;
-		});
-	});
-}*/
 
 function Utente(codiceFiscale, password, nome, cognome, email, docente, notifica) {
 	this.codiceFiscale = codiceFiscale;
@@ -29,7 +10,7 @@ function Utente(codiceFiscale, password, nome, cognome, email, docente, notifica
 	this.cognome = cognome;
 	this.email = email;
 	this.docente = docente;
-	this.notifica = notifica
+	this.notifica = notifica;
 }
 
 
@@ -129,6 +110,14 @@ $(document).ready(function() {
 						method: "POST",
 						data: JSON.stringify(parametri4),
 						contentType: "application/json",
+						success:function(risposta){
+							if(risposta=="successo"){
+								location.reload();
+							}
+							else{
+								alert("NO");
+							}
+						}
 					});
 				}
 				if (risposta == "errore") {

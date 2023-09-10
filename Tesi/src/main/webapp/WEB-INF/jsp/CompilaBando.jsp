@@ -25,7 +25,7 @@
 <title>TESI!</title>
 
 </head>
-<body>
+<body  style="background:  #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div>
@@ -81,7 +81,6 @@
 									id="mindoc_${status.index}" value='${doc.mindim}'> <input
 									type="hidden" id="maxdoc_${status.index}" value='${doc.maxdim}'>
 
-								<h4>titolodoc_${status.index}</h4>
 								<label class="l2">Inserire ${doc.titolodocumento}</label>
 								<h7>Formato documento: ${doc.formatodocumento}</h7>
 								<br>

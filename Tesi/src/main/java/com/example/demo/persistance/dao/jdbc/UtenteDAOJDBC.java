@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import com.example.demo.model.Bando;
 import com.example.demo.model.Notifica;
 import com.example.demo.model.Utente;
 import com.example.demo.persistance.DBSource;
@@ -111,7 +109,7 @@ public class UtenteDAOJDBC implements UtenteDAO {
 		else
 			return false;
 	}
-	
+
 	@Override
 	public Utente findByPrimaryKey(String codicefiscale) {
 		Utente utente = new Utente();
@@ -309,7 +307,7 @@ public class UtenteDAOJDBC implements UtenteDAO {
 	@Override
 	public List<Integer> getIdNotificheDaLeggere(String codiceFiscale) {
 		List<Integer> idNotifiche = new ArrayList<>();
-		Set<Integer> id=new HashSet<>();
+		Set<Integer> id = new HashSet<>();
 		try {
 			Connection conn = dbSource.getConnection();
 			String query = "select idnotifica from notifica inner join utente on (notifica.codicefiscale =?) where lettura=?;";
@@ -318,8 +316,8 @@ public class UtenteDAOJDBC implements UtenteDAO {
 			st.setString(1, codiceFiscale);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				int i=rs.getInt("idNotifica");
-				if(!id.contains(i)) {
+				int i = rs.getInt("idNotifica");
+				if (!id.contains(i)) {
 					id.add(i);
 					idNotifiche.add(i);
 				}
@@ -334,29 +332,83 @@ public class UtenteDAOJDBC implements UtenteDAO {
 	@Override
 	public List<Notifica> ottieniNotifiche(String codiceFiscale) {
 		List<Notifica> notifiche = new ArrayList<>();
-	    Set<Integer> idNotificheSet = new HashSet<>(); //
-	    try {
-	        Connection conn = dbSource.getConnection();
-	        String query = "select * from notifica inner join utente on (notifica.codicefiscale =?)";
-	        PreparedStatement st = conn.prepareStatement(query);
-	        st.setString(1, codiceFiscale);
-	        ResultSet rs = st.executeQuery();
-	        while (rs.next()) {
-	            int idNotifica = rs.getInt("idnotifica");
-	            if (!idNotificheSet.contains(idNotifica)) {
-	                Notifica n = new Notifica();
-	                n.setCodicefiscale(codiceFiscale);
-	                n.setMessaggio(rs.getString("messaggio"));
-	                n.setLettura(rs.getBoolean("lettura"));
-	                n.setIdnotifica(idNotifica);
-	                notifiche.add(n);
-	                idNotificheSet.add(idNotifica); 
-	            }
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return notifiche;
+		Set<Integer> idNotificheSet = new HashSet<>(); //
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select * from notifica inner join utente on (notifica.codicefiscale =?)";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, codiceFiscale);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				int idNotifica = rs.getInt("idnotifica");
+				if (!idNotificheSet.contains(idNotifica)) {
+					Notifica n = new Notifica();
+					n.setCodicefiscale(codiceFiscale);
+					n.setMessaggio(rs.getString("messaggio"));
+					n.setLettura(rs.getBoolean("lettura"));
+					n.setIdnotifica(idNotifica);
+					notifiche.add(n);
+					idNotificheSet.add(idNotifica);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return notifiche;
 	}
 
+	@Override
+	public List<String> getCognomiDocenti() {
+		List<String> cognomi = new ArrayList<>();
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select cognome from utente where docente=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setBoolean(1, true);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				cognomi.add(rs.getString("cognome"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cognomi;
+	}
+
+	@Override
+	public String getCognome(String codicefiscale) {
+		String cognome=null;
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select cognome from utente where codicefiscale=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, codicefiscale);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+	            cognome = rs.getString("cognome");
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cognome;
+	}
+
+	@Override
+	public List<String> getCodiciFiscaliUtenti() {
+		List<String> cf = new ArrayList<>();
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select codicefiscale from utente where docente=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setBoolean(1, false);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				cf.add(rs.getString("codicefiscale"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cf;
+	}
+	
 }

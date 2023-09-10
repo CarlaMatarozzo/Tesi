@@ -18,4 +18,5 @@ public interface BandoDAO {
 	public void setImg(int codicebando, String img);
 	public void setPdfIta(int codicebando, String ita);
 	public void setPdfIng(int codicebando, String ing);
+	public ArrayList<Bando> getBandiDocente(String docente);
 }

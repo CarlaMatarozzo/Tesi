@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Bando;
 import com.example.demo.model.DocumentiBando;
+import com.example.demo.model.DocumentiCaricatiBando;
 import com.example.demo.model.Notifica;
 import com.example.demo.model.RichiestaDocente;
 import com.example.demo.persistance.DBManager;
@@ -41,7 +42,8 @@ public class HomeController {
 		session.setAttribute("bandi", bandi);
 		session.setAttribute("bandiScaduti", getBandiScaduti(bandi));
 		if (session.getAttribute("codicefiscale") != null) {
-			session.setAttribute("docente", DBManager.getInstance().utenteDAO().isDocente(session.getAttribute("codicefiscale").toString()));
+			session.setAttribute("docente",
+					DBManager.getInstance().utenteDAO().isDocente(session.getAttribute("codicefiscale").toString()));
 			List<Integer> idNotificheDaLeggere = getIdNotificheDaLeggere(
 					session.getAttribute("codicefiscale").toString());
 			session.setAttribute("numNotifiche", idNotificheDaLeggere.size());
@@ -76,6 +78,36 @@ public class HomeController {
 		return "AggiungiDocente";
 	}
 
+	@GetMapping("/correzioneBando")
+	public String correzioneBando(HttpSession session, @RequestParam int codiceBando) {
+		session.setAttribute("codiceBandoDaCorreggere", codiceBando);
+		List<DocumentiBando> documentiBando = DBManager.getInstance().documentiBandoDAO().getDocumenti(codiceBando);
+		session.setAttribute("documentiBando", documentiBando);
+		List<String> codicifiscaliutenti = DBManager.getInstance().utenteDAO().getCodiciFiscaliUtenti();
+		List<DocumentiCaricatiBando> documentiCaricatiBando = DBManager.getInstance().documentiCaricatiBandoDAO()
+				.getDocumentiBando(codiceBando);
+		List<String> dati = new ArrayList<>();
+		boolean inserito = false;
+		for (int i = 0; i < codicifiscaliutenti.size(); i++) {
+			for (int e = 0; e < documentiCaricatiBando.size(); e++) {
+				if (documentiCaricatiBando.get(e).getCodicefiscale().equals(codicifiscaliutenti.get(i))) {
+					if (!inserito) {
+						inserito = true;
+						dati.add(codicifiscaliutenti.get(i));
+					}
+					dati.add(documentiCaricatiBando.get(e).getDocumento());
+				}
+			}
+			if (inserito) {
+				dati.add(" ");
+			}
+			inserito = false;
+
+		}
+		session.setAttribute("dati", dati);
+		return "Correzione";
+	}
+
 	@GetMapping("/navbar")
 	public String navbar(HttpSession session) {
 		return "Navbar";
@@ -107,7 +139,8 @@ public class HomeController {
 	}
 
 	@GetMapping("/creabando")
-	public String creaBando() {
+	public String creaBando(HttpSession session) {
+		session.setAttribute("docenti", DBManager.getInstance().utenteDAO().getCognomiDocenti());
 		return "CreaBando";
 	}
 
@@ -132,6 +165,23 @@ public class HomeController {
 		List<Bando> bandi = DBManager.getInstance().bandoDAO().getBandi();
 		session.setAttribute("bandi", bandi);
 		return "index";
+	}
+
+	@GetMapping("bandiDaCorreggere")
+	public String getBandiDaCorreggere(HttpSession session) {
+		String docente = DBManager.getInstance().utenteDAO()
+				.getCognome(session.getAttribute("codicefiscale").toString());
+		List<Bando> bandiDaCorreggere = DBManager.getInstance().bandoDAO().getBandiDocente(docente);
+		session.setAttribute("bandiDaCorreggere", bandiDaCorreggere);
+		List<Integer> numRichieste = new ArrayList<>();
+		for (int i = 0; i < bandiDaCorreggere.size(); i++) {
+			String titolo = DBManager.getInstance().documentiBandoDAO()
+					.getDocumenti(bandiDaCorreggere.get(i).getCodice()).get(0).getTitolodocumento();
+			numRichieste.add(DBManager.getInstance().documentiCaricatiBandoDAO()
+					.getNumeroRichieste(bandiDaCorreggere.get(i).getCodice(), titolo));
+		}
+		session.setAttribute("numRichieste", numRichieste);
+		return "BandiDaCorreggere";
 	}
 
 	@GetMapping("/mieiBandi")

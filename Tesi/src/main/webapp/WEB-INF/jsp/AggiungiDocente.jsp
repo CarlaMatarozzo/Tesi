@@ -27,7 +27,7 @@
 
 <title>TESI!</title>
 </head>
-<body>
+<body  style="background:  #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<form method="post" action="#" id="formRegistrazioneDocente">
 		<div class="form-group">

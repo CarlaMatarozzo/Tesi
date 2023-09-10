@@ -26,9 +26,10 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <link rel="stylesheet" href="css/index.css" type="text/css">
+
 <title>TESI!</title>
 </head>
-<body style="background: #fffdd0;">
+<body style="background:  #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Bandi
 		in corso</h1>
@@ -52,7 +53,8 @@
 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 											fill="currentColor" class="bi bi-bookmark"
 											viewBox="0 0 16 16"> <path
-												d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" /> </svg>
+												d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 
+												15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" /> </svg>
 									</button>
 
 								</form>

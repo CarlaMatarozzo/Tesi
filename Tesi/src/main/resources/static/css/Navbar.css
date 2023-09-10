@@ -25,8 +25,9 @@ body {
 }
 
 header {
-	background: #55d6aa;
+	background: #33CC66;
 }
+
 
 header::after {
 	content: '';
@@ -102,6 +103,7 @@ div#hormenu li {
 	padding-top: 23px;
 }
 
+
 div#hormenu li ul {
 	display: none
 }
@@ -110,7 +112,7 @@ div#hormenu li:hover ul {
 	display: block;
 	position: absolute;
 	z-index: 1;
-	background: #55d6aa;
+	background: #33CC66;
 }
 
 div#hormenu li li {
@@ -121,6 +123,7 @@ div#hormenu li li a {
 	padding: 2px 2px 2px 10px;
 }
 
+
 .myform {
 	position: relative;
 	display: -ms-flexbox;
@@ -130,17 +133,14 @@ div#hormenu li li a {
 	flex-direction: column;
 	width: 100%;
 	pointer-events: auto;
-	background-color: #55d6aa;
-	background-clip: #55d6aa;
-	border: 1px solid rgba(0, 0, 0, .2);
-	border-radius: 1.1rem;
+	background-color: #33CC66;
 	outline: 0;
 	max-width: 500px;
 }
 
 .titolo-loginForm {
 	font-family: 'Source Sans 3', italic;
-	color: blue;
+	color: #000000;
 }
 
 @media screen and (min-width:1185px) {
@@ -156,7 +156,7 @@ div#hormenu li li a {
 	.line {
 		width: 30px;
 		height: 4px;
-		background: #ffff;
+		background: #33CC66;
 		margin: 5px;
 	}
 	nav {

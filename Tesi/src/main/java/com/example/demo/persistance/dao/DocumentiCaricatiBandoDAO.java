@@ -11,4 +11,6 @@ public interface DocumentiCaricatiBandoDAO {
 
 	public List<Integer> getBandiCompilati(String codicefiscale);
 	public boolean rimuoviBando(int codiceBando, String codiceFiscale);
+	public int getNumeroRichieste(int codiceBando, String titolo);
+	public List<DocumentiCaricatiBando> getDocumentiBando(int codice);
 }

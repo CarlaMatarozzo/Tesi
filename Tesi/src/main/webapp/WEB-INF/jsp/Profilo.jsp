@@ -25,7 +25,7 @@
 
 <title>TESI!</title>
 </head>
-<body>
+<body  style="background:  #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<div>
 		<div>
@@ -77,7 +77,7 @@
 			<div class="col-md-12 text-center mb-3">
 				<button type="submit" id="btnModifica"
 					class=" btn btn-block mybtn x-tfm "
-					style="background: #e9e4e2 !important;">Modifica Profilo</button>
+					style="background: #33CC66 !important;">Modifica Profilo</button>
 			</div>
 		</form>
 	</div>

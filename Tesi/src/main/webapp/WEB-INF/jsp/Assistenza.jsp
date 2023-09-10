@@ -28,7 +28,7 @@
 <title>TESI!</title>
 </head>
 
-<body>
+<body style="background:  #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
 
 	<h1 style="text-align: center;">Benvenuto nell'area Assistenza</h1>
@@ -61,7 +61,7 @@
 				</div>
 				<button type="submit" id="inviaEmail"
 					class=" btn btn-block mybtn x-tfm "
-					style="background: #e9e4e2 !important;">Invia</button>
+					style="background: #33CC66 !important;">Invia</button>
 			</div>
 		</form>
 	</div>

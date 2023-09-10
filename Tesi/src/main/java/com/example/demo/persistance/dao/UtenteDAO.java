@@ -34,4 +34,10 @@ public interface UtenteDAO {
 	public String getCodiceFiscale(String email);
 	
 	public boolean isDocente(String codicefiscale);
+	
+	public List<String> getCognomiDocenti();
+	
+	public List<String> getCodiciFiscaliUtenti();
+	
+	public String getCognome(String codicefiscale);
 }

@@ -34,9 +34,8 @@
 
 	<header>
 		<div id="navbar">
-			<a href="/"> <img class="logo"
-				src="https://www.comune.carmagnola.to.it/it-it/immagine/img-258581-O-29-954-0-0-8048e8239efac140e63085dcebcb3c23"
-				width=auto height="130"></a>
+			<a href="/"> <img class="logo" src="image\Logo.png" width=auto
+				height="130"></a>
 			<nav id="nav-response">
 				<div id="hormenu">
 					<ul>
@@ -77,8 +76,8 @@
 							</c:when>
 							<c:when
 								test="${codicefiscale != null and codicefiscale!='ADMIN' and docente==true}">
-								
-									<li><c:choose>
+
+								<li><c:choose>
 										<c:when test="${numNotifiche==0}">
 											<a href="#"><span class="glyphicon glyphicon-user"></span></a>
 										</c:when>
@@ -89,14 +88,13 @@
 										</c:otherwise>
 									</c:choose>
 									<ul>
-									<li><a href="comunicazioni">Comunicazioni</a></li>
+										<li><a href="comunicazioni">Comunicazioni</a></li>
 
-									<li><a href="assistenza">Assistenza</a></li>
-									<li><a href="preferiti">Bandi da correggere</a></li>
-									<li><a href="profilo">Profilo</a></li>
-									<li><a href="Logout">Logout</a></li>
-								</ul>
-								</li>
+										<li><a href="assistenza">Assistenza</a></li>
+										<li><a href="bandiDaCorreggere">Bandi da correggere</a></li>
+										<li><a href="profilo">Profilo</a></li>
+										<li><a href="Logout">Logout</a></li>
+									</ul></li>
 							</c:when>
 							<c:when test="${codicefiscale=='ADMIN'}">
 								<li><c:choose>
@@ -177,7 +175,7 @@
 						<c:when
 							test="${codicefiscale != null and codicefiscale!='ADMIN' and docente==true}">
 
-							<li><a href="preferiti">Bandi da correggere</a></li>
+							<li><a href="bandiDaCorreggere">Bandi da correggere</a></li>
 							<li><a href="assistenza">Assistenza</a></li>
 							<li>
 								<div id="hormenu">
@@ -236,57 +234,67 @@
 				<div class="modal-content">
 
 					<!-- Modal body -->
-					<div class="modal-body">
 
-						<div id="first">
-							<div class="myform form ">
-								<div class="logo mb-3">
-									<div class="col-md-12 text-center">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h1 class="titolo-loginForm">Login</h1>
-										<h5 id="erroreLogin"></h5>
+					<div id="first">
+						<div class="myform form ">
+							<div class="logo mb-3">
+								<div class="col-md-12 text-center">
+									<button type="button" class="close" data-dismiss="modal">×</button>
+									<h1 class="titolo-loginForm">Login</h1>
+									<h5 id="erroreLogin"></h5>
 
-									</div>
 								</div>
-								<form method="post" action="#" id="loginForm">
-									<div class="form-group ">
-										<label for="exampleInputEmail1">Codice Fiscale</label> <input
-											type="text" name="codiceFiscaleLogin" class="form-control"
-											id="codiceFiscaleLogin" aria-describedby="emailHelp"
-											placeholder="Inserisci username" required>
-									</div>
-									<div class="form-group">
-										<label for="exampleInputEmail1">Password</label> <input
-											type="password" name="passwordLogin" id="passwordLogin"
-											class="form-control" aria-describedby="emailHelp"
-											placeholder="Inserisci Password" required>
-									</div>
-									<div class="col-md-12 text-center ">
-										<button type="submit" id="btnLogin"
-											class="mybtn btn btn-block "
-											style="background: #e9e4e2 !important;">Login</button>
-									</div>
-
-								</form>
-								<br>
-								<div class="form-group">
-									<p class="text-center">
-										Non hai un account? <a href="#" id="registrati">Registrati
-											qui</a>
-									</p>
-									<p class="text-center">
-										<button type="button" class="btn btn-sm btn-outline-success"
-											data-toggle="modal" data-target="#recuperaPassword">
-											- Ho dimenticato la password</button>
-									</p>
-								</div>
-
 							</div>
+							<form method="post" action="#" id="loginForm">
+								<div class="form-group ">
+									<label for="exampleInputEmail1">Codice Fiscale</label> <input
+										type="text" name="codiceFiscaleLogin" class="form-control"
+										id="codiceFiscaleLogin" aria-describedby="emailHelp"
+										placeholder="Inserisci username" required>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">Password</label> <input
+										type="password" name="passwordLogin" id="passwordLogin"
+										class="form-control" aria-describedby="emailHelp"
+										placeholder="Inserisci Password" required>
+								</div>
+								<div class="col-md-12 text-center ">
+									<button type="submit" id="btnLogin"
+										class="mybtn btn btn-block "
+										style="background: #ffffb3 !important;">Login</button>
+								</div>
+
+							</form>
+							<br>
+							<div class="form-group">
+								<p class="text-center">
+									Non hai un account? <a href="#" id="registrati">Registrati
+										qui</a>
+								</p>
+								<p class="text-center">
+									<button type="button" class="btn btn-sm btn-outline-success"
+										data-toggle="modal" data-target="#recuperaPassword"
+										style="color: #ffffb3 !important;">- Ho dimenticato
+										la password</button>
+								</p>
+							</div>
+
 						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
+		<script>
+			$(document).ready(function() {
+				// Ascolta il click sul pulsante di recupero password
+				$("#recuperaPassword").on("show.bs.modal", function() {
+					$("#loginModal").modal("hide"); // Chiudi la finestra modale di login
+				});
+			});
+		</script>
+
+
 
 		<!-- REGISTRAZIONE -->
 		<div class="modal fade" id="registrazioneModal">
@@ -298,7 +306,7 @@
 								<div class="col-md-12 text-center">
 									<button type="button" class="close" data-dismiss="modal">×</button>
 									<h1 class="titolo-loginForm">Registrati</h1>
-									<h5 id="erroreRegistrazione"></h5>
+									<h5 id="erroreRegistrazione" style="color:red;"></h5>
 								</div>
 							</div>
 							<form method="post" action="#" id="formRegistrazione">
@@ -351,7 +359,7 @@
 								<div class="col-md-12 text-center mb-3">
 									<button type="submit" id="btnIscriviti"
 										class=" btn btn-block mybtn x-tfm "
-										style="background: #e9e4e2 !important;">Iscriviti</button>
+										style="background: #ffffb3 !important;">Iscriviti</button>
 								</div>
 								<div class="col-md-12 ">
 									<div class="form-group">
@@ -425,7 +433,7 @@
 								<div class="col-md-12 text-center mb-3">
 									<button type="submit" id="btnIscriviti"
 										class=" btn btn-block mybtn x-tfm "
-										style="background: #e9e4e2 !important;">Invia Form</button>
+										style="background: #ffffb3 !important;">Invia Form</button>
 								</div>
 								<div class="col-md-12 ">
 									<div class="form-group">
@@ -440,24 +448,26 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="modal fade" id="recuperaPassword">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<!-- Modal body -->
-					<div class="modal-body">
-						<div class="myform2 form ">
+					<div class="second">
+						<div class="myform form ">
 							<div class="logo mb-3">
 								<div class="col-md-12 text-center">
 									<button type="button" class="close" data-dismiss="modal">×</button>
 									<br> <br>
 									<form id="recuperoPassword" action="#">
-										<h5>Inserisci la tua email per recuperare la password</h5>
+										<h4>
+											<strong>Inserisci la tua email per recuperare la
+												password</strong>
+										</h4>
 										<br> <input style="font-size: 15px;" type="email"
 											id="emailRecupero" name="emailRecupero" required><br>
 										<br>
 										<button type="submit" id="btnRecuperoPassword" class="btn"
-											style="float: right; background: #e9e4e2;">Recupera</button>
+											style="float: right; background: #ffffb3;">Recupera</button>
 									</form>
 									<br>
 								</div>
@@ -467,21 +477,33 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			$(document).ready(function() {
+				// Ascolta il submit del form
+				$("#recuperoPassword").submit(function(e) {
+					e.preventDefault(); // Impedisce l'invio del form
+					$("#recuperaPassword").modal("hide"); // Chiude la finestra modale
+					// Qui puoi aggiungere ulteriori azioni come l'invio del form tramite AJAX
+				});
+			});
+		</script>
+
 
 		<div class="modal fade" id="invioNuovaPassword">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<!-- Modal body -->
-					<div class="modal-body">
+					<div class="second">
 						<div class="myform form ">
 							<div class="logo mb-3">
 								<div class="col-md-12 text-center">
 									<button id="chiudi" type="button" class="close"
 										data-dismiss="modal">×</button>
 									<br>
-									<p>Se la tua email è presente sul sistema ti è stata
-										inviata una nuova password, controlla tra la posta in arrivo
-										ed accedi con la nuova password!
+									<p>
+										<strong>Se la tua email è presente nel sistema ti è
+											stata inviata una nuova password, controlla nella la posta in
+											arrivo ed accedi con la nuova password! </strong>
 									<p>
 										<br>
 								</div>
