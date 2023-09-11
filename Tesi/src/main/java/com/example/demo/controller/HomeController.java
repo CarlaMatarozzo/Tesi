@@ -88,22 +88,28 @@ public class HomeController {
 				.getDocumentiBando(codiceBando);
 		List<String> dati = new ArrayList<>();
 		boolean inserito = false;
+		int x=0;
 		for (int i = 0; i < codicifiscaliutenti.size(); i++) {
 			for (int e = 0; e < documentiCaricatiBando.size(); e++) {
 				if (documentiCaricatiBando.get(e).getCodicefiscale().equals(codicifiscaliutenti.get(i))) {
 					if (!inserito) {
+						x++;
 						inserito = true;
 						dati.add(codicifiscaliutenti.get(i));
 					}
 					dati.add(documentiCaricatiBando.get(e).getDocumento());
 				}
 			}
+
+
 			if (inserito) {
 				dati.add(" ");
 			}
 			inserito = false;
 
 		}
+		System.out.println(documentiCaricatiBando.size()/x);
+		session.setAttribute("sizeX",documentiCaricatiBando.size()/x);
 		session.setAttribute("dati", dati);
 		return "Correzione";
 	}

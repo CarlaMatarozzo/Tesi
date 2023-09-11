@@ -48,21 +48,27 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${dati}" var="dati" varStatus="status">
+				<c:forEach items="${dati}" var="dato" varStatus="status">
+				
 					<form method="post" action="#" id="correggiBando-${status.index}">
-						<input type="hidden" id="codicebando-${status.index}" name="codicebando-${status.index}"
+						<input type="hidden" id="sizeX"
+							value="${sizeX}">
+						<c:if test="${!fn:startsWith(dato,'data:')}">
+						
+							<th>${dato}</th>
+							
+						</c:if>
+						<input type="hidden" id="codfisc-${status.index}"
+							value="${dato}">
+						
+						<input type="hidden" id="codicebando-${status.index}"
 							value="${codiceBandoDaCorreggere}">
 
-						<c:if test="${!fn:startsWith(dati,'data:')}">
-							<th id="cf-${status.index}" name="cf-${status.index}">${dati}</th>
-
-						</c:if>
-						<c:if test="${fn:startsWith(dati,'data:')}">
-
-							<th><a id="downloadLink" href="#" download="Documento.pdf">
-									Scarica documento</a></th>
+						<c:if test="${fn:startsWith(dato,'data:')}">
+							<th><a id="downloadLink-${status.index}" href="#"
+								download="Documento.pdf">Scarica documento</a></th>
 							<script>
-								var base = '${dati}';
+								var base64 = '${dato}';
 								var binaryData2 = atob(base64.split(',')[1]);
 								var arrayBuffer2 = new ArrayBuffer(
 										binaryData2.length);
@@ -75,24 +81,23 @@
 								});
 
 								var downloadLinkIng = document
-										.getElementById('downloadLink');
+										.getElementById('downloadLink-${status.index}');
 								downloadLinkIng.href = URL
-										.createObjectURL(blob);
+										.createObjectURL(blob2);
 							</script>
-
 						</c:if>
-						<c:if test="${dati==' '}">
-							<th><input class="input" type="number"
-								class="form-control" id="punteggio-${status.index}" name="punteggio-${status.index}"
+						<c:if test="${dato==' '}">
+							<th><input class="input" type="number" class="form-control"
+								id="punteggio-${status.index}" name="punteggio"
 								style="color: black; width: 40px;" required min="1" max="100"></th>
 							<th>
-								<button type="submit" id="btnCorrezione-${status.index}"
+								<button type="submit" id="btnCorrezione"
 									class="btn btn-xs btn-primary btn-nuova-bozza">Invia
 									punteggio</button>
 							</th>
 							<tr></tr>
 						</c:if>
-						</form>
+					</form>
 				</c:forEach>
 
 			</tbody>
