@@ -4,12 +4,14 @@ public class Graduatoria {
 	private String codicefiscale;
 	private int codicebando;
 	private int punteggio;
+	private String pdf;
 	
-	public Graduatoria(String codicefiscale, int codicebando, int punteggio) {
+	public Graduatoria(String codicefiscale, int codicebando, int punteggio,String pdf) {
 		super();
 		this.codicefiscale = codicefiscale;
 		this.codicebando = codicebando;
 		this.punteggio = punteggio;
+		this.pdf=pdf;
 	}
 	
 	public Graduatoria() {
@@ -27,6 +29,10 @@ public class Graduatoria {
 		return codicebando;
 	}
 	
+	public String getPdf() {
+		return pdf;
+	}
+	
 	public void setCodicebando(int codicebando) {
 		this.codicebando = codicebando;
 	}
@@ -39,5 +45,7 @@ public class Graduatoria {
 		this.punteggio = punteggio;
 	}
 	
-	
+	public void setPdf(String pdf) {
+		this.pdf=pdf;
+	}
 }

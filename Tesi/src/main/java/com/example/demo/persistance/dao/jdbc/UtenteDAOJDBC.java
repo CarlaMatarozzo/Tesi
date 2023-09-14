@@ -410,5 +410,23 @@ public class UtenteDAOJDBC implements UtenteDAO {
 		}
 		return cf;
 	}
+
+	@Override
+	public String getEmail(String codicefiscale) {
+		String email=null;
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select email from utente where codicefiscale=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, codicefiscale);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+	            email = rs.getString("email");
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return email;
+	}
 	
 }

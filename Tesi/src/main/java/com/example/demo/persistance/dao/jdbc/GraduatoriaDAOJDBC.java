@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.demo.model.Graduatoria;
 import com.example.demo.persistance.DBManager;
@@ -22,11 +24,12 @@ public class GraduatoriaDAOJDBC implements GraduatoriaDAO{
 		Connection conn;
 		try {
 			conn=dbSource.getConnection();
-			String query="insert into graduatoria values(?,?,?);";
+			String query="insert into graduatoria values(?,?,?,?);";
 			PreparedStatement st=conn.prepareStatement(query);
 			st.setString(1, g.getCodicefiscale());
 			st.setInt(2, g.getCodicebando());
 			st.setInt(3, g.getPunteggio());
+			st.setString(4, null);
 			st.executeUpdate();
 			st.close();
 		}catch(SQLException e) {
@@ -40,9 +43,10 @@ public class GraduatoriaDAOJDBC implements GraduatoriaDAO{
 		int x=0;
 		try {
 			conn=dbSource.getConnection();
-			String query="select count(*) from graduatoria where codicebando=?;";
+			String query="select count(*) from graduatoria where codicebando=? and codicefiscale!=?";
 			PreparedStatement st=conn.prepareStatement(query);
 			st.setInt(1, codiceBando);
+			st.setString(2, "ADMIN");
 			ResultSet rs=st.executeQuery();
 			while(rs.next()) {
 				x=rs.getInt(1);
@@ -111,6 +115,44 @@ public class GraduatoriaDAOJDBC implements GraduatoriaDAO{
 			st.executeUpdate();
 			st.close();
 		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<Graduatoria> getPartecipazioniCorrette(int codiceBando) {
+		List<Graduatoria> cf=new ArrayList<Graduatoria>();
+		try {
+			Connection con=dbSource.getConnection();
+			String query="select * from graduatoria where codicebando=? and codicefiscale!=?;";
+			PreparedStatement st=con.prepareStatement(query);
+			st.setInt(1, codiceBando);
+			st.setString(2, "ADMIN");
+			ResultSet rs=st.executeQuery();
+			while(rs.next()) {
+				Graduatoria g=new Graduatoria();
+				g.setCodicefiscale(rs.getString("codicefiscale"));
+				g.setCodicebando(codiceBando);
+				g.setPunteggio(rs.getInt("punteggio"));
+				cf.add(g);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return cf;
+	}
+
+	@Override
+	public void aggiungiPDF(String pdf) {
+		try {
+			Connection con=dbSource.getConnection();
+			String query="update graduatoria set pdf=? where codicefiscale=?";
+			PreparedStatement st=con.prepareStatement(query);
+			st.setString(1, pdf);
+			st.setString(2, "ADMIN");
+			st.executeUpdate();
+		}
+		catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}

@@ -8,7 +8,7 @@ body {
 	overflow-x: auto;
 }
 
-tr{
+tr {
 	height: 50px;
 }
 
@@ -17,7 +17,6 @@ table {
 	border-collapse: collapse;
 	border: 1px solid #ddd; /* Aggiunto bordo intorno alla tabella */
 }
-
 
 th, td {
 	padding: 15px; /* Aumentato spazio interno */
@@ -29,11 +28,39 @@ th {
 	background-color: #f2f2f2;
 }
 
-button{
+button {
 	position: center;
 }
+
 @media screen and (max-width: 600px) {
 	table {
 		width: 100%;
 	}
+}
+
+.title-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.title {
+	text-align: center;
+}
+
+.button {
+	margin-right:10px;
+}
+.myform {
+	position: relative;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 1rem;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	width: 100%;
+	pointer-events: auto;
+	background-color: #33CC66;
+	outline: 0;
+	max-width: 500px;
 }

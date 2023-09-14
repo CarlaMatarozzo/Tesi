@@ -87,7 +87,7 @@
 										</c:when>
 										<c:otherwise>
 											<small class="badge badge-success">Chiuso</small>
-											<em><span>Il bando è scaduto il</span> <strong>${bandi.datascadenza}</strong></em>
+											<em><span>Il bando &#233 scaduto il</span> <strong>${bandi.datascadenza}</strong></em>
 										</c:otherwise>
 									</c:choose>
 								</span>

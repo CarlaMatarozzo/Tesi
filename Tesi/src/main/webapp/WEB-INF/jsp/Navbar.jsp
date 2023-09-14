@@ -32,10 +32,10 @@
 </head>
 <body>
 
-	<header>
+	<header style="height:150px !important;">
 		<div id="navbar">
-			<a href="/"> <img class="logo" src="image\Logo.png" width=auto
-				height="130"></a>
+			<a href="/"> <img class="logo" src="image\Logo.png" width="200px"
+				height="140"></a>
 			<nav id="nav-response">
 				<div id="hormenu">
 					<ul>

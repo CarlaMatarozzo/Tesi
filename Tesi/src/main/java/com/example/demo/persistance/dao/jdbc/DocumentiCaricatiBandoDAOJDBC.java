@@ -164,5 +164,23 @@ public class DocumentiCaricatiBandoDAOJDBC implements DocumentiCaricatiBandoDAO 
 		return doc;
 	}
 
+	@Override
+	public String getTitolo(int codicebando) {
+		String titolo=null;
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select titolodocumento from documenticaricatibando where codicebando=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setInt(1, codicebando);
+			ResultSet rs = st.executeQuery();
+			if(rs.next()) {
+				titolo=rs.getString("titolodocumento");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return titolo;
+}
+
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Bando;
 import com.example.demo.model.DocumentiBando;
+import com.example.demo.model.Graduatoria;
 import com.example.demo.persistance.DBManager;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +19,8 @@ public class CreaBandoController {
 	public String creaBando(HttpSession session, @RequestBody Bando b) {
 		if (!DBManager.getInstance().bandoDAO().esisteBando(b.getCodice())) {
 			DBManager.getInstance().bandoDAO().creaBando(b);
+			Graduatoria g=new Graduatoria("ADMIN", b.getCodice(),0,null);
+			DBManager.getInstance().graduatoriaDAO().inserisciPunteggio(g);
 			return "successo";
 		}
 		return "errore";

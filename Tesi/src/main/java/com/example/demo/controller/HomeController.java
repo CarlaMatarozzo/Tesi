@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.model.Bando;
 import com.example.demo.model.DocumentiBando;
 import com.example.demo.model.DocumentiCaricatiBando;
+import com.example.demo.model.Graduatoria;
 import com.example.demo.model.Notifica;
 import com.example.demo.model.RichiestaDocente;
 import com.example.demo.persistance.DBManager;
@@ -86,6 +87,20 @@ public class HomeController {
 		List<String> codicifiscaliutenti = DBManager.getInstance().utenteDAO().getCodiciFiscaliUtenti();
 		List<DocumentiCaricatiBando> documentiCaricatiBando = DBManager.getInstance().documentiCaricatiBandoDAO()
 				.getDocumentiBando(codiceBando);
+		List<Graduatoria> partecipazioniCorrette=DBManager.getInstance().graduatoriaDAO().getPartecipazioniCorrette(codiceBando);
+		session.setAttribute("partecipazioniCorrette", partecipazioniCorrette);
+		List<String> cfCorrette=new ArrayList();
+		for(int i=0; i<partecipazioniCorrette.size();i++) {
+			cfCorrette.add(partecipazioniCorrette.get(i).getCodicefiscale());
+		}
+		session.setAttribute("cfCorrette", cfCorrette);
+		String titolodoc=DBManager.getInstance().documentiCaricatiBandoDAO().getTitolo(codiceBando);
+		int numRichieste=DBManager.getInstance().documentiCaricatiBandoDAO().getNumeroRichieste(codiceBando, titolodoc);
+		boolean tuttiCorretti=false;
+		if(numRichieste==partecipazioniCorrette.size()) {
+			tuttiCorretti=true;
+			session.setAttribute("tuttiCorretti", tuttiCorretti);
+		}
 		List<String> dati = new ArrayList<>();
 		boolean inserito = false;
 		int x=0;
@@ -108,12 +123,12 @@ public class HomeController {
 			inserito = false;
 
 		}
-		System.out.println(documentiCaricatiBando.size()/x);
+		
 		session.setAttribute("sizeX",documentiCaricatiBando.size()/x);
 		session.setAttribute("dati", dati);
 		return "Correzione";
 	}
-
+	
 	@GetMapping("/navbar")
 	public String navbar(HttpSession session) {
 		return "Navbar";
@@ -246,4 +261,7 @@ public class HomeController {
 	public List<Notifica> getTutteLeNotifiche(String codiceFiscale) {
 		return DBManager.getInstance().utenteDAO().ottieniNotifiche(codiceFiscale);
 	}
+
+	
 }
+

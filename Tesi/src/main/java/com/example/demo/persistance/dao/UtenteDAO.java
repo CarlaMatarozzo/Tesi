@@ -40,4 +40,6 @@ public interface UtenteDAO {
 	public List<String> getCodiciFiscaliUtenti();
 	
 	public String getCognome(String codicefiscale);
+
+	public String getEmail(String codicefiscale);
 }

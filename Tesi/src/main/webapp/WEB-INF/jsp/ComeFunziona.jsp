@@ -34,20 +34,20 @@
     <h4>Puoi seguire la procedura del portale Bandi In Corso, dove è possibile trovare il bando che fa per te e compilare i dati necessari per l'adesione.</h4>
     <div class="row catalogo_bandi_home">
         <div class="col">
-            <img src="image\img1.svg" width="300" height="400">
+            <img src="image\ComeFunziona1.jpg" width="320" height="240">
             <h4 style="margin-left:15px;">Crea il tuo profilo</h4>
         </div>
         <div class="col">
-            <img src="image\img2.svg" width="300" height="400">
+            <img src="image\ComeFunziona2.jpg" width="320" height="240">
             <h4>Cerca il bando che ti interessa</h4>
         </div>
         <div class="col">
-            <img src="image\img3.svg" width="300" height="400">
+            <img src="image\ComeFunziona3.jpg" width="320" height="240">
             <h4>Compila la domanda inserendo</h4>
             <h4>gli allegati ed i dati richiesti</h4>
         </div>
         <div class="col">
-            <img src="image\img4.svg" width="300" height="400">
+            <img src="image\ComeFunziona4.jpg" width="320" height="240">
             <h4>Attendi la graduatoria, ti arriverà un'email</h4>
         </div>
     </div>
