@@ -29,7 +29,7 @@
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<div>
 		<div>
-			<h1 style="text-align: center;">Profilo</h1>
+			<h1 style="text-align: center; text-shadow: 2px 2px 4px black;"Profilo</h1>
 			<h5 style="text-align: center;" id="erroreModifica"></h5>
 		</div>
 	</div>

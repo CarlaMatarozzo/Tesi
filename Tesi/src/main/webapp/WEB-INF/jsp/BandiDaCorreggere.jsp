@@ -32,11 +32,11 @@
 <body style="background: #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
 
-	<h1 style="text-align: center;">Bandi Da Correggere</h1>
+	<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Bandi Da Correggere</h1>
 	<div class="table-container">
-		<table>
+		<table >
 			<thead>
-				<tr>
+				<tr style="background: white;">
 					<th>Codice Bando</th>
 					<th>Titolo</th>
 					<th>Numero Richieste</th>
@@ -64,7 +64,6 @@
 									</c:if>
 								</c:forEach>
 								<c:set var="pdfGrad" value="${pdf[indice]}" />
-								<h1>${pdfGrad}</h1>
 								<td><a id="downloadGrad" href="#" download="Graduatoria.pdf">Scarica
 										graduatoria</a> <script>
 											// La tua stringa Base64 contenente i dati del PDF

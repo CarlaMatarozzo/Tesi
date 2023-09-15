@@ -47,6 +47,7 @@
 											data-target="#loginModal">Accedi</a></li>
 										<li><a type="button" data-toggle="modal"
 											data-target="#registrazioneModal">Registrati</a></li>
+										
 										<li><a type="button" data-toggle="modal"
 											data-target="#registrazioneDocenteModal">Registrazione
 												Docente</a></li>
@@ -134,6 +135,7 @@
 											<ul>
 												<li><a type="button" data-toggle="modal"
 													data-target="#loginModal">Accedi</a></li>
+													
 												<li><a type="button" data-toggle="modal"
 													data-target="#registrazioneModal">Registrati</a></li>
 												<li><a type="button" data-toggle="modal"
@@ -487,7 +489,9 @@
 				});
 			});
 		</script>
-
+		
+		 <!-- Modal -->
+    
 
 		<div class="modal fade" id="invioNuovaPassword">
 			<div class="modal-dialog">
@@ -513,7 +517,52 @@
 				</div>
 			</div>
 		</div>
+<!-- 		
+<div id="registrazione2Modal" class="modal fade">
+	<div class="modal-dialog">
 
+		<div class="myform form ">
+			<button id="chiudi" type="button" class="close" data-dismiss="modal">×</button>
+			<br>
+
+			<h2>Sei un docente?</h2>
+			<label for="option1"> <input type="radio" id="option1"
+				name="choice" value="Option 1"> Si, sono un docente
+			</label> <br> <label for="option2"> <input type="radio"
+				id="option2" name="choice" value="Opzione 2"> No, non sono
+				un docente
+			</label> <br>
+			<button id="confirmBtn" type="submit">Conferma</button>
+		</div>
+		</div>
+	</div>
+
+	<script>
+	var openModalBtn = document.getElementById("openModalBtn");
+    var modal = document.getElementById("registrazioneModal");
+    var docenteModal = document.getElementById("registrazioneDocenteModal");
+    var confirmBtn = document.getElementById("confirmBtn");
+    confirmBtn.addEventListener("submit", function () {
+        var options = document.getElementsByName("choice");
+        var choice;
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                choice = options[i].value;
+                break;
+            }
+        }
+
+        // Apri la modal corretta in base alla scelta
+        if (choice === "Si") {
+        	$("#registrazione2Modal").modal("hide");
+        	$("#registrazioneDocenteModal").modal("show");
+        } else if (choice === "No") {
+        	$("#registrazione2Modal").modal("hide");
+        	$("#registrazioneModal").modal("show");
+        }
+    });
+ -->
+    </script>
 		<div class="modal fade" id="apriTermini">
 			<div class="modal-dialog">
 				<div class="modal-content">

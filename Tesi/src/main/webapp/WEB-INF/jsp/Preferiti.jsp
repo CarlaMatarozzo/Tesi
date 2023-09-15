@@ -26,7 +26,7 @@
 </head>
 <body  style="background:  #ffffb3;">
 	<jsp:include page="Navbar.jsp"></jsp:include>
-	<h1 style="text-align: center;">Preferiti</h1>
+		<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Preferiti</h1>
 	<div class="row pt-2 pb-4 catalogo_bandi_home">
 		<c:forEach items="${bandi}" var="bandi" varStatus="status">
 			<!-- Questa è la card -->

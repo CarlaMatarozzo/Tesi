@@ -37,7 +37,7 @@
 	<div class="container-fluid">
 		<div>
 			<div>
-				<h1 style="text-align: center;">Crea Bando</h1>
+				<h1 style="text-align: center; text-shadow: 2px 2px 4px black;"Crea Bando</h1>
 				<h3 style="text-align: center;" id="erroreBando"></h3>
 			</div>
 		</div>

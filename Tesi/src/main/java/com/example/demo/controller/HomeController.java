@@ -215,6 +215,16 @@ public class HomeController {
 
 	@GetMapping("/mieiBandi")
 	public String getMieiBandi(HttpSession session) {
+		List<Integer> codBandiCompilati=getCodiceBandiCompilati(session.getAttribute("codicefiscale").toString());
+		List<String> pdfPartecipanti=new ArrayList<String>();
+		for(int i=0; i<codBandiCompilati.size();i++) {
+			if(DBManager.getInstance().graduatoriaDAO().isCorretto(codBandiCompilati.get(i))) {
+				pdfPartecipanti.add(DBManager.getInstance().graduatoriaDAO().getpdf(codBandiCompilati.get(i)));
+			} else {
+				pdfPartecipanti.add(" ");
+			}
+		}
+		session.setAttribute("pdfPartecipanti", pdfPartecipanti);
 		return "MieiBandi";
 	}
 

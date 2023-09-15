@@ -29,7 +29,8 @@
 <style>
 table {
 	border-collapse: collapse;
-	width: 100%;
+	width: 95%;
+	margin:auto;
 }
 
 tr {
@@ -70,8 +71,8 @@ img {
 							</a>
 						</form>
 					</c:if></td>
-
 			</tr>
+			<tr></tr>
 		</c:forEach>
 
 	</table>
