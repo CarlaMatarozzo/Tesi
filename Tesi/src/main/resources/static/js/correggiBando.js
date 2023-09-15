@@ -7,10 +7,9 @@ function Graduatoria(codicefiscale, codicebando, punteggio, pdf) {
 
 
 $(document).ready(function() {
-		$("#generaPDF").on("submit", function(e1) {
+	$("#generaPDF").on("submit", function(e1) {
 		e1.preventDefault();
 		var cb1 = document.getElementById("cb").value;
-		alert(cb);
 		$.ajax({
 			url: "emailGraduatoria",
 			method: "POST",
@@ -18,12 +17,14 @@ $(document).ready(function() {
 			contentType: "application/json",
 			success: function(risposta) {
 				if (risposta == "successo") {
+
+					window.location.href = "http://localhost:8080/bandiDaCorreggere";
 					$("#graduatoriaModal").modal("show");
 				}
 			}
 		});
 	});
-	
+
 	$("form[id^='correggiBando-']").on("submit", function(e) {
 		e.preventDefault();
 		var form = $(this);
@@ -46,7 +47,6 @@ $(document).ready(function() {
 			contentType: "application/json",
 			success: function(risposta) {
 				if (risposta == "successo") {
-					alert("OK");
 				}
 			}
 		});

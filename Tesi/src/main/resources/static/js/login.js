@@ -114,9 +114,6 @@ $(document).ready(function() {
 							if(risposta=="successo"){
 								location.reload();
 							}
-							else{
-								alert("NO");
-							}
 						}
 					});
 				}

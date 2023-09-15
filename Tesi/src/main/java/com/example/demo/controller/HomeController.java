@@ -195,12 +195,20 @@ public class HomeController {
 		List<Bando> bandiDaCorreggere = DBManager.getInstance().bandoDAO().getBandiDocente(docente);
 		session.setAttribute("bandiDaCorreggere", bandiDaCorreggere);
 		List<Integer> numRichieste = new ArrayList<>();
+		List<Integer> bandiCorretti=new ArrayList<>();
+		List<String> pdf=new ArrayList<>();
 		for (int i = 0; i < bandiDaCorreggere.size(); i++) {
 			String titolo = DBManager.getInstance().documentiBandoDAO()
 					.getDocumenti(bandiDaCorreggere.get(i).getCodice()).get(0).getTitolodocumento();
 			numRichieste.add(DBManager.getInstance().documentiCaricatiBandoDAO()
 					.getNumeroRichieste(bandiDaCorreggere.get(i).getCodice(), titolo));
+			if(DBManager.getInstance().graduatoriaDAO().isCorretto(bandiDaCorreggere.get(i).getCodice())) {
+				bandiCorretti.add(bandiDaCorreggere.get(i).getCodice());
+				pdf.add(DBManager.getInstance().graduatoriaDAO().getpdf(bandiDaCorreggere.get(i).getCodice()));
+			}
 		}
+		session.setAttribute("pdf", pdf);
+		session.setAttribute("bandiCorretti", bandiCorretti);
 		session.setAttribute("numRichieste", numRichieste);
 		return "BandiDaCorreggere";
 	}

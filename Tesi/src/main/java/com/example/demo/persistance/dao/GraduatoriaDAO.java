@@ -12,4 +12,6 @@ public interface GraduatoriaDAO {
 	public void rimuoviCorrezione(int codicebando, String codicefiscale);
 	public List<Graduatoria> getPartecipazioniCorrette(int codiceBando);
 	public void aggiungiPDF(String pdf);
+	public boolean isCorretto(int codicebando);
+	public String getpdf(int codicebando);
 }

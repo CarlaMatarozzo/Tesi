@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.model.Graduatoria;
+import com.example.demo.model.Utente;
 import com.example.demo.persistance.DBManager;
 import com.example.demo.persistance.DBSource;
 import com.example.demo.persistance.dao.GraduatoriaDAO;
@@ -157,4 +158,51 @@ public class GraduatoriaDAOJDBC implements GraduatoriaDAO{
 		}
 	}
 
+	@Override
+	public boolean isCorretto(int codicebando) {
+		Graduatoria g=new Graduatoria();
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select * from graduatoria where codicebando=? and codicefiscale=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setInt(1, codicebando);
+			st.setString(2, "ADMIN");
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				g.setCodicefiscale(rs.getString("codicefiscale"));
+				g.setCodicebando(codicebando);
+				g.setPunteggio(0);
+				g.setPdf(rs.getString("pdf"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (g.getPdf() != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public String getpdf(int codicebando) {
+		String pdf=null;
+		try {
+			Connection con=dbSource.getConnection();
+			String query="select pdf from graduatoria where codicebando=? and codicefiscale=?;";
+			PreparedStatement st=con.prepareStatement(query);
+			st.setInt(1, codicebando);
+			st.setString(2, "ADMIN");
+			ResultSet rs=st.executeQuery();
+			if(rs.next()) {
+				pdf=rs.getString("pdf");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return pdf;
+	}
 }

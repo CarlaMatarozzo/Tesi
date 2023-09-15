@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +52,45 @@
 						<td>${bandiDaCorreggere.titolo}</td>
 						<td>${numRichieste[status.index]}</td>
 						<c:choose>
+							<c:when
+								test="${fn:contains(bandiCorretti,bandiDaCorreggere.codice) and bandiScaduti.contains(bandiDaCorreggere.codice)}">
+								<td>Corretto</td>
+								<c:set var="trovato" value="false" />
+								<c:forEach var="element" items="${bandiCorretti}"
+									varStatus="loop">
+									<c:if test="${element eq bandiDaCorreggere.codice}">
+										<c:set var="indice" value="${loop.index}" />
+										<c:set var="trovato" value="true" />
+									</c:if>
+								</c:forEach>
+								<c:set var="pdfGrad" value="${pdf[indice]}" />
+								<h1>${pdfGrad}</h1>
+								<td><a id="downloadGrad" href="#" download="Graduatoria.pdf">Scarica
+										graduatoria</a> <script>
+											// La tua stringa Base64 contenente i dati del PDF
+											var base64PDFData = '${pdfgrad}'; // Inserisci qui i dati Base64
+
+											var arrayBuffer = new ArrayBuffer(
+													base64PDFData.length);
+											var uint8Array = new Uint8Array(
+													arrayBuffer);
+											for (var i = 0; i < base64PDFData.length; i++) {
+												uint8Array[i] = base64PDFData
+														.charCodeAt(i);
+											}
+											var blob = new Blob(
+													[ uint8Array ],
+													{
+														type: 'application/pdf'
+													});
+
+											// Crea il link di download dinamico
+											var downloadLink = document
+													.getElementById('downloadGrad');
+											downloadLink.href = URL
+													.createObjectURL(blob);
+										</script>
+							</c:when>
 							<c:when
 								test="${!bandiScaduti.contains(bandiDaCorreggere.codice)}">
 

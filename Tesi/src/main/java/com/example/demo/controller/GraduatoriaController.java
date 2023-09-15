@@ -30,7 +30,7 @@ public class GraduatoriaController {
 	}
 
 	@PostMapping("emailGraduatoria")
-	public String emailRegistrazioneDoc(HttpSession session, @RequestBody int codicebando) {
+	public String emailGraduatoria(HttpSession session, @RequestBody int codicebando) {
 		try {
 			List<Graduatoria> partecipazioni = DBManager.getInstance().graduatoriaDAO()
 					.getPartecipazioniCorrette(codicebando);
@@ -44,8 +44,8 @@ public class GraduatoriaController {
 				cf.add(grad.get(i).getCodicefiscale());
 				punteggio.add(grad.get(i).getPunteggio());
 			}
-			 String base64String = Base64.getEncoder().encodeToString(EmailSender.generatePdf(codicebando, cf,punteggio));
-
+			String base64String = Base64.getEncoder().encodeToString(EmailSender.generatePdf(codicebando, cf,punteggio));
+			System.out.println(codicebando); 
 			DBManager.getInstance().graduatoriaDAO().aggiungiPDF(base64String);
 			return "successo";
 
