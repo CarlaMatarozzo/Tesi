@@ -27,37 +27,41 @@
 
 <title>TESI!</title>
 </head>
-<body  style="background:  #ffffb3;">
+<body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
-	<form method="post" action="#" id="formRegistrazioneDocente">
-		<div class="form-group">
-			<label for="exampleInputEmail1">Nome</label> <input type="text"
-				name="nome" class="form-control" id="nome1"
-				aria-describedby="emailHelp" placeholder="${richiesta.nome}" value="${richiesta.nome}" required>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">Cognome</label> <input type="text"
-				name="cognome" class="form-control" id="cognome1"
-				aria-describedby="emailHelp" placeholder="${richiesta.cognome}" value="${richiesta.cognome}"
-				required>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">Codice Fiscale</label> <input
-				type="text" name="username" class="form-control" id="codiceFiscale1"
-				aria-describedby="emailHelp" placeholder="${richiesta.codicefiscale}" value="${richiesta.codicefiscale}"
-				pattern="^[A-Za-z]{6}\d{2}[A-Za-z]\d{2}[A-Za-z]\d{3}[A-Za-z]$"
-				required>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">Email</label> <input type="email"
-				name="email" class="form-control" id="email1"
-				aria-describedby="emailHelp" placeholder="${richiesta.email}" value="${richiesta.email}" required>
-		</div>
+		<form method="post" action="#" id="formRegistrazioneDocente">
+			<div class="form-group">
+				<label for="exampleInputEmail1">Nome</label> <input type="text"
+					name="nome" class="form-control" id="nome1"
+					aria-describedby="emailHelp" placeholder="${richiesta.nome}"
+					value="${richiesta.nome}" required>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Cognome</label> <input type="text"
+					name="cognome" class="form-control" id="cognome1"
+					aria-describedby="emailHelp" placeholder="${richiesta.cognome}"
+					value="${richiesta.cognome}" required>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Codice Fiscale</label> <input
+					type="text" name="username" class="form-control"
+					id="codiceFiscale1" aria-describedby="emailHelp"
+					placeholder="${richiesta.codicefiscale}"
+					value="${richiesta.codicefiscale}"
+					pattern="^[A-Za-z]{6}\d{2}[A-Za-z]\d{2}[A-Za-z]\d{3}[A-Za-z]$"
+					required>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Email</label> <input type="email"
+					name="email" class="form-control" id="email1"
+					aria-describedby="emailHelp" placeholder="${richiesta.email}"
+					value="${richiesta.email}" required>
+			</div>
 
-		<div class="col-md-12 text-center mb-3">
-			<button type="submit" id="btnRegistraDocente"
-				class=" btn btn-block mybtn x-tfm "
-				style="background: #e9e4e2 !important;">Registra docente</button>
-		</div>
-	</form>
+			<div class="col-md-12 text-center mb-3">
+				<button type="submit" id="btnRegistraDocente"
+					class=" btn btn-block mybtn x-tfm "
+					style="background: #e9e4e2 !important;">Registra docente</button>
+			</div>
+		</form>
 </body>

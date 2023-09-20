@@ -260,10 +260,10 @@
 										class="form-control" aria-describedby="emailHelp"
 										placeholder="Inserisci Password" required>
 								</div>
-								<div class="col-md-12 text-center ">
+								<div class="form-group col-md-12 text-center ">
 									<button type="submit" id="btnLogin"
 										class="mybtn btn btn-block "
-										style="background: #ffffb3 !important;">Login</button>
+										style="background: #ffffb3 !important; width: 50%; display: flex; justify-content: center; align-items: center;">Login</button>
 								</div>
 
 							</form>
@@ -273,6 +273,8 @@
 									Non hai un account? <a href="#" id="registrati">Registrati
 										qui</a>
 								</p>
+							</div>
+							<div class="form-group">
 								<p class="text-center">
 									<button type="button" class="btn btn-sm btn-outline-success"
 										data-toggle="modal" data-target="#recuperaPassword"
@@ -344,7 +346,9 @@
 										class="form-control" aria-describedby="emailHelp"
 										placeholder="Inserisci Password" required
 										pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
-									<p id="parametriPSW">Minimo otto caratteri, almeno una
+								</div>
+								<div class="form-group">
+								<p id="parametriPSW">Minimo otto caratteri, almeno una
 										lettera maiuscola, una lettere minuscola, un numero e un
 										carattere speciale tra: [@$!%*?&]</p>
 								</div>

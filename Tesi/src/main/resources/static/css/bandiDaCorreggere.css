@@ -1,6 +1,10 @@
+
 body {
 	margin: 0;
 	font-family: Arial, sans-serif;
+	background-image: url('../image/Sfondo3.png'); /* Imposta il percorso dell'immagine */
+      background-size: cover; /* Imposta il ridimensionamento dell'immagine */
+      background-repeat: no-repeat;
 }
 
 .table-container {
@@ -13,7 +17,7 @@ tr {
 }
 
 #td1 {
-       width: 20% !important;
+	   width: 20% !important;
        text-align: center;
        vertical-align: middle;
    }

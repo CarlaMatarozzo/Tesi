@@ -23,49 +23,54 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="./js/assistenza.js"></script>
-<link rel="stylesheet" href="css/creabando.css" type="text/css">
+<link rel="stylesheet" href="css/profilo.css" type="text/css">
 
 <title>TESI!</title>
 </head>
 
-<body style="background:  #ffffb3;">
+<body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
 
-	<h1 style="text-align: center;">Benvenuto nell'area Assistenza</h1>
-	<h3 style="text-align: center;">Hai bisogno d'aiuto? Scrivici un'email</h3>
-	<div class="container-fluid">
+	<div class="form2">
 
-		<form id="emailAssistenza" action="#">
-			<div class="form">
-				<c:if test="${codicefiscale==null}">
-				<div class="form-group">
-					<label for="11">Mittente:</label> <input class="input1"
-						type="email" class="form-control" style="color: black;"
-						id="mittente" placeholder="Inserisci il tuo indirizzo email"
-						required>
+		<h1 style="text-align: center;">Benvenuto nell'area Assistenza</h1>
+		<h3 style="text-align: center;">Hai bisogno d'aiuto? Scrivici
+			un'email</h3>
+		<div class="container-fluid">
+
+			<form id="emailAssistenza" action="#">
+				<div class="form">
+					<c:if test="${codicefiscale==null}">
+						<div class="form-group">
+							<label for="11">Mittente:</label> <input class="input1"
+								type="email" class="form-control" style="color: black;"
+								id="mittente" placeholder="Inserisci il tuo indirizzo email"
+								required>
+						</div>
+					</c:if>
+					<c:if test="${codicefiscale!=null}">
+						<input type="hidden" id="mittente" value="${email}">
+					</c:if>
+					<div class="form-group">
+						<label for="11">Oggetto:</label> <input class="input1" type="text"
+							class="form-control" style="color: black;" id="oggetto"
+							placeholder="Inserisci l'oggetto della email" required>
+					</div>
+					<div class="form-group">
+						<label for="messaggio">Messaggio:</label>
+						<textarea id="messaggio" class="form-control" class="input1"
+							class="fixed-size-textarea" style="height: 100px !important;"
+							placeholder="Inserisci il messaggio della email" required></textarea>
+					</div>
+					<div class="form-group">
+					<button type="submit" id="inviaEmail"
+						class=" btn btn-block mybtn x-tfm "
+						style="background: #33CC66 !important; width:50% ">Invia</button>
+						</div>
 				</div>
-				</c:if>
-				<c:if test="${codicefiscale!=null}">
-				<input type="hidden" id="mittente" value="${email}">
-				</c:if>
-				<div class="form-group">
-					<label for="11">Oggetto:</label> <input class="input1" type="text"
-						class="form-control" style="color: black;" id="oggetto"
-						placeholder="Inserisci l'oggetto della email" required>
-				</div>
-				<div class="form-group">
-					<label for="messaggio">Messaggio:</label>
-					<textarea id="messaggio" class="form-control"
-						class="input1"  class="fixed-size-textarea"
-						placeholder="Inserisci il messaggio della email" required></textarea>
-				</div>
-				<button type="submit" id="inviaEmail"
-					class=" btn btn-block mybtn x-tfm "
-					style="background: #33CC66 !important;">Invia</button>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
-
 </body>
 </html>
 </html>

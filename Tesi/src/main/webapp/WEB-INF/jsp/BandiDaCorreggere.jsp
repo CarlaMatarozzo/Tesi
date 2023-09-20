@@ -29,32 +29,34 @@
 
 <title>TESI!</title>
 </head>
-<body style="background: #ffffb3;">
+<body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
 
-	<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Bandi Da Correggere</h1>
+	<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Bandi
+		Da Correggere</h1>
 	<div class="table-container">
-		<table >
+		<table>
 			<thead>
 				<tr style="background: white;">
-					<th>Codice Bando</th>
-					<th>Titolo</th>
-					<th>Numero Richieste</th>
-					<th>Stato Bando</th>
-					<th></th>
+					<td id="td1">Codice Bando</td>
+					<td id="td1">Titolo</td>
+					<td id="td1">Numero Richieste</td>
+					<td id="td1">Stato Bando</td>
+					<td id="td1">
+					</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody style="text-align: center;">
 				<c:forEach items="${bandiDaCorreggere}" var="bandiDaCorreggere"
 					varStatus="status">
 					<tr>
-						<td>${bandiDaCorreggere.codice}</td>
-						<td>${bandiDaCorreggere.titolo}</td>
-						<td>${numRichieste[status.index]}</td>
+						<td id="td1">${bandiDaCorreggere.codice}</td>
+						<td id="td1">${bandiDaCorreggere.titolo}</td>
+						<td id="td1">${numRichieste[status.index]}</td>
 						<c:choose>
 							<c:when
 								test="${fn:contains(bandiCorretti,bandiDaCorreggere.codice) and bandiScaduti.contains(bandiDaCorreggere.codice)}">
-								<td>Corretto</td>
+								<td id="td1">Corretto</td>
 								<c:set var="trovato" value="false" />
 								<c:forEach var="element" items="${bandiCorretti}"
 									varStatus="loop">
@@ -64,45 +66,44 @@
 									</c:if>
 								</c:forEach>
 								<c:set var="pdfGrad" value="${pdf[indice]}" />
-								<td><a id="downloadGrad" href="#" download="Graduatoria.pdf">Scarica
-										graduatoria</a> <script>
-											// La tua stringa Base64 contenente i dati del PDF
-											var base64PDFData = '${pdfgrad}'; // Inserisci qui i dati Base64
+								<td id="td1"><a id="downloadGrad" href="#"
+									download="Graduatoria.pdf">Scarica graduatoria</a> <script>
+										// La tua stringa Base64 contenente i dati del PDF
+										var base64PDFData = '${pdfgrad}'; // Inserisci qui i dati Base64
 
-											var arrayBuffer = new ArrayBuffer(
-													base64PDFData.length);
-											var uint8Array = new Uint8Array(
-													arrayBuffer);
-											for (var i = 0; i < base64PDFData.length; i++) {
-												uint8Array[i] = base64PDFData
-														.charCodeAt(i);
-											}
-											var blob = new Blob(
-													[ uint8Array ],
-													{
-														type: 'application/pdf'
-													});
+										var arrayBuffer = new ArrayBuffer(
+												base64PDFData.length);
+										var uint8Array = new Uint8Array(
+												arrayBuffer);
+										for (var i = 0; i < base64PDFData.length; i++) {
+											uint8Array[i] = base64PDFData
+													.charCodeAt(i);
+										}
+										var blob = new Blob([ uint8Array ], {
+											type : 'application/pdf'
+										});
 
-											// Crea il link di download dinamico
-											var downloadLink = document
-													.getElementById('downloadGrad');
-											downloadLink.href = URL
-													.createObjectURL(blob);
-										</script>
+										// Crea il link di download dinamico
+										var downloadLink = document
+												.getElementById('downloadGrad');
+										downloadLink.href = URL
+												.createObjectURL(blob);
+									</script>
 							</c:when>
 							<c:when
 								test="${!bandiScaduti.contains(bandiDaCorreggere.codice)}">
 
-								<td>In corso</td>
+								<td id="td1">In corso</td>
 								<td>Attendi per correggere</td>
 							</c:when>
 
 							<c:otherwise>
-								<td>Scaduto</td>
+								<td id="td1">Scaduto</td>
 								<td><a
 									href="/correzioneBando?codiceBando=${bandiDaCorreggere.codice}">
-										<button class="btn btn-xs btn-primary btn-nuova-bozza"
-											type="button">Correggi bando</button>
+										<button class=" btn btn-block mybtn x-tfm "
+											style="background: #33CC66 !important; width:auto;" type="button">Correggi
+											bando</button>
 								</a></td>
 							</c:otherwise>
 						</c:choose>

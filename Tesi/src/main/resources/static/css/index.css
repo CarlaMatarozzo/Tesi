@@ -1,3 +1,8 @@
+body{
+	background-image: url('../image/Sfondo3.png'); /* Imposta il percorso dell'immagine */
+      background-size: cover; /* Imposta il ridimensionamento dell'immagine */
+      background-repeat: no-repeat;
+}
 .row {
     display: -ms-flexbox;
     display: flex;
@@ -29,6 +34,7 @@ div {
 	height: 430px !important;
 	
 }
+
 #imgbando{
 	margin-top:10px;
 	width: 350px !important;

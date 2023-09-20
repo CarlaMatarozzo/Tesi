@@ -22,6 +22,7 @@
 
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="css/bandiDaCorreggere.css" type="text/css">
 
 <title>TESI!</title>
 
@@ -40,16 +41,11 @@ tr {
 	text-align: left;
 }
 
-img {
-	width: 100 px;
-	height: 80px;
-}
-
 #imgBando {
 	width: 180px !important;
 }
 </style>
-<body style="background: #ffffb3;">
+<body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<div class="container-fluid"></div>
 	<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">I miei bandi</h1>

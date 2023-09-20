@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="css/index.css" type="text/css">
 <title>TESI!</title>
 </head>
-<body style="background:  #ffffb3;">
+<body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<main class="container">
 		<!-- Left Column / Headphones Image -->

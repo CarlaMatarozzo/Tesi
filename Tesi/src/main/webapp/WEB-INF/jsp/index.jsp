@@ -29,7 +29,7 @@
 
 <title>TESI!</title>
 </head>
-<body style="background:  #ffffb3;">
+<body >
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Bandi
 		in corso</h1>

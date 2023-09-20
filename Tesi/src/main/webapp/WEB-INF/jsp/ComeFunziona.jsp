@@ -26,7 +26,7 @@
 <title>TESI!</title>
 
 </head>
-<body  style="background:  #ffffb3;">
+<body>
     <jsp:include page="Navbar.jsp"></jsp:include>
     <h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Bandi In Corso</h1>
     <h4>Bandi In Corso è un servizio che permette a coloro i quali vogliono intraprendere un dottorato o qualcosa di simile di presentare online le domande di partecipazione ai bandi. Il portale mira a semplificare l'accesso alle informazioni e la partecipazione ai bandi in maniera tale che chi è interessato tramite la piattaforma possono presentare le domande online.</h4>

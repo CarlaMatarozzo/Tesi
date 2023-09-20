@@ -25,7 +25,7 @@
 <title>TESI!</title>
 
 </head>
-<body  style="background:  #ffffb3;">
+<body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div>
