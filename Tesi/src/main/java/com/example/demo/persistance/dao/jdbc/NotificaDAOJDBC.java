@@ -93,4 +93,22 @@ public class NotificaDAOJDBC implements NotificaDAO {
 		return d;
 	}
 
+	@Override
+	public boolean esisteNotifica(String codicefiscale, String messaggio) {
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select lettura from notifica where codicefiscale=? and messaggio=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, codicefiscale);
+			st.setString(2, messaggio);
+			ResultSet rs = st.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

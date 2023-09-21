@@ -428,5 +428,23 @@ public class UtenteDAOJDBC implements UtenteDAO {
 		}
 		return email;
 	}
+
+	@Override
+	public List<String> getCodiciFiscaliDocenti() {
+		List<String> cf = new ArrayList<>();
+		try {
+			Connection conn = dbSource.getConnection();
+			String query = "select codicefiscale from utente where docente=?";
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setBoolean(1, true);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				cf.add(rs.getString("codicefiscale"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cf;
+	}
 	
 }

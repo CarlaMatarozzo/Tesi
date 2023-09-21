@@ -43,9 +43,14 @@ public class GraduatoriaController {
 			for (int i = 0; i < grad.size(); i++) {
 				cf.add(grad.get(i).getCodicefiscale());
 				punteggio.add(grad.get(i).getPunteggio());
+				if(grad.get(i).getCodicefiscale()!="ADMIN") {
+				DBManager.getInstance().notificaDAO().nuovaNotifica(grad.get(i).getCodicefiscale(), "Consulta la graduatoria del bando "+codicebando+" nella pagina i miei bandi.", false);
+				}
+				else {
+					DBManager.getInstance().notificaDAO().nuovaNotifica(grad.get(i).getCodicefiscale(), "&#200 stato corretto il bando "+codicebando+" consulta la graduatoria", false);	
+				}
 			}
-			String base64String = Base64.getEncoder().encodeToString(EmailSender.generatePdf(codicebando, cf,punteggio));
-			System.out.println(codicebando); 
+			String base64String = Base64.getEncoder().encodeToString(EmailSender.generatePdf(codicebando, cf,punteggio)); 
 			DBManager.getInstance().graduatoriaDAO().aggiungiPDF(base64String);
 			return "successo";
 

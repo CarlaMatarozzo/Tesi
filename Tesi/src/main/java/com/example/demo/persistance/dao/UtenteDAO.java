@@ -38,6 +38,8 @@ public interface UtenteDAO {
 	public List<String> getCognomiDocenti();
 	
 	public List<String> getCodiciFiscaliUtenti();
+
+	public List<String> getCodiciFiscaliDocenti();
 	
 	public String getCognome(String codicefiscale);
 

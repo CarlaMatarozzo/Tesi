@@ -256,6 +256,8 @@ public class HomeController {
 		for (int i = 0; i < notifiche.size(); i++) {
 			DBManager.getInstance().notificaDAO().messaggioLetto(notifiche.get(i).getIdnotifica());
 		}
+		List<String> cfDocenti=DBManager.getInstance().utenteDAO().getCodiciFiscaliDocenti();
+		session.setAttribute("cfDocenti", DBManager.getInstance().utenteDAO().getCodiciFiscaliDocenti());
 		return "Comunicazioni";
 	}
 

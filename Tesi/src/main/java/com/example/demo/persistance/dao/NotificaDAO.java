@@ -5,4 +5,5 @@ public interface NotificaDAO {
 	public void messaggioLetto(int codiceNotifica);
 	public int getCodiceNotifica(String codicefiscale, String messaggio);
 	public int ultimoIdNotifica();
+	public boolean esisteNotifica(String codicefiscale,String messaggio);
 }
