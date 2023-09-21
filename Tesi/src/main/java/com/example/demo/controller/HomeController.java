@@ -42,6 +42,7 @@ public class HomeController {
 		List<Bando> bandi = getBandi();
 		session.setAttribute("bandi", bandi);
 		session.setAttribute("bandiScaduti", getBandiScaduti(bandi));
+		List<Integer> scad=getBandiScaduti(bandi);
 		if (session.getAttribute("codicefiscale") != null) {
 			session.setAttribute("docente",
 					DBManager.getInstance().utenteDAO().isDocente(session.getAttribute("codicefiscale").toString()));
@@ -187,7 +188,20 @@ public class HomeController {
 		session.setAttribute("bandi", bandi);
 		return "index";
 	}
-
+	
+	@GetMapping("/graduatorieBandi")
+	public String graduatorieBandi(HttpSession session) {
+		ArrayList<Bando> bandiCorretti=new ArrayList<>();
+		List<Bando> bandi=getBandi();
+		for(int i=0; i<bandi.size();i++) {
+			if(DBManager.getInstance().graduatoriaDAO().isCorretto(bandi.get(i).getCodice())) {
+				bandiCorretti.add(bandi.get(i));
+			}
+		}
+		session.setAttribute("bandiCorretti", bandiCorretti);
+		return "GraduatorieBandi";
+	}
+	
 	@GetMapping("bandiDaCorreggere")
 	public String getBandiDaCorreggere(HttpSession session) {
 		String docente = DBManager.getInstance().utenteDAO()

@@ -33,7 +33,7 @@
 </head>
 <body>
 
-	<header style="height:150px !important;">
+	<header style="height: 150px !important;">
 		<div id="navbar">
 			<a href="/"> <img class="logo" src="image\Logo.png" width="200px"
 				height="140"></a>
@@ -47,11 +47,7 @@
 										<li><a type="button" data-toggle="modal"
 											data-target="#loginModal">Accedi</a></li>
 										<li><a type="button" data-toggle="modal"
-											data-target="#registrazioneModal">Registrati</a></li>
-										
-										<li><a type="button" data-toggle="modal"
-											data-target="#registrazioneDocenteModal">Registrazione
-												Docente</a></li>
+											data-target="#registrazione2Modal">Registrati</a></li>
 									</ul></li>
 							</c:when>
 							<c:when
@@ -111,7 +107,7 @@
 									</c:choose>
 									<ul>
 										<li><a href="creabando">Crea Bando</a></li>
-										<li><a href="#">Risultati bandi</a></li>
+										<li><a href="graduatorieBandi">Risultati bandi</a></li>
 										<li><a href="comunicazioni">Comunicazioni</a></li>
 										<li><a href="profilo">Profilo</a></li>
 										<li><a href="Logout">Logout</a></li>
@@ -136,12 +132,9 @@
 											<ul>
 												<li><a type="button" data-toggle="modal"
 													data-target="#loginModal">Accedi</a></li>
-													
+
 												<li><a type="button" data-toggle="modal"
-													data-target="#registrazioneModal">Registrati</a></li>
-												<li><a type="button" data-toggle="modal"
-													data-target="#registrazioneDocenteModal">Registrazione
-														Docente</a></li>
+													data-target="#registrazione2Modal">Registrati</a></li>
 											</ul></li>
 									</ul>
 								</div>
@@ -204,7 +197,7 @@
 						</c:when>
 						<c:when test="${codicefiscale=='ADMIN'}">
 							<li><a href="creabando">Crea Bando</a></li>
-							<li><a href="#">Risultati bandi</a></li>
+							<li><a href="graduatorieBandi">Risultati bandi</a></li>
 							<li><a href="comunicazioni">Comunicazioni</a></li>
 							<li>
 								<div id="hormenu">
@@ -311,7 +304,7 @@
 								<div class="col-md-12 text-center">
 									<button type="button" class="close" data-dismiss="modal">×</button>
 									<h1 class="titolo-loginForm">Registrati</h1>
-									<h5 id="erroreRegistrazione" style="color:red;"></h5>
+									<h5 id="erroreRegistrazione" style="color: red;"></h5>
 								</div>
 							</div>
 							<form method="post" action="#" id="formRegistrazione">
@@ -349,7 +342,7 @@
 										pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$">
 								</div>
 								<div class="form-group">
-								<p id="parametriPSW">Minimo otto caratteri, almeno una
+									<p id="parametriPSW">Minimo otto caratteri, almeno una
 										lettera maiuscola, una lettere minuscola, un numero e un
 										carattere speciale tra: [@$!%*?&]</p>
 								</div>
@@ -494,9 +487,9 @@
 				});
 			});
 		</script>
-		
-		 <!-- Modal -->
-    
+
+		<!-- Modal -->
+
 
 		<div class="modal fade" id="invioNuovaPassword">
 			<div class="modal-dialog">
@@ -522,52 +515,39 @@
 				</div>
 			</div>
 		</div>
-<!-- 		
-<div id="registrazione2Modal" class="modal fade">
-	<div class="modal-dialog">
 
-		<div class="myform form ">
-			<button id="chiudi" type="button" class="close" data-dismiss="modal">×</button>
-			<br>
+		<div id="registrazione2Modal" class="modal fade">
+			<div class="modal-dialog">
 
-			<h2>Sei un docente?</h2>
-			<label for="option1"> <input type="radio" id="option1"
-				name="choice" value="Option 1"> Si, sono un docente
-			</label> <br> <label for="option2"> <input type="radio"
-				id="option2" name="choice" value="Opzione 2"> No, non sono
-				un docente
-			</label> <br>
-			<button id="confirmBtn" type="submit">Conferma</button>
+				<div class="myform form ">
+					<div style="text-align: right;">
+						<button id="chiudi" type="button" class="close"
+							data-dismiss="modal" style="width: 10%;">×</button>
+					</div>
+					<h2 style="text-align: center;">Sei un docente?</h2>
+					<label for="option1"> <input type="radio" id="option1"
+						name="choice" value="option1"> Si, sono un docente
+					</label> <br> <label for="option2"> <input type="radio"
+						id="option2" name="choice" value="option2"> No, non sono
+						un docente
+					</label> <br>
+					<button id="confirmBtn" type="submit" class="btn"
+						style="float: right; background: #ffffb3;">Conferma</button>
+				</div>
+			</div>
 		</div>
-		</div>
-	</div>
+		<script>
+			$("#confirmBtn").click(function() {
+				var choice = $("input[name='choice']:checked").val();
+				$("#registrazione2Modal").modal('hide');
+				if (choice === "option1") {
+					$("#registrazioneDocenteModal").modal('show');
+				} else {
+					$("#registrazioneModal").modal('show');
+				}
+			});
+		</script>
 
-	<script>
-	var openModalBtn = document.getElementById("openModalBtn");
-    var modal = document.getElementById("registrazioneModal");
-    var docenteModal = document.getElementById("registrazioneDocenteModal");
-    var confirmBtn = document.getElementById("confirmBtn");
-    confirmBtn.addEventListener("submit", function () {
-        var options = document.getElementsByName("choice");
-        var choice;
-        for (var i = 0; i < options.length; i++) {
-            if (options[i].checked) {
-                choice = options[i].value;
-                break;
-            }
-        }
-
-        // Apri la modal corretta in base alla scelta
-        if (choice === "Si") {
-        	$("#registrazione2Modal").modal("hide");
-        	$("#registrazioneDocenteModal").modal("show");
-        } else if (choice === "No") {
-        	$("#registrazione2Modal").modal("hide");
-        	$("#registrazioneModal").modal("show");
-        }
-    });
- -->
-    </script>
 		<div class="modal fade" id="apriTermini">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -599,9 +579,6 @@
 									<li>Registrarsi con identità falsa</li>
 									<li>Inserire informazioni non valide</li>
 								</ul>
-								<p>Se non vengono rispettati i seguenti criteri, gli
-									amministratori elimineranno il vostro account.
-								<p>
 							</div>
 						</div>
 					</div>

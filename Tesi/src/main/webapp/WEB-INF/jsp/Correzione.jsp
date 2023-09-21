@@ -33,133 +33,139 @@
 </head>
 <body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
-	<div class="title-container">
-		<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Partecipazioni
-			Bando ${codiceBandoDaCorreggere}</h1>
-		<c:if test="${tuttiCorretti ==true }">
-			<form method="post" action="#" id="generaPDF">
-				<div class="button-container">
-					<input type="hidden" id="cb" value="${codiceBandoDaCorreggere}">
+	<div class="form2">
+		<h1 style="text-align: center;">Partecipazioni Bando
+			${codiceBandoDaCorreggere}</h1>
 
-					<button type="submit" id="btnGraduatoria"
-						 class=" btn btn-block mybtn x-tfm "
-					style="background: #33CC66 !important; margin-right: 20px; width:auto;">Genera
-						graduatoria</button>
-				</div>
+		<div>
+			<table>
+				<tr>
+					<td id="td1">Codice fiscale</td>
+					<c:set var="documentiBandoSize"
+						value="${fn:length(documentiBando)}"></c:set>
+					<c:forEach items="${documentiBando}" var="documentiBando"
+						varStatus="status">
+						<td id="td1">${documentiBando.titolodocumento}</td>
+					</c:forEach>
+					<td id="td1">Punteggio</td>
+					<td id="td1"></td>
+				</tr>
+				<tr>
+					<c:forEach items="${dati}" var="dato" varStatus="status">
+						<form method="post" action="#" id="correggiBando-${status.index}">
+							<input type="hidden" id="sizeX" value="${sizeX}">
+							<c:if
+								test="${!fn:startsWith(dato, 'data:') and dato.matches('^[A-Za-z].*')}">
+								<td id="td1">${dato}</td>
+							</c:if>
+							<input type="hidden" id="codfisc-${status.index}" value="${dato}">
 
-			</form>
-		</c:if>
-	</div>
-	<div>
-		<table>
-			<tr>
-				<td id="td1">Codice fiscale</td>
-				<c:set var="documentiBandoSize" value="${fn:length(documentiBando)}"></c:set>
-				<c:forEach items="${documentiBando}" var="documentiBando"
-					varStatus="status">
-					<td id="td1">${documentiBando.titolodocumento}</td>
-				</c:forEach>
-				<td id="td1">Punteggio</td>
-				<td id="td1"></td>
-			</tr>
-			<tr>
-				<c:forEach items="${dati}" var="dato" varStatus="status">
-					<form method="post" action="#" id="correggiBando-${status.index}">
-						<input type="hidden" id="sizeX" value="${sizeX}">
-						<c:if
-							test="${!fn:startsWith(dato, 'data:') and dato.matches('^[A-Za-z].*')}">
-							<td id="td1">${dato}</td>
-						</c:if>
-						<input type="hidden" id="codfisc-${status.index}" value="${dato}">
+							<input type="hidden" id="codicebando-${status.index}"
+								value="${codiceBandoDaCorreggere}">
 
-						<input type="hidden" id="codicebando-${status.index}"
-							value="${codiceBandoDaCorreggere}">
+							<c:if test="${fn:startsWith(dato,'data:')}">
+								<td id="td1"><a id="downloadLink-${status.index}" href="#"
+									download="Documento.pdf">Scarica documento</a></td>
+								<script>
+									var base64 = '${dato}';
+									var binaryData2 = atob(base64.split(',')[1]);
+									var arrayBuffer2 = new ArrayBuffer(
+											binaryData2.length);
+									var uint8Array2 = new Uint8Array(
+											arrayBuffer2);
+									for (var i = 0; i < binaryData2.length; i++) {
+										uint8Array2[i] = binaryData2
+												.charCodeAt(i);
+									}
+									var blob2 = new Blob([ uint8Array2 ], {
+										type : 'application/pdf'
+									});
 
-						<c:if test="${fn:startsWith(dato,'data:')}">
-							<td id="td1"><a id="downloadLink-${status.index}" href="#"
-								download="Documento.pdf">Scarica documento</a></td>
-							<script>
-								var base64 = '${dato}';
-								var binaryData2 = atob(base64.split(',')[1]);
-								var arrayBuffer2 = new ArrayBuffer(
-										binaryData2.length);
-								var uint8Array2 = new Uint8Array(arrayBuffer2);
-								for (var i = 0; i < binaryData2.length; i++) {
-									uint8Array2[i] = binaryData2.charCodeAt(i);
-								}
-								var blob2 = new Blob([ uint8Array2 ], {
-									type : 'application/pdf'
-								});
+									var downloadLinkIng = document
+											.getElementById('downloadLink-${status.index}');
+									downloadLinkIng.href = URL
+											.createObjectURL(blob2);
+								</script>
+							</c:if>
 
-								var downloadLinkIng = document
-										.getElementById('downloadLink-${status.index}');
-								downloadLinkIng.href = URL
-										.createObjectURL(blob2);
-							</script>
-						</c:if>
+							<c:set var="corretto" value="0" />
+							<c:if test="${dato==' '}">
+								<c:forEach var="graduatoria" items="${partecipazioniCorrette}"
+									varStatus="status2">
+									<c:if test="${status2.index ==0}">
+										<c:choose>
+											<c:when
+												test="${fn:contains(cfCorrette, dati[status.index-sizeX-1])}">
+												<td id="td1"><input class="input" type="number"
+													class="form-control" id="punteggio-${status.index}"
+													name="punteggio" placeholder="${graduatoria.punteggio}"
+													style="color: black; width: 40px;" required min="1"
+													max="100"></td>
+												<td id="td1">
+													<button type="submit" id="btnCorrezione"
+														class=" btn btn-block mybtn x-tfm "
+														style="background: #33CC66 !important; width: auto;">Modifica
+														punteggio</button>
+												</td>
+											</c:when>
+											<c:otherwise>
 
-						<c:set var="corretto" value="0" />
-						<c:if test="${dato==' '}">
-							<c:forEach var="graduatoria" items="${partecipazioniCorrette}"
-								varStatus="status2">
-								<c:if test="${status2.index ==0}">
-									<c:choose>
-										<c:when
-											test="${fn:contains(cfCorrette, dati[status.index-sizeX-1])}">
-											<td id="td1"><input class="input" type="number"
-												class="form-control" id="punteggio-${status.index}"
-												name="punteggio" placeholder="${graduatoria.punteggio}"
-												style="color: black; width: 40px;" required min="1"
-												max="100"></td>
-											<td id="td1">
-												<button type="submit" id="btnCorrezione" class=" btn btn-block mybtn x-tfm "
-					style="background: #33CC66 !important; width:auto;" >Modifica
-													punteggio</button>
-											</td>
-										</c:when>
-										<c:otherwise>
+												<c:set var="corretto" value="${corretto+1}" />
+												<td id="td1"><input class="input" type="number"
+													class="form-control" id="punteggio-${status.index}"
+													name="punteggio" placeholder="0"
+													style="color: black; widtd: 40px;" required min="1"
+													max="100"></td>
+												<td id="td1">
+													<button type="submit" id="btnCorrezione"
+														class=" btn btn-block mybtn x-tfm "
+														style="background: #33CC66 !important; width: auto;">Invia
+														punteggio</button>
+												</td>
+											</c:otherwise>
 
-											<c:set var="corretto" value="${corretto+1}" />
-											<td id="td1"><input class="input" type="number"
-												class="form-control" id="punteggio-${status.index}"
-												name="punteggio" placeholder="0"
-												style="color: black; widtd: 40px;" required min="1"
-												max="100"></td>
-											<td id="td1">
-												<button type="submit" id="btnCorrezione" class=" btn btn-block mybtn x-tfm "
-					style="background: #33CC66 !important; width:auto;" >Invia
-													punteggio</button>
-											</td>
-										</c:otherwise>
+										</c:choose>
 
-									</c:choose>
+									</c:if>
 
-								</c:if>
+								</c:forEach>
+							</c:if>
 
-							</c:forEach>
-						</c:if>
+						</form>
 
-					</form>
+					</c:forEach>
 
-				</c:forEach>
+				</tr>
+			</table>
+			<c:if test="${tuttiCorretti ==true }">
+				<form method="post" action="#" id="generaPDF">
+					<div class="button-container">
+						<input type="hidden" id="cb" value="${codiceBandoDaCorreggere}">
 
-			</tr>
-		</table>
-	</div>
-	<div class="modal fade" id="graduatoriaModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="myform modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="myform modal-body">
-					<p>La graduatoria è stata inviata via email a tutti i
-						partecipanti!</p>
+						<button type="submit" id="btnGraduatoria"
+							class=" btn btn-block mybtn x-tfm float-right "
+							style="background: #33CC66 !important; margin-right: 15px; margin-top:50px; width: auto;">Genera
+							graduatoria</button>
+
+					</div>
+
+				</form>
+			</c:if>
+		</div>
+		<div class="modal fade" id="graduatoriaModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="myform modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="myform modal-body">
+						<p>La graduatoria è stata inviata via email a tutti i
+							partecipanti!</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 
 

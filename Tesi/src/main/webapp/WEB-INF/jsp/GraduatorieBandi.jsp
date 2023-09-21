@@ -44,39 +44,19 @@ tr {
 <body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	<div class="form2">
-		<h1 style="text-align: center;">I miei bandi</h1>
+		<h1 style="text-align: center;">Graduatorie bandi</h1>
 		<table>
-			<c:forEach items="${bandiCompilati}" var="bandiCompilati"
+			<c:forEach items="${bandiCorretti}" var="bandiCorretti"
 				varStatus="status">
 				<tr>
 					<td id="td2 imgBando"><c:if
-							test="${bandiCompilati.img != null}">
-							<img id="imgBando" src=${bandiCompilati.img}>
-						</c:if> <c:if test="${bandiCompilati.img == null}">
+							test="${bandiCorretti.img != null}">
+							<img id="imgBando" src=${bandiCorretti.img}>
+						</c:if> <c:if test="${bandiCorretti.img == null}">
 							<img id="imgbandiCompilati" src="image\notImage.png">
 						</c:if>
-					<td id="td2">Codice Bando: ${bandiCompilati.codice}</td>
-					<td id="td2">${bandiCompilati.titolo}</td>
-					<c:if test="${!bandiScaduti.contains(bandiCompilati.codice)}">
-
-						<form id="formRimozioneIscrizione" method="post"
-							action="RimuoviIscrizione">
-							<input type="hidden" id="codicebando" name="codicebando"
-								value="${bandiCompilati.codice}">
-							<td id="td2">
-								<button class="btn btn-xs btn-danger btn-nuova-bozza"
-									type="submit" id="btnRimuoviCandidatura">Rimuovi
-									Candidatura</button>
-							</td>
-						</form>
-					</c:if>
-					<c:if test="${bandiScaduti.contains(bandiCompilati.codice)}">
-						<c:set var="vuoto" value=" " />
-						<c:choose>
-							<c:when test="${pdfPartecipanti[status.index] eq vuoto}">
-								<td>Attendi la graduatoria</td>
-							</c:when>
-							<c:otherwise>
+					<td id="td2">Codice Bando: ${bandiCorretti.codice}</td>
+					<td id="td2">${bandiCorretti.titolo}</td>
 								<td><a id="downloadGrad" href="#"
 									download="Graduatoria.pdf">Scarica graduatoria</a> <script>
 										// La tua stringa Base64 contenente i dati del PDF
@@ -99,9 +79,7 @@ tr {
 										downloadLink.href = URL
 												.createObjectURL(blob);
 									</script>
-							</c:otherwise>
-						</c:choose>
-					</c:if>
+							
 				</tr>
 			</c:forEach>
 		</table>

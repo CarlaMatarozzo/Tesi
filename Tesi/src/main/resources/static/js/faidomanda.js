@@ -32,7 +32,7 @@ $(document).ready(function() {
 				if (risposta == "successo") {
 					for (var i = 0; i < numDoc; i++) {
 						var pdf = document.getElementById("doc_" + i);
-						var tit=document.getElementById("titolodoc_"+i).value;
+						var tit = document.getElementById("titolodoc_" + i).value;
 						if (pdf.files[0]) {
 							window.convert2(pdf.files[0], codice, tit, codFiscale)
 								.then((conversionResult) => {

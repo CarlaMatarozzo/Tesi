@@ -1,7 +1,9 @@
 package com.example.demo.persistance.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.model.Bando;
 import com.example.demo.model.Graduatoria;
 
 public interface GraduatoriaDAO {

@@ -120,7 +120,7 @@
 				</div>
 				<div class="col-md-12 text-center mb-3">
 					<button type="submit" id="btnCreaBando"
-						style="width: 30%; border-color: transparent; background-color: #55d6aa">Aggiungi
+						style="width: 30%; border-color: transparent; background-color: #33CC66;">Aggiungi
 						bando</button>
 				</div>
 			</div>

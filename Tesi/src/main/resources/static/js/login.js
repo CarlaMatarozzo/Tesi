@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 	var btnRegistrati = document.getElementById("registrati").addEventListener("click", function() {
 		$("#loginModal").modal('hide');
-		$("#registrazioneModal").modal('show');
+		$("#registrazione2Modal").modal('show');
 
 	});
 

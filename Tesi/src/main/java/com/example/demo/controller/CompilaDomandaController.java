@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.DocumentiCaricatiBando;
@@ -34,4 +35,6 @@ public class CompilaDomandaController {
 		DBManager.getInstance().documentiCaricatiBandoDAO().setDocumento(parametri.get(0),Integer.parseInt(parametri.get(1)),
 				parametri.get(2), parametri.get(3));
 	}
+
+
 }

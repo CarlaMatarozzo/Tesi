@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.model.Bando;
 import com.example.demo.model.Graduatoria;
 import com.example.demo.model.Utente;
 import com.example.demo.persistance.DBManager;
@@ -205,4 +206,6 @@ public class GraduatoriaDAOJDBC implements GraduatoriaDAO{
 		}
 		return pdf;
 	}
+
+	
 }
