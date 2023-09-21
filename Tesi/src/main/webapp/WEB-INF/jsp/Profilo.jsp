@@ -23,7 +23,8 @@
 <link rel="stylesheet" href="css/profilo.css" type="text/css">
 
 
-<title>TESI!</title>
+<title>Bandi di Concorso</title>
+<link rel="icon" href="../image/Logo.png" type="image/png">
 </head>
 <body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
@@ -71,7 +72,7 @@
 					type="password" name="password" id="nuovaPassword"
 					class="form-control" aria-describedby="emailHelp"
 					placeholder="Inserisci Password" style="color: black;"
-					pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$">
+					pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$">
 			</div>
 			<div class="form-group">
 				<p id="p1">*La password deve contenere minimo otto caratteri, almeno una

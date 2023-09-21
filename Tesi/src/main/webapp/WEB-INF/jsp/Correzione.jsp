@@ -28,7 +28,8 @@
 
 <link rel="stylesheet" href="css/bandiDaCorreggere.css" type="text/css">
 
-<title>TESI!</title>
+<title>Bandi di Concorso</title>
+<link rel="icon" href="../image/Logo.png" type="image/png">
 </head>
 <body>
 	<jsp:include page="Navbar.jsp"></jsp:include>

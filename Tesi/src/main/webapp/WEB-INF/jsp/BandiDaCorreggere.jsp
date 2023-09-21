@@ -27,11 +27,13 @@
 <script src="./js/assistenza.js"></script>
 <link rel="stylesheet" href="css/bandiDaCorreggere.css" type="text/css">
 
-<title>TESI!</title>
+<title>Bandi di Concorso</title>
+<link rel="icon" href="../image/Logo.png" type="image/png">
 </head>
 <body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
-
+	
+	<div class="form2">
 	<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Bandi
 		Da Correggere</h1>
 	<div class="table-container">
@@ -66,7 +68,7 @@
 									</c:if>
 								</c:forEach>
 								<c:set var="pdfGrad" value="${pdf[indice]}" />
-								<td id="td1"><a id="downloadGrad" href="#"
+								<td><a id="downloadGrad" href="#"
 									download="Graduatoria.pdf">Scarica graduatoria</a> <script>
 										// La tua stringa Base64 contenente i dati del PDF
 										var base64PDFData = '${pdfgrad}'; // Inserisci qui i dati Base64
@@ -112,6 +114,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+	</div>
 	</div>
 </body>
 </html>

@@ -25,7 +25,8 @@
 <link rel="stylesheet" href="css/Navbar.css" type="text/css">
 <script src="./js/login.js"></script>
 
-<title>TESI!</title>
+<title>Bandi di Concorso</title>
+<link rel="icon" href="../image/Logo.png" type="image/png">
 </head>
 <body>
 	<jsp:include page="Navbar.jsp"></jsp:include>

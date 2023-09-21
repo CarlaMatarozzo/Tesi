@@ -25,7 +25,8 @@
 	href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@1,500&display=swap"
 	rel="stylesheet">
 <!-- fine font -->
-<title>TESI!</title>
+<title>Bandi di Concorso</title>
+<link rel="icon" href="../image/Logo.png" type="image/png">
 <script src="./js/login.js"></script>
 <link rel="stylesheet" href="css/Navbar.css" type="text/css">
 
@@ -260,10 +261,10 @@
 										class="form-control" aria-describedby="emailHelp"
 										placeholder="Inserisci Password" required>
 								</div>
-								<div class="form-group col-md-12 text-center ">
+								<div class="form-group col-md-12 text-center form-group">
 									<button type="submit" id="btnLogin"
 										class="mybtn btn btn-block "
-										style="background: #ffffb3 !important; width: 50%; display: flex; justify-content: center; align-items: center;">Login</button>
+										style="background: #ffffb3 !important;">Login</button>
 								</div>
 
 							</form>
@@ -345,7 +346,7 @@
 										type="password" name="password" id="password"
 										class="form-control" aria-describedby="emailHelp"
 										placeholder="Inserisci Password" required
-										pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+										pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$">
 								</div>
 								<div class="form-group">
 								<p id="parametriPSW">Minimo otto caratteri, almeno una
