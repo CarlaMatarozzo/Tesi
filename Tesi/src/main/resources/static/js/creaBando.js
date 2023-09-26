@@ -46,10 +46,13 @@ $(document).ready(function() {
       <input class="input" type="text" name="doc${uniqueId}" id="doc${uniqueId}"
         placeholder="Titolo documento" style="color: black;"    </div>
     <div class="form-group">
-      <label class="l1">Formato documento</label>
-      <input class="input" type="text" name="formatoDoc${uniqueId}" id="formatoDoc${uniqueId}"
-        placeholder="Formato documento" style="color: black;">
-    </div>
+		<label class="l1" for="scelta">Formato documento</label> 
+			<select id="scelta">
+				<option value="pdf">Pdf</option>
+				<option value="img">Immagine</option>
+				<option value="txt">Testo</option>
+			</select>
+	</div>
     <div class="form-group">
       <label class="l1">Minima dimensione</label>
       <input class="input" type="number" name="minSize${uniqueId}" id="minSize${uniqueId}"

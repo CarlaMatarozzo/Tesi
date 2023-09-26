@@ -68,7 +68,7 @@ tr {
 									<input type="hidden" id="codFiscale" name="codFiscale"
 										value="${parametriDoc[2]}"> <a
 										href="/aggiungiDocente?codFiscale=?${parametriDoc[2]}}">
-										<button type="submit" class=" btn btn-block mybtn x-tfm "
+										<button type="submit" class="btn btn-xs btn-danger btn-nuova-bozza"
 											style="background: #33CC66 !important; margin-botton: 10px;">Registra
 											Docente</button>
 									</a>

@@ -44,9 +44,9 @@
 					<c:if test="${codicefiscale==null}">
 						<div class="form-group">
 							<label for="11">Mittente:</label> <input class="input1"
-								type="email" class="form-control" style="color: black; width: 300px !important;"
-								id="mittente"  placeholder="Inserisci il tuo indirizzo email"
-								required>
+								type="email" class="form-control"
+								style="color: black; width: 300px !important;" id="mittente"
+								placeholder="Inserisci il tuo indirizzo email" required>
 						</div>
 					</c:if>
 					<c:if test="${codicefiscale!=null}">
@@ -54,20 +54,22 @@
 					</c:if>
 					<div class="form-group">
 						<label for="11">Oggetto:</label> <input class="input1" type="text"
-							class="form-control" style="color: black; width: 300px !important;" id="oggetto"
+							class="form-control"
+							style="color: black; width: 300px !important;" id="oggetto"
 							placeholder="Inserisci l'oggetto della email" required>
 					</div>
 					<div class="form-group">
 						<label for="messaggio">Messaggio:</label>
 						<textarea id="messaggio" class="form-control" class="input1"
-							class="fixed-size-textarea" style="width: 300px !important; height: 200px !important;"
+							class="fixed-size-textarea"
+							style="width: 300px !important; height: 200px !important;"
 							placeholder="Inserisci il messaggio della email" required></textarea>
 					</div>
 					<div class="form-group">
-					<button type="submit" id="inviaEmail"
-						class=" btn btn-block mybtn x-tfm "
-						style="background: #33CC66 !important; width:50% ">Invia</button>
-						</div>
+						<button type="submit" id="inviaEmail"
+							class="btn btn-xs btn-danger btn-nuova-bozza"
+							style="background: #33CC66 !important; width: 50%">Invia</button>
+					</div>
 				</div>
 			</form>
 		</div>

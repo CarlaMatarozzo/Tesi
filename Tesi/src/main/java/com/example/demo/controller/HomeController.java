@@ -122,7 +122,6 @@ public class HomeController {
 				dati.add(" ");
 			}
 			inserito = false;
-
 		}
 		
 		session.setAttribute("sizeX",documentiCaricatiBando.size()/x);

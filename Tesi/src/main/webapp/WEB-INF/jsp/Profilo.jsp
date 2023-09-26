@@ -80,8 +80,7 @@
 			</div>
 
 			<div class="col-md-12 text-center mb-3" style="display: flex; justify-content: center; align-items: center;">
-				<button type="submit" id="btnModifica"
-					class=" btn btn-block mybtn x-tfm "
+				<button type="submit" id="btnModifica" class="btn btn-xs btn-danger btn-nuova-bozza"
 					style="background: #33CC66 !important; width:30%;">Modifica Profilo</button>
 			</div>
 		</form>

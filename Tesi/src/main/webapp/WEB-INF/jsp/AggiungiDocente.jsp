@@ -65,8 +65,8 @@
 
 			<div class="col-md-12 text-center mb-3">
 				<button type="submit" id="btnRegistraDocente"
-					class="btn btn-block mybtn x-tfm mx-auto"
-					style="background: #33CC66 !important; width: 200px; margin-top:20px;">Registra
+					class="btn btn-xs btn-danger btn-nuova-bozza"
+					style="background: #33CC66 !important; width: 200px; margin-top: 20px;">Registra
 					docente</button>
 
 			</div>

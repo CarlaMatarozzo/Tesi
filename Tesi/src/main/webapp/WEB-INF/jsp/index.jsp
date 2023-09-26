@@ -116,10 +116,6 @@
 							<a class="text-decoration-none" target="_blank">
 								<h4 class="card-title" style="color: black;">${bandi.titolo}</h4>
 							</a>
-
-							<p class="card-text" style="color: black;">
-								Codice: <strong>${bandi.codice}</strong><br> <br>
-							</p>
 							<a id="downloadLink" href="#" download="BandoIta.pdf"
 								style="color: black;">Scarica il PDF</a>
 							<c:set var="myVariable" value='${bandi.pdfIta}' />
@@ -180,7 +176,7 @@
 												test="${!bandiScaduti.contains(bandi.codice) and !codiceBandiCompilati.contains(bandi.codice)}">
 												<a href="/compilaBando?codiceBando=${bandi.codice}">
 													<div style="text-align: right;">
-														<button type="button"
+														<button type="button" class="btn btn-xs btn-danger btn-nuova-bozza"
 															style="width: 30%; border-color: transparent; background-color: #33CC66; color: black;">Fai
 															domanda</button>
 													</div>

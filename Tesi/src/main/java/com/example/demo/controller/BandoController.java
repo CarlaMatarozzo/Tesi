@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,16 +35,17 @@ public class BandoController {
 	public String rimuoviBando(HttpSession session, @RequestParam int codicebando) {
 		if (DBManager.getInstance().bandoDAO().esisteBando(codicebando)) {
 			Bando b = DBManager.getInstance().bandoDAO().ottieniBando(codicebando);
-			DBManager.getInstance().bandoDAO().eliminaBando(b);
-
-			return "redirect:/";
+			DBManager.getInstance().bandoDAO().eliminaBando(b); 
+				return "redirect:/";
+			
 		}
 		return "redirect:/";
 	}
-	
+
 	@PostMapping("/RimuoviDomanda")
 	public String rimuoviDomanda(HttpSession session, @RequestParam int codbando) {
-		if(DBManager.getInstance().documentiCaricatiBandoDAO().rimuoviBando(codbando, session.getAttribute("codicefiscale").toString())) {
+		if (DBManager.getInstance().documentiCaricatiBandoDAO().rimuoviBando(codbando,
+				session.getAttribute("codicefiscale").toString())) {
 			return "redirect:/";
 		}
 		return "redirect:/";

@@ -103,9 +103,8 @@
 								<td id="td1">Scaduto</td>
 								<td><a
 									href="/correzioneBando?codiceBando=${bandiDaCorreggere.codice}">
-										<button class=" btn btn-block mybtn x-tfm "
-											style="background: #33CC66 !important; width:auto;" type="button">Correggi
-											bando</button>
+									<button type="button"  class="btn btn-xs btn-danger btn-nuova-bozza"
+								style="width: 30%; border-color: transparent; background-color: #33CC66">Correggi bando</button>
 								</a></td>
 							</c:otherwise>
 						</c:choose>

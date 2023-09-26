@@ -107,8 +107,8 @@
 							</c:forEach>
 						</div>
 						<div class="col-md-12 text-center mb-3">
-							<button type="submit" id="btnInviaDomanda"
-								style="width: 30%; border-color: transparent; background-color: #55d6aa">Invia
+							<button type="submit" id="btnInviaDomanda" class="btn btn-xs btn-danger btn-nuova-bozza"
+								style="width: 30%; border-color: transparent; background-color: #33CC66">Invia
 								domanda</button>
 						</div>
 					</div>
