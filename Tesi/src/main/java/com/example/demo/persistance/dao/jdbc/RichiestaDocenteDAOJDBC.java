@@ -63,13 +63,11 @@ public class RichiestaDocenteDAOJDBC implements RichiestaDocenteDAO{
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setString(1, codFiscale);
 			ResultSet rs = st.executeQuery();
-			System.out.println(codFiscale);
 			while (rs.next()) {
 				richiesta.setNome(rs.getString("nome"));
 				richiesta.setCognome(rs.getString("cognome"));
 				richiesta.setCodicefiscale(codFiscale);
-				richiesta.setEmail(rs.getString("email"));
-			}
+				richiesta.setEmail(rs.getString("email"));			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -77,6 +77,10 @@ public class HomeController {
 	public String addDocente(HttpSession session, @RequestParam String codFiscale) {
 		RichiestaDocente richiesta = DBManager.getInstance().richiestaDocenteDAO().getRichiestaDocente(codFiscale);
 		session.setAttribute("richiesta", richiesta);
+		System.out.println(richiesta.getCodicefiscale());
+		System.out.println(richiesta.getNome());
+		System.out.println(richiesta.getCognome());
+		System.out.println(richiesta.getEmail());
 		return "AggiungiDocente";
 	}
 

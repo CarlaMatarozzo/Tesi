@@ -34,7 +34,7 @@
 	<jsp:include page="Navbar.jsp"></jsp:include>
 	
 	<div class="form2">
-	<h1 style="text-align: center; text-shadow: 2px 2px 4px black;">Bandi
+	<h1 style="text-align: center;">Bandi
 		Da Correggere</h1>
 	<div class="table-container">
 		<table>
@@ -104,7 +104,7 @@
 								<td><a
 									href="/correzioneBando?codiceBando=${bandiDaCorreggere.codice}">
 									<button type="button"  class="btn btn-xs btn-danger btn-nuova-bozza"
-								style="width: 30%; border-color: transparent; background-color: #33CC66">Correggi bando</button>
+								style="width: 60%; border-color: transparent; background-color: #33CC66">Correggi bando</button>
 								</a></td>
 							</c:otherwise>
 						</c:choose>
